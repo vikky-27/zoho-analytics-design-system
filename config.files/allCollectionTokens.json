@@ -1,0 +1,1649 @@
+{
+  "Primititives": {
+    "Mode 1": {
+      "Color": {
+        "Accent Colors": {
+          "Blue": {
+            "$value": "#2C66DD",
+            "$type": "color",
+            "Shades": {
+              "Blue 10": {
+                "$value": "#225CCF",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#1E52BB",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#1B49A6",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#184091",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#14377C",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#112E68",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#0E2553",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#0A1B3E",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#071229",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#030915",
+                "$type": "color"
+              }
+            },
+            "Tints": {
+              "Blue 10": {
+                "$value": "#376EDF",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#4276E0",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#5685E4",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#6B94E7",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#80A3EB",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#96B3EE",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#ABC2F1",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#C0D1F5",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#D5E0F8",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#EAF0FC",
+                "$type": "color"
+              }
+            }
+          },
+          "Red": {
+            "$value": "#CC3929",
+            "$type": "color",
+            "Shades": {
+              "Blue 10": {
+                "$value": "#BA3425",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#A72E21",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#95291D",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#82241A",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#6F1F16",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#5D1A12",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#4A150F",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#380F0B",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#250A07",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#130504",
+                "$type": "color"
+              }
+            },
+            "Tints": {
+              "Blue 10": {
+                "$value": "#CF4335",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#D14D3F",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#D66154",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#DB756A",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#E0887F",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#E69C94",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#EBB0A9",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#F0C4BF",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#F5D7D4",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#FAECEA",
+                "$type": "color"
+              }
+            }
+          },
+          "Green": {
+            "$value": "#0C8844",
+            "$type": "color",
+            "Shades": {
+              "Blue 10": {
+                "$value": "#0D7D3F",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#0A7138",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#096633",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#085B2D",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#074F28",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#064422",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#05391C",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#042D17",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#032211",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#02170B",
+                "$type": "color"
+              }
+            },
+            "Tints": {
+              "Blue 10": {
+                "$value": "#188E4E",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#249457",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#3DA069",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#55AC7C",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#6DB88F",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#86C4A2",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#9ECFB4",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#B7DCC7",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#CEE7DA",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#E7F3ED",
+                "$type": "color"
+              }
+            }
+          },
+          "Yellow": {
+            "$value": "#EBB625",
+            "$type": "color",
+            "Tints": {
+              "Blue 10": {
+                "$value": "#ECBA30",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#EDBD3B",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#EFC551",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#F1CC67",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#F3D37C",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#F5DB92",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#F7E2A8",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#F9E9BE",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#FBF0D3",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#FDF8E9",
+                "$type": "color"
+              }
+            },
+            "Shades": {
+              "Blue 10": {
+                "$value": "#E3AC15",
+                "$type": "color"
+              },
+              "Blue 20": {
+                "$value": "#CE9C13",
+                "$type": "color"
+              },
+              "Blue 30": {
+                "$value": "#B98D11",
+                "$type": "color"
+              },
+              "Blue 40": {
+                "$value": "#A57D0F",
+                "$type": "color"
+              },
+              "Blue 50": {
+                "$value": "#906D0D",
+                "$type": "color"
+              },
+              "Blue 60": {
+                "$value": "#7C5E0B",
+                "$type": "color"
+              },
+              "Blue 70": {
+                "$value": "#674E0A",
+                "$type": "color"
+              },
+              "Blue 80": {
+                "$value": "#523E08",
+                "$type": "color"
+              },
+              "Blue 90": {
+                "$value": "#3E2F06",
+                "$type": "color"
+              },
+              "Blue 100": {
+                "$value": "#291F04",
+                "$type": "color"
+              }
+            }
+          },
+          "Hover": {
+            "Blue H": {
+              "$value": "#1E51B8",
+              "$type": "color"
+            },
+            "Red H": {
+              "$value": "#A12D20",
+              "$type": "color"
+            },
+            "Green H": {
+              "$value": "#08592D",
+              "$type": "color"
+            },
+            "Yellow H": {
+              "$value": "#C99812",
+              "$type": "color"
+            }
+          },
+          "Tap": {
+            "Blue T": {
+              "$value": "#6A92E5",
+              "$type": "color"
+            },
+            "Red T": {
+              "$value": "#DA7367",
+              "$type": "color"
+            },
+            "Green T": {
+              "$value": "#53AA7A",
+              "$type": "color"
+            },
+            "Yellow T": {
+              "$value": "#EFCA65",
+              "$type": "color"
+            }
+          },
+          "Blue 20": {
+            "$value": "#2C66DD33",
+            "$type": "color",
+            "$description": "Use only on hover"
+          },
+          "Red 20": {
+            "$value": "#CC392933",
+            "$type": "color"
+          },
+          "Green 20": {
+            "$value": "#0C884433",
+            "$type": "color"
+          },
+          "Yellow 20": {
+            "$value": "#EBB62533",
+            "$type": "color"
+          }
+        },
+        "Base": {
+          "White": {
+            "$value": "#FFFFFF",
+            "$type": "color"
+          },
+          "Black": {
+            "$value": "#000000",
+            "$type": "color"
+          },
+          "Shades": {
+            "Grey 00": {
+              "$value": "#F5F5F5",
+              "$type": "color"
+            },
+            "Grey 05": {
+              "$value": "#E9E9E9",
+              "$type": "color"
+            },
+            "Grey 10": {
+              "$value": "#DCDCDC",
+              "$type": "color"
+            },
+            "Grey 20": {
+              "$value": "#C4C4C4",
+              "$type": "color"
+            },
+            "Grey 30": {
+              "$value": "#ABABAB",
+              "$type": "color"
+            },
+            "Grey 40": {
+              "$value": "#939393",
+              "$type": "color"
+            },
+            "Grey 50": {
+              "$value": "#7A7A7A",
+              "$type": "color"
+            },
+            "Grey 60": {
+              "$value": "#626262",
+              "$type": "color"
+            },
+            "Grey 70": {
+              "$value": "#494949",
+              "$type": "color"
+            },
+            "Grey 80": {
+              "$value": "#313131",
+              "$type": "color"
+            },
+            "Grey 90": {
+              "$value": "#181818",
+              "$type": "color"
+            },
+            "Grey 100": {
+              "$value": "#0C0C0C",
+              "$type": "color"
+            }
+          },
+          "Tint": {
+            "Grey 00": {
+              "$value": "#07080A",
+              "$type": "color"
+            },
+            "Grey 05": {
+              "$value": "#141516",
+              "$type": "color"
+            },
+            "Grey 10": {
+              "$value": "#202123",
+              "$type": "color"
+            },
+            "Grey 20": {
+              "$value": "#39393B",
+              "$type": "color"
+            },
+            "Grey 30": {
+              "$value": "#525354",
+              "$type": "color"
+            },
+            "Grey 40": {
+              "$value": "#6A6B6C",
+              "$type": "color"
+            },
+            "Grey 50": {
+              "$value": "#838485",
+              "$type": "color"
+            },
+            "Grey 60": {
+              "$value": "#9C9C9D",
+              "$type": "color"
+            },
+            "Grey 70": {
+              "$value": "#B5B5B6",
+              "$type": "color"
+            },
+            "Grey 80": {
+              "$value": "#CDCECE",
+              "$type": "color"
+            },
+            "Grey 90": {
+              "$value": "#E7E7E7",
+              "$type": "color"
+            },
+            "Grey 100": {
+              "$value": "#F2F2F3",
+              "$type": "color"
+            }
+          },
+          "White 20": {
+            "$value": "#FFFFFF33",
+            "$type": "color"
+          }
+        },
+        "Other Zoho Color": {
+          "Burgundy": {
+            "$value": "#821F1F",
+            "$type": "color"
+          },
+          "Maroon": {
+            "$value": "#A41D1E",
+            "$type": "color"
+          },
+          "Crimson": {
+            "$value": "#E42527",
+            "$type": "color"
+          },
+          "Persimmon": {
+            "$value": "#E65000",
+            "$type": "color"
+          },
+          "Flamingo": {
+            "$value": "#DA3949",
+            "$type": "color"
+          },
+          "Ceris": {
+            "$value": "#DA2C6F",
+            "$type": "color"
+          },
+          "Plum": {
+            "$value": "#993399",
+            "$type": "color"
+          },
+          "Charoite": {
+            "$value": "#663399",
+            "$type": "color"
+          },
+          "Sugilite": {
+            "$value": "#6200EA",
+            "$type": "color"
+          },
+          "Indigo": {
+            "$value": "#3119D4",
+            "$type": "color"
+          },
+          "Lapis": {
+            "$value": "#003ADD",
+            "$type": "color"
+          },
+          "Sapphire": {
+            "$value": "#085CF3",
+            "$type": "color"
+          },
+          "Cornflower": {
+            "$value": "#2D78FF",
+            "$type": "color"
+          },
+          "Brunnera": {
+            "$value": "#0B97FF",
+            "$type": "color"
+          },
+          "Cerulean": {
+            "$value": "#008EE0",
+            "$type": "color"
+          },
+          "Teal": {
+            "$value": "#06AED0",
+            "$type": "color"
+          },
+          "Spurge": {
+            "$value": "#00D096",
+            "$type": "color"
+          },
+          "Jade": {
+            "$value": "#02B55C",
+            "$type": "color"
+          },
+          "Shamrock": {
+            "$value": "#049949",
+            "$type": "color"
+          },
+          "Laurel": {
+            "$value": "#2F7D31",
+            "$type": "color"
+          },
+          "Parsely": {
+            "$value": "#13601F",
+            "$type": "color"
+          },
+          "Olive": {
+            "$value": "#999900",
+            "$type": "color"
+          },
+          "Sunshine": {
+            "$value": "#F9B21D",
+            "$type": "color"
+          },
+          "Clay": {
+            "$value": "#9A6633",
+            "$type": "color"
+          }
+        },
+        "Neutral": {
+          "Neutral color": {
+            "$value": "#7A8CA5",
+            "$type": "color"
+          },
+          "Shades": {
+            "Neutral 10": {
+              "$value": "#74859D",
+              "$type": "color"
+            },
+            "Neutral 20": {
+              "$value": "#6E7E94",
+              "$type": "color"
+            },
+            "Neutral 30": {
+              "$value": "#627084",
+              "$type": "color"
+            },
+            "Neutral 40": {
+              "$value": "#556274",
+              "$type": "color"
+            },
+            "Neutral 50": {
+              "$value": "#495463",
+              "$type": "color"
+            },
+            "Neutral 60": {
+              "$value": "#3D4653",
+              "$type": "color"
+            },
+            "Neutral 70": {
+              "$value": "#313842",
+              "$type": "color"
+            },
+            "Neutral 80": {
+              "$value": "#252A32",
+              "$type": "color"
+            },
+            "Neutral 90": {
+              "$value": "#181C21",
+              "$type": "color"
+            },
+            "Neutral 95": {
+              "$value": "#0C0E11",
+              "$type": "color"
+            }
+          },
+          "Tint": {
+            "Neutral 10": {
+              "$value": "#8092A9",
+              "$type": "color"
+            },
+            "Neutral 20": {
+              "$value": "#8797AE",
+              "$type": "color"
+            },
+            "Neutral 30": {
+              "$value": "#93A2B6",
+              "$type": "color"
+            },
+            "Neutral 40": {
+              "$value": "#A0ADBF",
+              "$type": "color"
+            },
+            "Neutral 50": {
+              "$value": "#ACB8C8",
+              "$type": "color"
+            },
+            "Neutral 60": {
+              "$value": "#B9C3D1",
+              "$type": "color"
+            },
+            "Neutral 70": {
+              "$value": "#C6CED9",
+              "$type": "color"
+            },
+            "Neutral 80": {
+              "$value": "#D2D9E2",
+              "$type": "color"
+            },
+            "Neutral 90": {
+              "$value": "#DFE4EB",
+              "$type": "color"
+            },
+            "Neutral 95": {
+              "$value": "#EBEFF3",
+              "$type": "color"
+            },
+            "Neutral 100": {
+              "$value": "#F5F7F9",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "Spacing": {
+        "2": {
+          "$value": 2,
+          "$type": "float"
+        },
+        "#4": {
+          "$value": 4,
+          "$type": "float"
+        },
+        "#8": {
+          "$value": 8,
+          "$type": "float"
+        },
+        "#12": {
+          "$value": 12,
+          "$type": "float"
+        },
+        "#16": {
+          "$value": 16,
+          "$type": "float"
+        },
+        "#20": {
+          "$value": 20,
+          "$type": "float"
+        },
+        "#24": {
+          "$value": 24,
+          "$type": "float"
+        },
+        "#32": {
+          "$value": 32,
+          "$type": "float"
+        },
+        "#40": {
+          "$value": 40,
+          "$type": "float"
+        },
+        "#1": {
+          "$value": 1,
+          "$type": "float"
+        }
+      }
+    }
+  },
+  "Tokens: Spacing": {
+    "Desktop/L": {
+      "Spacing System": {
+        "Radius": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "3XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          },
+          "4XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "Radius-ICON": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          }
+        },
+        "DropShadow": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          }
+        },
+        "Padding! Gap! Spacing!": {
+          "XXS": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XXXS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          }
+        },
+        "Gap": {
+          "xS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          }
+        },
+        "Width": {
+          "M": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          }
+        }
+      },
+      "Text": {
+        "$value": "Option 1",
+        "$type": "string"
+      }
+    },
+    "Tab/M": {
+      "Spacing System": {
+        "Radius": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "3XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          },
+          "4XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "Radius-ICON": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          }
+        },
+        "DropShadow": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          }
+        },
+        "Padding! Gap! Spacing!": {
+          "XXS": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XXXS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          }
+        },
+        "Gap": {
+          "xS": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          }
+        },
+        "Width": {
+          "M": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          }
+        }
+      },
+      "Text": {
+        "$value": "Option 1",
+        "$type": "string"
+      }
+    },
+    "Mobile/S": {
+      "Spacing System": {
+        "Radius": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "3XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          },
+          "4XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "Radius-ICON": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          }
+        },
+        "DropShadow": {
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#16}",
+            "$type": "float"
+          }
+        },
+        "Padding! Gap! Spacing!": {
+          "XXS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "XS": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XXXS": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          },
+          "2XL": {
+            "$value": "{Spacing.#40}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#24}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#32}",
+            "$type": "float"
+          }
+        },
+        "Gap": {
+          "xS": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          },
+          "S": {
+            "$value": "{Spacing.#4}",
+            "$type": "float"
+          },
+          "M": {
+            "$value": "{Spacing.#8}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          },
+          "XL": {
+            "$value": "{Spacing.#12}",
+            "$type": "float"
+          }
+        },
+        "Width": {
+          "M": {
+            "$value": "{Spacing.#1}",
+            "$type": "float"
+          },
+          "L": {
+            "$value": "{Spacing.2}",
+            "$type": "float"
+          }
+        }
+      },
+      "Text": {
+        "$value": "Option 1",
+        "$type": "string"
+      }
+    }
+  },
+  "Accent Colors": {
+    "Blue": {
+      "Accent Color": {
+        "$value": "{Color.Accent Colors.Blue}",
+        "$type": "color"
+      },
+      "Accent Hover state Light": {
+        "$value": "{Color.Accent Colors.Blue.Shades.Blue 30}",
+        "$type": "color"
+      },
+      "Tap state": {
+        "$value": "{Color.Accent Colors.Blue.Tints.Blue 20}",
+        "$type": "color"
+      },
+      "Disabled Light": {
+        "$value": "{Color.Accent Colors.Blue.Tints.Blue 50}",
+        "$type": "color"
+      },
+      "Other Hover": {
+        "$value": "{Color.Accent Colors.Blue 20}",
+        "$type": "color"
+      },
+      "Disabled Dark": {
+        "$value": "{Color.Accent Colors.Blue.Shades.Blue 40}",
+        "$type": "color"
+      },
+      "Accent Hover state Dark": {
+        "$value": "{Color.Accent Colors.Blue.Tints.Blue 30}",
+        "$type": "color"
+      }
+    },
+    "Green": {
+      "Accent Color": {
+        "$value": "{Color.Accent Colors.Green}",
+        "$type": "color"
+      },
+      "Accent Hover state Light": {
+        "$value": "{Color.Accent Colors.Green.Shades.Blue 30}",
+        "$type": "color"
+      },
+      "Tap state": {
+        "$value": "{Color.Accent Colors.Green.Tints.Blue 20}",
+        "$type": "color"
+      },
+      "Disabled Light": {
+        "$value": "{Color.Accent Colors.Green.Tints.Blue 50}",
+        "$type": "color"
+      },
+      "Other Hover": {
+        "$value": "{Color.Accent Colors.Green 20}",
+        "$type": "color"
+      },
+      "Disabled Dark": {
+        "$value": "{Color.Accent Colors.Green.Shades.Blue 50}",
+        "$type": "color"
+      },
+      "Accent Hover state Dark": {
+        "$value": "{Color.Accent Colors.Green.Tints.Blue 30}",
+        "$type": "color"
+      }
+    },
+    "Red": {
+      "Accent Color": {
+        "$value": "{Color.Accent Colors.Red}",
+        "$type": "color"
+      },
+      "Accent Hover state Light": {
+        "$value": "{Color.Accent Colors.Red.Shades.Blue 30}",
+        "$type": "color"
+      },
+      "Tap state": {
+        "$value": "{Color.Accent Colors.Red.Tints.Blue 20}",
+        "$type": "color"
+      },
+      "Disabled Light": {
+        "$value": "{Color.Accent Colors.Red.Tints.Blue 50}",
+        "$type": "color"
+      },
+      "Other Hover": {
+        "$value": "{Color.Accent Colors.Red 20}",
+        "$type": "color"
+      },
+      "Disabled Dark": {
+        "$value": "{Color.Accent Colors.Red.Shades.Blue 50}",
+        "$type": "color"
+      },
+      "Accent Hover state Dark": {
+        "$value": "{Color.Accent Colors.Red.Tints.Blue 30}",
+        "$type": "color"
+      }
+    },
+    "Yellow": {
+      "Accent Color": {
+        "$value": "{Color.Accent Colors.Yellow}",
+        "$type": "color"
+      },
+      "Accent Hover state Light": {
+        "$value": "{Color.Accent Colors.Yellow.Shades.Blue 30}",
+        "$type": "color"
+      },
+      "Tap state": {
+        "$value": "{Color.Accent Colors.Yellow.Tints.Blue 20}",
+        "$type": "color"
+      },
+      "Disabled Light": {
+        "$value": "{Color.Accent Colors.Yellow.Tints.Blue 50}",
+        "$type": "color"
+      },
+      "Other Hover": {
+        "$value": "{Color.Accent Colors.Yellow 20}",
+        "$type": "color"
+      },
+      "Disabled Dark": {
+        "$value": "{Color.Accent Colors.Yellow.Shades.Blue 50}",
+        "$type": "color"
+      },
+      "Accent Hover state Dark": {
+        "$value": "{Color.Accent Colors.Yellow.Tints.Blue 30}",
+        "$type": "color"
+      }
+    }
+  },
+  "Token: Colors": {
+    "Light": {
+      "Background": {
+        "BG-Primary-Default": {
+          "$value": "{Color.Base.White}",
+          "$type": "color",
+          "$description": "Explorer; Settings"
+        },
+        "BG-Primary-Grey": {
+          "$value": "{Color.Base.Shades.Grey 00}",
+          "$type": "color"
+        },
+        "BG-Primary-Subtle": {
+          "$value": "{Color.Neutral.Tint.Neutral 100}",
+          "$type": "color"
+        },
+        "BG-Primary-Raised": {
+          "$value": "{Color.Neutral.Tint.Neutral 95}",
+          "$type": "color"
+        }
+      },
+      "Text": {
+        "Text Primary": {
+          "$value": "{Color.Neutral.Shades.Neutral 95}",
+          "$type": "color"
+        },
+        "Text Description": {
+          "$value": "{Color.Neutral.Shades.Neutral 60}",
+          "$type": "color"
+        },
+        "Text Disabled": {
+          "$value": "{Color.Neutral.Tint.Neutral 30}",
+          "$type": "color"
+        },
+        "Text Placeholder": {
+          "$value": "{Color.Neutral.Tint.Neutral 30}",
+          "$type": "color"
+        },
+        "Text On AccentColor": {
+          "$value": "{Color.Base.White}",
+          "$type": "color"
+        }
+      },
+      "Button": {
+        "Button Fill": {
+          "Button Primary": {
+            "$value": "{Accent Color}",
+            "$type": "color"
+          },
+          "Primary Disabled": {
+            "$value": "{Disabled Light}",
+            "$type": "color"
+          },
+          "Secondary Disabled": {
+            "$value": "{Color.Neutral.Tint.Neutral 100}",
+            "$type": "color"
+          },
+          "Secondary": {
+            "$value": "{Color.Neutral.Tint.Neutral 90}",
+            "$type": "color"
+          },
+          "Input Fill": {
+            "$value": "{Color.Base.White}",
+            "$type": "color"
+          },
+          "Accent Hover": {
+            "$value": "{Accent Hover state Light}",
+            "$type": "color"
+          },
+          "ON OFF": {
+            "$value": "{Color.Neutral.Tint.Neutral 40}",
+            "$type": "color"
+          },
+          "ON OFF Disabled": {
+            "$value": "{Color.Neutral.Tint.Neutral 70}",
+            "$type": "color"
+          }
+        },
+        "Button Stroke": {
+          "Secondary": {
+            "$value": "{Color.Base.Shades.Grey 70}",
+            "$type": "color"
+          },
+          "Secondary Disabled": {
+            "$value": "{Color.Base.Shades.Grey 70}",
+            "$type": "color"
+          }
+        }
+      },
+      "stroke": {
+        "Stroke 1": {
+          "$value": "{Color.Neutral.Tint.Neutral 90}",
+          "$type": "color"
+        },
+        "Stroke 2": {
+          "$value": "{Color.Neutral.Tint.Neutral 80}",
+          "$type": "color"
+        },
+        "Stroke 3": {
+          "$value": "{Color.Neutral.Tint.Neutral 70}",
+          "$type": "color"
+        },
+        "Stroke Disabled": {
+          "$value": "{Color.Neutral.Tint.Neutral 80}",
+          "$type": "color"
+        }
+      },
+      "Text Link": {
+        "$value": "#006AFF",
+        "$type": "color"
+      },
+      "Notification": {
+        "Button Primary": {
+          "$value": "{Accent Color}",
+          "$type": "color"
+        },
+        "Text secondary": {
+          "$value": "{Color.Base.Shades.Grey 70}",
+          "$type": "color"
+        },
+        "Text Disabled": {
+          "$value": "{Color.Base.Shades.Grey 50}",
+          "$type": "color"
+        }
+      },
+      "Card": {
+        "BG-Primary": {
+          "$value": "{Color.Base.White}",
+          "$type": "color"
+        },
+        "BG-Primary 2": {
+          "$value": "{Color.Neutral.Tint.Neutral 100}",
+          "$type": "color"
+        },
+        "BG-Primary 3": {
+          "$value": "{Color.Base.Shades.Grey 00}",
+          "$type": "color"
+        },
+        "BG-Primary 4": {
+          "$value": "{Color.Neutral.Tint.Neutral 95}",
+          "$type": "color"
+        }
+      },
+      "Error": {
+        "$value": "{Color.Accent Colors.Red}",
+        "$type": "color"
+      },
+      "Always White": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "Link Disabled": {
+        "$value": "#66A6FF",
+        "$type": "color"
+      },
+      "Hover": {
+        "$value": "{Other Hover}",
+        "$type": "color"
+      },
+      "Dropshadow": {
+        "S": {
+          "$value": "#181C210A",
+          "$type": "color"
+        },
+        "M": {
+          "$value": "#181C210F",
+          "$type": "color"
+        },
+        "L": {
+          "$value": "#181C2114",
+          "$type": "color"
+        }
+      },
+      "Tooltip": {
+        "$value": "{Color.Neutral.Shades.Neutral 80}",
+        "$type": "color"
+      },
+      "Side nave bar bg": {
+        "$value": "VariableID:ca0239a8449376f43519deb7401de437bde0ca44/2:558",
+        "$type": "color"
+      },
+      "Side bar BG hove": {
+        "$value": "#E0E6F4",
+        "$type": "color"
+      }
+    },
+    "Dark": {
+      "Background": {
+        "BG-Primary-Default": {
+          "$value": "{Color.Neutral.Shades.Neutral 95}",
+          "$type": "color",
+          "$description": "Explorer; Settings"
+        },
+        "BG-Primary-Grey": {
+          "$value": "{Color.Base.Tint.Grey 00}",
+          "$type": "color"
+        },
+        "BG-Primary-Subtle": {
+          "$value": "{Color.Neutral.Shades.Neutral 90}",
+          "$type": "color"
+        },
+        "BG-Primary-Raised": {
+          "$value": "{Color.Neutral.Shades.Neutral 95}",
+          "$type": "color"
+        }
+      },
+      "Text": {
+        "Text Primary": {
+          "$value": "{Color.Base.White}",
+          "$type": "color"
+        },
+        "Text Description": {
+          "$value": "{Color.Neutral.Shades.Neutral 40}",
+          "$type": "color"
+        },
+        "Text Disabled": {
+          "$value": "{Color.Neutral.Shades.Neutral 40}",
+          "$type": "color"
+        },
+        "Text Placeholder": {
+          "$value": "{Color.Neutral.Tint.Neutral 70}",
+          "$type": "color"
+        },
+        "Text On AccentColor": {
+          "$value": "{Color.Neutral.Shades.Neutral 95}",
+          "$type": "color"
+        }
+      },
+      "Button": {
+        "Button Fill": {
+          "Button Primary": {
+            "$value": "{Accent Color}",
+            "$type": "color"
+          },
+          "Primary Disabled": {
+            "$value": "{Disabled Dark}",
+            "$type": "color"
+          },
+          "Secondary Disabled": {
+            "$value": "{Color.Neutral.Shades.Neutral 90}",
+            "$type": "color"
+          },
+          "Secondary": {
+            "$value": "{Color.Neutral.Shades.Neutral 90}",
+            "$type": "color"
+          },
+          "Input Fill": {
+            "$value": "{Color.Neutral.Shades.Neutral 95}",
+            "$type": "color"
+          },
+          "Accent Hover": {
+            "$value": "{Accent Hover state Dark}",
+            "$type": "color"
+          },
+          "ON OFF": {
+            "$value": "{Color.Neutral.Shades.Neutral 40}",
+            "$type": "color"
+          },
+          "ON OFF Disabled": {
+            "$value": "{Color.Neutral.Shades.Neutral 70}",
+            "$type": "color"
+          }
+        },
+        "Button Stroke": {
+          "Secondary": {
+            "$value": "{Color.Base.Shades.Grey 20}",
+            "$type": "color"
+          },
+          "Secondary Disabled": {
+            "$value": "{Color.Base.Shades.Grey 20}",
+            "$type": "color"
+          }
+        }
+      },
+      "stroke": {
+        "Stroke 1": {
+          "$value": "{Color.Neutral.Shades.Neutral 80}",
+          "$type": "color"
+        },
+        "Stroke 2": {
+          "$value": "{Color.Neutral.Shades.Neutral 70}",
+          "$type": "color"
+        },
+        "Stroke 3": {
+          "$value": "{Color.Neutral.Shades.Neutral 60}",
+          "$type": "color"
+        },
+        "Stroke Disabled": {
+          "$value": "{Color.Neutral.Shades.Neutral 60}",
+          "$type": "color"
+        }
+      },
+      "Text Link": {
+        "$value": "#00A6FF",
+        "$type": "color"
+      },
+      "Notification": {
+        "Button Primary": {
+          "$value": "{Accent Color}",
+          "$type": "color"
+        },
+        "Text secondary": {
+          "$value": "{Color.Base.Shades.Grey 20}",
+          "$type": "color"
+        },
+        "Text Disabled": {
+          "$value": "{Color.Base.Tint.Grey 50}",
+          "$type": "color"
+        }
+      },
+      "Card": {
+        "BG-Primary": {
+          "$value": "{Color.Neutral.Shades.Neutral 90}",
+          "$type": "color"
+        },
+        "BG-Primary 2": {
+          "$value": "{Color.Neutral.Shades.Neutral 80}",
+          "$type": "color"
+        },
+        "BG-Primary 3": {
+          "$value": "{Color.Neutral.Shades.Neutral 90}",
+          "$type": "color"
+        },
+        "BG-Primary 4": {
+          "$value": "{Color.Neutral.Shades.Neutral 95}",
+          "$type": "color"
+        }
+      },
+      "Error": {
+        "$value": "{Color.Accent Colors.Red}",
+        "$type": "color"
+      },
+      "Always White": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "Link Disabled": {
+        "$value": "#006499",
+        "$type": "color"
+      },
+      "Hover": {
+        "$value": "{Color.Base.White 20}",
+        "$type": "color"
+      },
+      "Dropshadow": {
+        "S": {
+          "$value": "{Color.Neutral.Shades.Neutral 70}",
+          "$type": "color"
+        },
+        "M": {
+          "$value": "{Color.Neutral.Shades.Neutral 90}",
+          "$type": "color"
+        },
+        "L": {
+          "$value": "{Color.Neutral.Shades.Neutral 90}",
+          "$type": "color"
+        }
+      },
+      "Tooltip": {
+        "$value": "{Color.Neutral.Tint.Neutral 90}",
+        "$type": "color"
+      },
+      "Side nave bar bg": {
+        "$value": "VariableID:ca0239a8449376f43519deb7401de437bde0ca44/2:558",
+        "$type": "color"
+      },
+      "Side bar BG hove": {
+        "$value": "#E0E6F4",
+        "$type": "color"
+      }
+    }
+  }
+}

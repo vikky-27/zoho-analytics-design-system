@@ -1,0 +1,210 @@
+{
+  "_meta": {
+    "description": "Scoring rubric for screenshot verification after Figma MCP execution. Vision Agent runs C1–C10 on every screenshot. Each check includes specific fixActions for surgical repair — only failing checks are re-run, not the whole component.",
+    "version": "2.0",
+    "keyChanges": [
+      "PASS threshold lowered 15→14: single weight-2 miss is now WARN not FAIL",
+      "fixActions added per check: exact MCP code to fix only that check",
+      "earlyWinRule: C10 naming-only failures skip the iteration counter",
+      "sameCheckEscalation: same check failing twice → escalate, don't burn attempt 3"
+    ]
+  },
+
+  "checks": [
+    {
+      "id": "C1",
+      "name": "Layout Direction",
+      "weight": 2,
+      "passIf": "Children flow in the direction matching spec.autolayout.direction",
+      "failIf": "Children stacked wrong, overlapping, or using absolute positions",
+      "fixActions": [
+        "frame.layoutMode = 'HORIZONTAL';  // or 'VERTICAL' per spec",
+        "// Single property — do not change padding, gap, or fills"
+      ],
+      "fixHint": "Set frame.layoutMode only. Nothing else changes."
+    },
+    {
+      "id": "C2",
+      "name": "Padding Correct",
+      "weight": 2,
+      "passIf": "Padding matches resolved spacing token (±4px tolerance)",
+      "failIf": "Content touches edges or padding is clearly wrong",
+      "fixActions": [
+        "frame.paddingTop    = {rules.paddingTop};",
+        "frame.paddingRight  = {rules.paddingRight};",
+        "frame.paddingBottom = {rules.paddingBottom};",
+        "frame.paddingLeft   = {rules.paddingLeft};",
+        "// Values from auto-layout-rules.json for this component — no guessing"
+      ],
+      "fixHint": "Apply all 4 padding values from auto-layout-rules.json. Do not touch other properties."
+    },
+    {
+      "id": "C3",
+      "name": "Gap Between Children",
+      "weight": 1,
+      "passIf": "Children have consistent spacing matching the resolved gap token",
+      "failIf": "Children jammed together or inconsistent spacing",
+      "fixActions": [
+        "frame.itemSpacing = {rules.itemSpacing};  // single property"
+      ],
+      "fixHint": "Set frame.itemSpacing from auto-layout-rules.json. One line fix."
+    },
+    {
+      "id": "C4",
+      "name": "All Variants Present",
+      "weight": 2,
+      "passIf": "All specified variant × size × state combinations are present as distinct named frames",
+      "failIf": "Any variant missing, duplicated, or incorrectly named",
+      "fixActions": [
+        "// Create ONLY the missing variant frames — do not recreate existing ones",
+        "const missing = figma.createFrame();",
+        "missing.name = '{ComponentName}/{variant}/{size}/{state}';",
+        "// Copy layoutMode, padding, itemSpacing from an existing sibling frame",
+        "// Then rebind fills for the correct state"
+      ],
+      "fixHint": "Add only what is missing. Copy layout from a sibling. Never touch passing variants."
+    },
+    {
+      "id": "C5",
+      "name": "States Visually Distinct",
+      "weight": 2,
+      "passIf": "Each state (default, hover, disabled…) has a visually different fill or opacity",
+      "failIf": "Two or more states look identical",
+      "fixActions": [
+        "// Rebind fills per state using figma-variable-bindings.json roleIndex",
+        "// Default:  await boundPaint('VariableID:577:38')  // primaryButtonFill",
+        "// Hover:    await boundPaint('{hoverVariableId}')",
+        "// Disabled: await boundPaint('{disabledVariableId}')",
+        "stateFrame.fills = [await boundPaint(correctVariableId)];",
+        "// Touch ONLY the fill — do not change layout or text"
+      ],
+      "fixHint": "Each state needs a different variableId. Look up in figma-variable-bindings.json. Apply with boundPaint() only."
+    },
+    {
+      "id": "C6",
+      "name": "Text Readable",
+      "weight": 2,
+      "passIf": "Text is visible, legible, correct size, uses Zoho Puvi or Lato",
+      "failIf": "Text invisible, clipped, wrong font, or too small",
+      "fixActions": [
+        "await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Regular' });",
+        "textNode.fontName = { family: 'Zoho Puvi', style: 'Regular' };",
+        "textNode.fontSize = 14;  // bodyMd — or use correct scale value from spec",
+        "textNode.textAutoResize = 'WIDTH_AND_HEIGHT';"
+      ],
+      "fixHint": "Always loadFontAsync first. Font name 'Zoho Puvi' must match exactly. Do not change fills or layout."
+    },
+    {
+      "id": "C7",
+      "name": "Colors Match Variable Bindings",
+      "weight": 2,
+      "passIf": "token-audit.js returns PASS — zero hardcoded fill or stroke issues",
+      "failIf": "token-audit.js reports any hardcoded_fill or hardcoded_stroke",
+      "fixActions": [
+        "// 1. Run token-audit.js — collect all hardcoded_fill issues",
+        "// 2. For each issue, look up issue.value (hex) in figma-variable-bindings.json → hexIndex",
+        "// 3. Get the variableId for that hex",
+        "// 4. Apply:",
+        "const node = await figma.getNodeByIdAsync(issue.nodeId);",
+        "node.fills = [await boundPaint(variableId)];",
+        "// 5. Re-run token-audit.js to confirm PASS before proceeding"
+      ],
+      "fixHint": "Use nodeId from token-audit output to target exactly the right node. Never guess the variable — look it up in hexIndex."
+    },
+    {
+      "id": "C8",
+      "name": "Corner Radius Correct",
+      "weight": 1,
+      "passIf": "Corners match the borderRadius token in spec (borderRadius.md = 8px visible but subtle)",
+      "failIf": "Corners sharp when rounding expected, or rounded when none specified",
+      "fixActions": [
+        "frame.cornerRadius = {resolvedBorderRadius};  // e.g. 8 for borderRadius.md",
+        "// Single property — nothing else changes"
+      ],
+      "fixHint": "One property fix. Get exact px value from resolved-tokens.json borderRadius section."
+    },
+    {
+      "id": "C9",
+      "name": "Component Dimensions",
+      "weight": 1,
+      "passIf": "Height matches naturalHeight from auto-layout-rules.json. No unexpected stretching.",
+      "failIf": "Component too tall, too wide, or squashed",
+      "fixActions": [
+        "// Height fix — almost always the cause:",
+        "frame.counterAxisSizingMode = 'HUG';",
+        "// Width fix if wrong:",
+        "frame.primaryAxisSizingMode = 'HUG';  // or 'FILL' per spec"
+      ],
+      "fixHint": "Set counterAxisSizingMode to HUG. Height should come from content, not a fixed value."
+    },
+    {
+      "id": "C10",
+      "name": "Layer Naming Convention",
+      "weight": 1,
+      "passIf": "All layers: component = Name/Variant/Size/State, text = label--*, icons = icon--*",
+      "failIf": "Generic names like 'Frame 1', 'Text', 'Rectangle' present anywhere",
+      "fixActions": [
+        "// Bulk rename — run via figma_execute with component selected",
+        "function rename(node) {",
+        "  if (node.type === 'TEXT' && !node.name.startsWith('label--'))",
+        "    node.name = 'label--content';",
+        "  if (node.name.toLowerCase().startsWith('icon') && !node.name.startsWith('icon--'))",
+        "    node.name = 'icon--left';  // adjust position as needed",
+        "  if ('children' in node) node.children.forEach(rename);",
+        "}",
+        "figma.currentPage.selection.forEach(rename);"
+      ],
+      "fixHint": "Cheapest fix — do it in Step 7 before the first verify. C10 failure alone never costs an iteration (earlyWinRule)."
+    }
+  ],
+
+  "scoring": {
+    "totalWeight": 16,
+    "thresholds": {
+      "PASS": { "minScore": 14, "action": "Proceed to G3 A11y check." },
+      "WARN": { "minScore": 12, "action": "Proceed. Log flagged checks. Fix before human review." },
+      "FAIL": { "minScore": 0,  "action": "Apply surgical fixActions for failed checks only. Increment iteration counter." }
+    },
+    "note": "v2.0: Threshold 15→14. A single weight-2 miss is now WARN, not FAIL. Prevents burning an iteration on a minor visual difference."
+  },
+
+  "iterationConfig": {
+    "maxAttempts": 3,
+    "fixMode": "surgical",
+    "fixModeRule": "On any FAIL: run ONLY the fixActions for the failed check IDs. Do not rebuild passing checks. Do not restart the component.",
+
+    "earlyWinRule": {
+      "condition": "Score ≥ 14 AND only C10 (naming) is failing",
+      "action": "Apply C10 fixActions inline. Do NOT count as a failed iteration. Proceed to G3.",
+      "rationale": "Naming is a cosmetic fix that takes one figma_execute call. Never worth an iteration."
+    },
+
+    "sameCheckEscalation": {
+      "condition": "The same check ID fails on two consecutive attempts",
+      "action": "Escalate that check to human. Continue the pipeline for all other passing checks.",
+      "output": "PARTIAL ESCALATE — Check {id} ({name}) failed attempts {n} and {n+1}. Escalated to human. All other checks: {status}."
+    },
+
+    "attempt1": {
+      "onFail": "Collect failed check IDs. Run fixActions for each. Re-run token-audit + screenshot verify.",
+      "log": "ATTEMPT 1 FAILED — Failed: {ids}. Surgical fixes applied: {summary}."
+    },
+    "attempt2": {
+      "onFail": "Any check that failed attempt 1 AND attempt 2 → partial escalate. Run fixActions for new failures only. Re-run verify.",
+      "log": "ATTEMPT 2 FAILED — Escalated (repeat failures): {escalatedIds}. New failures: {newIds}. Applying fixes for new failures."
+    },
+    "attempt3": {
+      "onFail": "ESCALATE TO HUMAN. All MCP execution stops.",
+      "log": "ESCALATE TO HUMAN — {componentName} failed 3 attempts.\nAll failed checks: {fullLog}."
+    },
+
+    "resetOnSuccess": "Exit fix loop immediately on PASS or WARN. Never continue iterating after a pass."
+  },
+
+  "outputFormat": {
+    "onPass": "VERIFY PASS (Attempt {n}) — Score: {score}/16. Proceeding to G3 A11y.",
+    "onWarn": "VERIFY WARN (Attempt {n}) — Score: {score}/16. Flagged: {ids}. Logged. Proceeding.",
+    "onFail": "VERIFY FAIL (Attempt {n}/3) — Score: {score}/16.\nFailed checks: {ids}\nFix plan:\n{fixPlanPerCheck}\nApplying surgical fixes now...",
+    "onEscalate": "ESCALATE TO HUMAN — {componentName} failed {n} attempts.\nFailed: {allFailedChecks}\nMCP execution stopped."
+  }
+}

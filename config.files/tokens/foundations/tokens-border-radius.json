@@ -1,0 +1,13 @@
+{
+  "Border Radius": {
+    "Mode 1": {
+      "none": { "$value": "0px",    "$type": "dimension", "$description": "No rounding — sharp corners. Use for table cells, data grids." },
+      "sm":   { "$value": "4px",    "$type": "dimension", "$description": "Subtle rounding — badges, tags, chips." },
+      "md":   { "$value": "8px",    "$type": "dimension", "$description": "Default rounding — cards, inputs, buttons." },
+      "lg":   { "$value": "12px",   "$type": "dimension", "$description": "Prominent rounding — modals, drawers, panels." },
+      "xl":   { "$value": "16px",   "$type": "dimension", "$description": "Strong rounding — sheets, feature cards." },
+      "2xl":  { "$value": "24px",   "$type": "dimension", "$description": "Extra-strong rounding — hero cards, onboarding screens." },
+      "full": { "$value": "9999px", "$type": "dimension", "$description": "Fully rounded — pills, toggles, circular avatars." }
+    }
+  }
+}

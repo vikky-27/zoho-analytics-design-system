@@ -1,0 +1,36 @@
+{
+  "Shadow": {
+    "Mode 1": {
+      "none": {
+        "$value": { "x": 0, "y": 0, "blur": 0, "spread": 0, "color": "#00000000" },
+        "$type": "shadow",
+        "$description": "No shadow — flat surfaces, disabled states."
+      },
+      "sm": {
+        "$value": { "x": 0, "y": 1, "blur": 4, "spread": 0, "color": "#181C210A" },
+        "$type": "shadow",
+        "$description": "Small shadow — buttons, chips, badges. 4% opacity."
+      },
+      "md": {
+        "$value": { "x": 0, "y": 4, "blur": 12, "spread": 0, "color": "#181C210F" },
+        "$type": "shadow",
+        "$description": "Medium shadow — cards, dropdowns, tooltips. 6% opacity."
+      },
+      "lg": {
+        "$value": { "x": 0, "y": 8, "blur": 24, "spread": 0, "color": "#181C2114" },
+        "$type": "shadow",
+        "$description": "Large shadow — modals, side panels, floating elements. 8% opacity."
+      },
+      "xl": {
+        "$value": { "x": 0, "y": 16, "blur": 48, "spread": 0, "color": "#181C2120" },
+        "$type": "shadow",
+        "$description": "Extra-large shadow — popovers, command palettes. 13% opacity."
+      },
+      "inner": {
+        "$value": { "x": 0, "y": 2, "blur": 4, "spread": 0, "color": "#181C2114", "inset": true },
+        "$type": "shadow",
+        "$description": "Inset shadow — pressed/active button states, inset input fields."
+      }
+    }
+  }
+}

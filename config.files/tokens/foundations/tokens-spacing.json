@@ -1,0 +1,133 @@
+{
+  "Tokens: Spacing": {
+    "Desktop/L": {
+      "Spacing System": {
+        "Radius": {
+          "XS":          { "$value": "{Spacing.2}",   "$type": "dimension", "$description": "Extra-small radius — tags, chips." },
+          "S":           { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Small radius — badges, tooltips." },
+          "M":           { "$value": "{Spacing.#8}",  "$type": "dimension", "$description": "Default radius — inputs, cards." },
+          "L":           { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Large radius — modals, drawers." },
+          "XL":          { "$value": "{Spacing.#16}", "$type": "dimension", "$description": "Extra-large radius — sheets." },
+          "2XL":         { "$value": "{Spacing.#24}", "$type": "dimension", "$description": "2× large radius." },
+          "3XL":         { "$value": "{Spacing.#32}", "$type": "dimension", "$description": "3× large radius." },
+          "4XL":         { "$value": "{Spacing.#40}", "$type": "dimension", "$description": "4× large radius — full-bleed cards." },
+          "Radius-ICON": { "$value": "{Spacing.1}",   "$type": "dimension", "$description": "Icon corner radius." }
+        },
+        "DropShadow": {
+          "S":  { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Small shadow blur radius." },
+          "M":  { "$value": "{Spacing.#8}",  "$type": "dimension", "$description": "Medium shadow blur radius." },
+          "L":  { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Large shadow blur radius." },
+          "XL": { "$value": "{Spacing.#16}", "$type": "dimension", "$description": "Extra-large shadow blur radius." }
+        },
+        "Padding": {
+          "XXXS": { "$value": "{Spacing.2}",   "$type": "dimension", "$description": "Minimum padding — icon-only buttons." },
+          "XXS":  { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Extra-extra-small padding." },
+          "XS":   { "$value": "{Spacing.#8}",  "$type": "dimension", "$description": "Extra-small padding — compact components." },
+          "S":    { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Small padding — dense lists." },
+          "M":    { "$value": "{Spacing.#16}", "$type": "dimension", "$description": "Default padding — buttons, inputs." },
+          "L":    { "$value": "{Spacing.#24}", "$type": "dimension", "$description": "Large padding — cards, panels." },
+          "XL":   { "$value": "{Spacing.#32}", "$type": "dimension", "$description": "Extra-large padding — page sections." },
+          "2XL":  { "$value": "{Spacing.#40}", "$type": "dimension", "$description": "Maximum padding — hero areas." }
+        },
+        "Gap": {
+          "xs": { "$value": "{Spacing.2}",   "$type": "dimension", "$description": "Minimum gap between elements." },
+          "S":  { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Small gap — icon + label pairs." },
+          "M":  { "$value": "{Spacing.#8}",  "$type": "dimension", "$description": "Default gap — form fields, stacked items." },
+          "L":  { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Large gap — grouped sections." },
+          "XL": { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Extra-large gap — layout columns (Desktop)." }
+        },
+        "Width": {
+          "M": { "$value": "{Spacing.1}",  "$type": "dimension", "$description": "Border width — default (1px)." },
+          "L": { "$value": "{Spacing.2}",  "$type": "dimension", "$description": "Border width — emphasis (2px)." }
+        }
+      },
+      "Text": { "$value": "Option 1", "$type": "string" }
+    },
+    "Tab/M": {
+      "Spacing System": {
+        "Radius": {
+          "XS":          { "$value": "{Spacing.2}",   "$type": "dimension", "$description": "Extra-small radius." },
+          "S":           { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Small radius." },
+          "M":           { "$value": "{Spacing.#8}",  "$type": "dimension", "$description": "Default radius." },
+          "L":           { "$value": "{Spacing.#12}", "$type": "dimension", "$description": "Large radius." },
+          "XL":          { "$value": "{Spacing.#16}", "$type": "dimension", "$description": "Extra-large radius." },
+          "2XL":         { "$value": "{Spacing.#24}", "$type": "dimension", "$description": "2× large radius." },
+          "3XL":         { "$value": "{Spacing.#32}", "$type": "dimension", "$description": "3× large radius." },
+          "4XL":         { "$value": "{Spacing.#40}", "$type": "dimension", "$description": "4× large radius." },
+          "Radius-ICON": { "$value": "{Spacing.1}",   "$type": "dimension", "$description": "Icon corner radius." }
+        },
+        "DropShadow": {
+          "S":  { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "M":  { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "L":  { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "XL": { "$value": "{Spacing.#16}", "$type": "dimension" }
+        },
+        "Padding": {
+          "XXXS": { "$value": "{Spacing.2}",   "$type": "dimension" },
+          "XXS":  { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "XS":   { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "S":    { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "M":    { "$value": "{Spacing.#16}", "$type": "dimension" },
+          "L":    { "$value": "{Spacing.#24}", "$type": "dimension" },
+          "XL":   { "$value": "{Spacing.#32}", "$type": "dimension" },
+          "2XL":  { "$value": "{Spacing.#40}", "$type": "dimension" }
+        },
+        "Gap": {
+          "xs": { "$value": "{Spacing.#4}",  "$type": "dimension", "$description": "Minimum gap — slightly larger on tablet." },
+          "S":  { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "M":  { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "L":  { "$value": "{Spacing.#16}", "$type": "dimension" },
+          "XL": { "$value": "{Spacing.#16}", "$type": "dimension", "$description": "Extra-large gap — layout columns (Tablet)." }
+        },
+        "Width": {
+          "M": { "$value": "{Spacing.1}",  "$type": "dimension" },
+          "L": { "$value": "{Spacing.2}",  "$type": "dimension" }
+        }
+      },
+      "Text": { "$value": "Option 1", "$type": "string" }
+    },
+    "Mobile/S": {
+      "Spacing System": {
+        "Radius": {
+          "XS":          { "$value": "{Spacing.2}",   "$type": "dimension" },
+          "S":           { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "M":           { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "L":           { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "XL":          { "$value": "{Spacing.#16}", "$type": "dimension" },
+          "2XL":         { "$value": "{Spacing.#24}", "$type": "dimension" },
+          "3XL":         { "$value": "{Spacing.#32}", "$type": "dimension" },
+          "4XL":         { "$value": "{Spacing.#40}", "$type": "dimension" },
+          "Radius-ICON": { "$value": "{Spacing.1}",   "$type": "dimension" }
+        },
+        "DropShadow": {
+          "S":  { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "M":  { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "L":  { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "XL": { "$value": "{Spacing.#16}", "$type": "dimension" }
+        },
+        "Padding": {
+          "XXXS": { "$value": "{Spacing.1}",   "$type": "dimension", "$description": "Minimum padding on mobile (1px, tighter than Desktop/Tablet)." },
+          "XXS":  { "$value": "{Spacing.2}",   "$type": "dimension" },
+          "XS":   { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "S":    { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "M":    { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "L":    { "$value": "{Spacing.#24}", "$type": "dimension" },
+          "XL":   { "$value": "{Spacing.#32}", "$type": "dimension" },
+          "2XL":  { "$value": "{Spacing.#40}", "$type": "dimension" }
+        },
+        "Gap": {
+          "xs": { "$value": "{Spacing.2}",   "$type": "dimension" },
+          "S":  { "$value": "{Spacing.#4}",  "$type": "dimension" },
+          "M":  { "$value": "{Spacing.#8}",  "$type": "dimension" },
+          "L":  { "$value": "{Spacing.#12}", "$type": "dimension" },
+          "XL": { "$value": "{Spacing.#12}", "$type": "dimension" }
+        },
+        "Width": {
+          "M": { "$value": "{Spacing.1}",  "$type": "dimension" },
+          "L": { "$value": "{Spacing.2}",  "$type": "dimension" }
+        }
+      },
+      "Text": { "$value": "Option 1", "$type": "string" }
+    }
+  }
+}

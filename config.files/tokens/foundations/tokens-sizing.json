@@ -1,0 +1,45 @@
+{
+  "Sizing": {
+    "Mode 1": {
+      "button": {
+        "heightSm":  { "$value": "28px",  "$type": "dimension", "$description": "Small button height — compact toolbars, inline actions." },
+        "heightMd":  { "$value": "36px",  "$type": "dimension", "$description": "Default button height — most form contexts." },
+        "heightLg":  { "$value": "44px",  "$type": "dimension", "$description": "Large button height — primary CTAs, prominent actions." },
+        "minWidth":  { "$value": "64px",  "$type": "dimension", "$description": "Minimum button width to prevent text wrapping on short labels." },
+        "maxWidth":  { "$value": "320px", "$type": "dimension", "$description": "Maximum button width — prevents overly wide buttons in wide containers." }
+      },
+      "input": {
+        "heightSm":  { "$value": "28px",  "$type": "dimension", "$description": "Small input height — dense forms, filter bars." },
+        "heightMd":  { "$value": "36px",  "$type": "dimension", "$description": "Default input height." },
+        "heightLg":  { "$value": "44px",  "$type": "dimension", "$description": "Large input height — prominent search fields." },
+        "minWidth":  { "$value": "120px", "$type": "dimension", "$description": "Minimum input width." },
+        "maxWidth":  { "$value": "480px", "$type": "dimension", "$description": "Maximum input width — constrains inline inputs." }
+      },
+      "icon": {
+        "xs": { "$value": "12px", "$type": "dimension", "$description": "Extra-small icon — decorative or badge context." },
+        "sm": { "$value": "16px", "$type": "dimension", "$description": "Small icon — inline text icons, list item icons." },
+        "md": { "$value": "20px", "$type": "dimension", "$description": "Default icon size — buttons, nav items." },
+        "lg": { "$value": "24px", "$type": "dimension", "$description": "Large icon — section headers, empty states." },
+        "xl": { "$value": "32px", "$type": "dimension", "$description": "Extra-large icon — illustration icons, onboarding." }
+      },
+      "avatar": {
+        "xs": { "$value": "20px", "$type": "dimension", "$description": "Extra-small avatar — comment threads, dense lists." },
+        "sm": { "$value": "24px", "$type": "dimension", "$description": "Small avatar — inline mentions, compact nav." },
+        "md": { "$value": "32px", "$type": "dimension", "$description": "Default avatar size — list rows, dropdowns." },
+        "lg": { "$value": "40px", "$type": "dimension", "$description": "Large avatar — profile headers, cards." },
+        "xl": { "$value": "48px", "$type": "dimension", "$description": "Extra-large avatar — profile pages, settings." }
+      },
+      "checkbox": {
+        "sm": { "$value": "14px", "$type": "dimension", "$description": "Small checkbox/radio — dense tables." },
+        "md": { "$value": "16px", "$type": "dimension", "$description": "Default checkbox/radio size." },
+        "lg": { "$value": "20px", "$type": "dimension", "$description": "Large checkbox/radio — prominent form contexts." }
+      },
+      "toggle": {
+        "widthSm":  { "$value": "28px", "$type": "dimension", "$description": "Small toggle switch width." },
+        "widthMd":  { "$value": "36px", "$type": "dimension", "$description": "Default toggle switch width." },
+        "heightSm": { "$value": "16px", "$type": "dimension", "$description": "Small toggle switch height." },
+        "heightMd": { "$value": "20px", "$type": "dimension", "$description": "Default toggle switch height." }
+      }
+    }
+  }
+}

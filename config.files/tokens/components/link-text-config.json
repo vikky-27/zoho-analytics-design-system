@@ -1,0 +1,173 @@
+{
+  "nodes": [
+    {
+      "id": "2610:3300",
+      "name": "Link Text",
+      "type": "INSTANCE",
+      "width": 58,
+      "height": 20,
+      "x": 211,
+      "y": 59,
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#FFFFFF"
+        }
+      ],
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Property 1": {
+          "type": "VARIANT",
+          "value": "Default"
+        }
+      },
+      "children": [
+        {
+          "id": "I2610:3300;2610:3291",
+          "name": "Link Text",
+          "type": "TEXT",
+          "width": 58,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#00A6FF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Link Text",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#00A6FF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2610:3303",
+      "name": "Link Text",
+      "type": "INSTANCE",
+      "width": 57,
+      "height": 20,
+      "x": 295,
+      "y": 59,
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#FFFFFF"
+        }
+      ],
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Property 1": {
+          "type": "VARIANT",
+          "value": "Hover"
+        }
+      },
+      "children": [
+        {
+          "id": "I2610:3303;2610:3292",
+          "name": "Link Text",
+          "type": "TEXT",
+          "width": 57,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#00A6FF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Link Text",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#00A6FF"
+          }
+        }
+      ]
+    }
+  ],
+  "statesAndOptions": {
+    "componentSets": [],
+    "instances": [
+      {
+        "nodeId": "2610:3300",
+        "nodeName": "Link Text",
+        "mainComponentId": "2610:3297",
+        "mainComponentName": "Property 1=Default",
+        "currentProperties": {
+          "Property 1": {
+            "type": "VARIANT",
+            "value": "Default"
+          }
+        },
+        "componentSetId": "2610:3298",
+        "componentSetName": "Link Text",
+        "allVariantOptions": {
+          "Property 1": [
+            "Default",
+            "Hover"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2610:3303",
+        "nodeName": "Link Text",
+        "mainComponentId": "2610:3296",
+        "mainComponentName": "Property 1=Hover",
+        "currentProperties": {
+          "Property 1": {
+            "type": "VARIANT",
+            "value": "Hover"
+          }
+        },
+        "componentSetId": "2610:3298",
+        "componentSetName": "Link Text",
+        "allVariantOptions": {
+          "Property 1": [
+            "Default",
+            "Hover"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      }
+    ]
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "linkText":  { "variableName": "Text Link",        "variableId": "VariableID:706:113", "value": "#00A6FF" },
+    "bgWhite":   { "variableName": "Color/Base/White", "variableId": "VariableID:189:170", "value": "#FFFFFF" }
+  }
+}

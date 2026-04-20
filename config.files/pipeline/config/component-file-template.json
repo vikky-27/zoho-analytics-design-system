@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "description": "Template for auto-generated component config files. Produced by the Orchestrator Agent (Step 11) after a component is successfully built and published. Replace all {{PLACEHOLDER}} values.",
+    "outputPath": "tokens/components/{{componentNameKebab}}-config.json",
+    "generatedBy": "Orchestrator Agent — Step 11",
+    "sourceRef": "pipeline/config/component-file-template.json"
+  },
+
+  "component": {
+    "name": "{{ComponentName}}",
+    "description": "{{One-line description of what this component does}}",
+    "figmaSource": {
+      "fileKey": "{{figmaFileKey}}",
+      "componentSetId": "{{componentSetNodeId}}",
+      "componentSetKey": "{{componentSetKey_40charHex}}",
+      "pageUrl": "https://www.figma.com/design/{{figmaFileKey}}/Design-System--Zoho-Analytics?node-id={{componentSetNodeId}}"
+    },
+    "addedAt": "{{ISO-8601 date}}",
+    "tokenBindings": {
+      "background":    "{{semantic.light.*}}",
+      "text":          "{{semantic.light.text.*}}",
+      "borderRadius":  "{{borderRadius.*}}",
+      "border":        "{{border.width.*}}",
+      "borderColor":   "{{semantic.light.stroke.*}}",
+      "padding":       "{{spacing.padding.*}}",
+      "gap":           "{{spacing.gap.*}}",
+      "height":        "{{sizing.*.height*}}",
+      "shadow":        "{{shadow.*}}"
+    }
+  },
+
+  "variantAxes": [
+    {
+      "name": "{{AxisName_1 e.g. State}}",
+      "values": ["{{value1}}", "{{value2}}", "{{value3}}"]
+    },
+    {
+      "name": "{{AxisName_2 e.g. Primary}}",
+      "values": ["{{value1}}", "{{value2}}"]
+    }
+  ],
+
+  "variants": [
+    {
+      "combo": { "{{AxisName_1}}": "{{value1}}", "{{AxisName_2}}": "{{value1}}" },
+      "variantKey": "{{40charHexKey}}",
+      "nodeId": "{{XXXX:YYYY}}",
+      "useCase": "{{When to use this variant}}"
+    },
+    {
+      "combo": { "{{AxisName_1}}": "{{value1}}", "{{AxisName_2}}": "{{value2}}" },
+      "variantKey": "{{40charHexKey}}",
+      "nodeId": "{{XXXX:YYYY}}",
+      "useCase": "{{When to use this variant}}"
+    }
+  ],
+
+  "properties": [
+    {
+      "key": "{{PropertyName}}",
+      "type": "VARIANT | TEXT | BOOLEAN",
+      "values": ["{{option1}}", "{{option2}}"],
+      "description": "{{What this property controls}}"
+    }
+  ],
+
+  "layout": {
+    "direction": "HORIZONTAL | VERTICAL",
+    "paddingTop":    "{{n}} (from {{spacing.padding.*}})",
+    "paddingRight":  "{{n}} (from {{spacing.padding.*}})",
+    "paddingBottom": "{{n}} (from {{spacing.padding.*}})",
+    "paddingLeft":   "{{n}} (from {{spacing.padding.*}})",
+    "itemSpacing":   "{{n}} (from {{spacing.gap.*}})",
+    "primaryAxisSizingMode":   "HUG | FILL | FIXED",
+    "counterAxisSizingMode":   "HUG | FILL | FIXED",
+    "naturalHeight": "{{n}}px",
+    "naturalWidth":  "{{n}}px"
+  },
+
+  "showcase": {
+    "frameName": "{{ComponentName}}/Showcase",
+    "rows": "{{axis-name (e.g. Primary=Yes/No)}}",
+    "cols": "{{axis-name (e.g. State=Default/Hover/Disabled)}}",
+    "figmaNodeId": "{{showcase frame node ID after creation}}"
+  },
+
+  "auditStatus": {
+    "tokenAudit":   "PASS | WARN | FAIL",
+    "visualDiff":   "PASS | WARN | FAIL",
+    "a11yCheck":    "PASS | WARN | FAIL",
+    "runAt":        "{{ISO-8601 date}}",
+    "score":        "{{n}}/16"
+  }
+}

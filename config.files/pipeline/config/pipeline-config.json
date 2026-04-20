@@ -1,0 +1,198 @@
+{
+  "_meta": {
+    "description": "Global pipeline configuration. Controls iteration limits, confirmation requirements, agent behavior, and escalation rules for the Figma component generation pipeline.",
+    "version": "2.0",
+    "change": "Redesigned iteration loop for 2–3 attempt convergence. Added pre-flight step, surgical fix mode, same-check escalation, and targeted fixActions."
+  },
+
+  "pipeline": {
+    "version": "2.0",
+    "mode": "figma-only",
+    "confirmBeforeExecution": true,
+    "confirmationKeyword": "proceed",
+
+    "steps": [
+      { "step": 1,  "name": "Validate brief",           "tool": "component-spec-schema.json",  "blockOnFail": true  },
+      { "step": 2,  "name": "Resolve tokens",            "tool": "resolved-tokens.json",        "blockOnFail": true  },
+      { "step": 3,  "name": "Check library components",  "tool": "figma_get_library_components", "blockOnFail": false },
+      { "step": 4,  "name": "Load auto-layout rules",    "tool": "auto-layout-rules.json",      "blockOnFail": true  },
+      { "step": 5,  "name": "Generate plan + confirm",   "tool": "human-confirmation",          "blockOnFail": true  },
+      { "step": 6,  "name": "Pre-flight checks",         "tool": "figma_execute",               "blockOnFail": true  },
+      { "step": 7,  "name": "Execute Figma MCP",         "tool": "figma_execute",               "blockOnFail": false },
+      { "step": 8,  "name": "Token audit (G2)",          "tool": "token-audit.js",              "blockOnFail": true  },
+      { "step": 9,  "name": "Screenshot + verify (G1)",  "tool": "verify-rubric.json",          "blockOnFail": false },
+      { "step": 10, "name": "A11y check (G3)",           "tool": "figma_execute",               "blockOnFail": false },
+      { "step": 11, "name": "Human review + publish",    "tool": "human-approval",              "blockOnFail": true  },
+      { "step": 12, "name": "Generate component files",  "tool": "agent",                       "blockOnFail": false }
+    ]
+  },
+
+  "preFlightChecks": {
+    "description": "Run BEFORE Step 7 (Figma MCP execution). Failures here do NOT consume an iteration — they are infrastructure problems, not design problems. Fix and re-run pre-flight only.",
+    "checks": [
+      {
+        "id": "PF1",
+        "name": "Fonts loaded",
+        "action": "await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Regular' }); await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Medium' }); await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Semibold' }); await figma.loadFontAsync({ family: 'Lato', style: 'Regular' });",
+        "failMessage": "Font load failed. Zoho Puvi or Lato not available. Check Figma file font access before continuing.",
+        "blockExecution": true
+      },
+      {
+        "id": "PF2",
+        "name": "Target page exists or can be created",
+        "action": "Check figma.root.children for a page matching spec.page. If missing, create it. Log creation.",
+        "failMessage": "Could not find or create target page.",
+        "blockExecution": true
+      },
+      {
+        "id": "PF3",
+        "name": "Variable IDs reachable",
+        "action": "For each variableId in the execution plan, call figma.variables.getVariableByIdAsync(id). Confirm it returns a non-null variable object.",
+        "failMessage": "One or more Figma variable IDs are unreachable. Re-query figma-variable-bindings.json and confirm IDs match the current file.",
+        "blockExecution": true
+      },
+      {
+        "id": "PF4",
+        "name": "Library component keys valid",
+        "action": "For each variantKey in the plan, call figma_get_library_components and confirm the key appears in the results.",
+        "failMessage": "One or more variant keys not found in library. Re-query with figma_get_library_components to get current keys.",
+        "blockExecution": true
+      },
+      {
+        "id": "PF5",
+        "name": "Canvas space clear",
+        "action": "Call figma_capture_screenshot on the target page. Confirm clear space exists at the intended placement coordinates. If not, adjust coordinates.",
+        "failMessage": "Target coordinates overlap existing work. Find new clear space.",
+        "blockExecution": false
+      }
+    ],
+    "rule": "ALL blockExecution=true checks must pass before Step 7 runs. Pre-flight failures do NOT count toward the iterationGuard.maxAttempts counter."
+  },
+
+  "iterationGuard": {
+    "maxAttempts": 3,
+    "scope": "One iteration = pre-flight (Step 6) + execute (Step 7) + token audit (Step 8) + verify (Step 9). Pre-flight failures outside this scope do NOT count.",
+
+    "fixMode": "surgical",
+    "fixModeDescription": "On iteration failure, re-run ONLY the Figma MCP operations that fix the specific failed checks. Do NOT rebuild the entire component. Rebuilding resets all progress and risks introducing new issues.",
+
+    "sameCheckEscalation": {
+      "enabled": true,
+      "rule": "If the SAME check ID fails on two consecutive attempts, immediately escalate that check to human — do NOT spend attempt 3 on it.",
+      "output": "PARTIAL ESCALATE — Check {checkId} ({checkName}) failed on attempts {n} and {n+1}. This check is escalated to human review. Continuing pipeline for remaining checks."
+    },
+
+    "attempt1": {
+      "onFail": "Output failed check IDs with fixActions (from verify-rubric.json). Execute ONLY the fixActions for failed checks. Re-run token audit + screenshot verify.",
+      "log": "Attempt 1 failures: {failedCheckIds}. Fix actions taken: {fixActionsSummary}."
+    },
+    "attempt2": {
+      "onFail": "Output failed check IDs. Compare with attempt 1 failures. For any check that failed BOTH attempt 1 and 2 → escalate that check. For new failures → apply fixActions. Re-run token audit + screenshot verify.",
+      "log": "Attempt 2 failures: {failedCheckIds}. Repeated from attempt 1: {repeatedIds} (escalated). New failures: {newIds}."
+    },
+    "attempt3": {
+      "onFail": {
+        "action": "ESCALATE_TO_HUMAN",
+        "output": "ESCALATE TO HUMAN — Component {componentName} could not be fully verified after 3 attempts.\n\nFailed checks:\n{failedChecksList}\n\nAll Figma MCP execution has stopped.\nReview the failure log and correct the component spec or token mappings before retrying.",
+        "stopPipeline": true
+      }
+    },
+
+    "resetOnSuccess": "If PASS or WARN at any attempt, exit the fix loop immediately. Do NOT continue iterating."
+  },
+
+  "tokenResolution": {
+    "sourceFile": "tokens/resolved-tokens.json",
+    "variableBindingFile": "tokens/figma-variable-bindings.json",
+    "rule": "Every fill, stroke, radius, padding, gap, font, or shadow MUST be a Figma variable binding. Never pass a raw hex or {r,g,b} object to any fill or stroke. Look up the variableId in figma-variable-bindings.json → roleIndex.",
+    "colorPattern": "async function boundPaint(variableId) { const v = await figma.variables.getVariableByIdAsync(variableId); return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: { r:0, g:0, b:0 } }, 'color', v); }",
+    "exampleLookup": {
+      "role":       "primaryButtonFill",
+      "variableId": "VariableID:577:38",
+      "hex":        "#2C66DD"
+    }
+  },
+
+  "qualityGateOrder": {
+    "description": "Gates run in sequence. A FAIL blocks the next gate. WARN allows progression with issues logged.",
+    "G2_TokenAudit": {
+      "step": 8,
+      "runBefore": "G1",
+      "reason": "No point screenshotting a component that still has hardcoded values — the screenshot won't match the spec.",
+      "tool": "pipeline/scripts/token-audit.js",
+      "passCriteria": "Zero FAIL issues. WARN issues (unbound font size) are logged but do not block.",
+      "onFail": "Fix all FAIL issues using the quickFix snippets in the audit report. Do NOT increment iteration counter — token audit fixes are infrastructure, not design decisions."
+    },
+    "G1_VisualDiff": {
+      "step": 9,
+      "runAfter": "G2 passes",
+      "tool": "verify-rubric.json + figma_capture_screenshot + Vision Agent",
+      "passCriteria": "Score ≥ 14/16 (PASS) or ≥ 12/16 (WARN — proceed with notes)",
+      "onFail": "Apply surgical fixActions from the rubric for each failed check. Increment iteration counter."
+    },
+    "G3_A11yCheck": {
+      "step": 10,
+      "runAfter": "G1 passes or warns",
+      "checks": [
+        "Contrast ratio ≥ 4.5:1 for normal text, ≥ 3:1 for large text (≥18px or 14px bold)",
+        "Interactive targets: width ≥ 44px, height ≥ 28px minimum",
+        "All text layers named label--*, all icon slots named icon--*"
+      ],
+      "passCriteria": "All three checks pass",
+      "onFail": "Naming failures: fix immediately with rename MCP call. Contrast failures: flag token pair to human — do not block publish."
+    }
+  },
+
+  "surgicalFixMap": {
+    "description": "Maps each verify-rubric check ID to the minimum set of Figma MCP operations needed to fix it. Used in surgical fix mode — only these operations run, not a full rebuild.",
+    "C1_layoutDirection":   ["Set frame.layoutMode to correct direction. Check auto-layout-rules.json for this component."],
+    "C2_padding":           ["Re-apply paddingTop/Right/Bottom/Left from auto-layout-rules.json resolved values. No other changes."],
+    "C3_gap":               ["Re-apply frame.itemSpacing from auto-layout-rules.json. No other changes."],
+    "C4_variantsMissing":   ["Create the missing variant frame(s). Copy layout from an existing variant. Set correct name."],
+    "C5_statesNotDistinct": ["Rebind fills for each state using correct variableId from figma-variable-bindings.json."],
+    "C6_textUnreadable":    ["Load font. Set fontFamily to Zoho Puvi. Set fontSize from typography.scale token. Set textAutoResize to NONE or WIDTH_AND_HEIGHT."],
+    "C7_colorsMismatch":    ["Run boundPaint() with correct variableId for each affected node. Do NOT set raw fills."],
+    "C8_cornerRadius":      ["Set cornerRadius from borderRadius token in resolved-tokens.json. Bind via variable if variable exists."],
+    "C9_dimensions":        ["For height: set counterAxisSizingMode to HUG. For width: set primaryAxisSizingMode to HUG or FILL per spec."],
+    "C10_layerNaming":      ["Rename each layer via node.name = '...' per naming convention in component spec."]
+  },
+
+  "publishRules": {
+    "requireHumanApproval": true,
+    "neverAutoPublish": true,
+    "onApproval": "Call figma_publish. Then execute Step 12 (generate component config JSON + doc MD).",
+    "onRejection": "Agent receives feedback and re-enters pipeline at the step indicated by the feedback."
+  },
+
+  "figmaMCPRules": {
+    "colorBinding": {
+      "rule": "NEVER set node.fills or node.strokes with raw hex, {r,g,b} objects, or hexToRgb() results. ALWAYS use figma.variables.setBoundVariableForPaint() with a variable ID from figma-variable-bindings.json.",
+      "helper": "async function boundPaint(id) { const v = await figma.variables.getVariableByIdAsync(id); return figma.variables.setBoundVariableForPaint({ type:'SOLID', color:{r:0,g:0,b:0} }, 'color', v); }"
+    },
+    "placement": {
+      "rule": "Never place components directly on blank canvas. Always place inside a named Section or Frame.",
+      "beforeCreate": "Run PF5 pre-flight check to find clear canvas space.",
+      "noOverlap": "Position new section without overlapping existing work."
+    },
+    "nodeIds": {
+      "rule": "Node IDs are session-specific. Never reuse node IDs from previous sessions.",
+      "action": "Re-query and re-resolve all IDs at the start of every session."
+    },
+    "instanceText": {
+      "rule": "For INSTANCE nodes, always use setProperties() to set text and state.",
+      "never": "Never edit child text nodes directly on instances."
+    },
+    "cleanup": {
+      "rule": "After a failed execution, remove all partial artifacts with node.remove() before retrying.",
+      "noDuplicatePages": "If the target page already exists, reuse it. Never create a duplicate."
+    },
+    "fontLoad": {
+      "rule": "Always call figma.loadFontAsync() in PF1 before any text node creation. Do not assume fonts are loaded."
+    }
+  },
+
+  "agentSystemPrompt": {
+    "description": "Inject this context when initialising any agent. Replace {{TOKEN_JSON}} with resolved-tokens.json contents.",
+    "prompt": "You are a Figma component agent for Zoho Analytics Design System.\n\nCRITICAL RULES:\n1. Colors MUST be Figma variable bindings — never raw hex or {r,g,b}. Use boundPaint(variableId) from figma-variable-bindings.json.\n2. Run 5 pre-flight checks (PF1–PF5) before any Figma MCP write call.\n3. On verification failure, apply SURGICAL fixes only — re-run only the MCP operations for failed checks. Do not rebuild the full component.\n4. If the same check fails twice in a row, escalate that check to human. Do not spend a 3rd attempt on it.\n5. Maximum 3 total iterations. Use them wisely — pre-flight failures do not count.\n6. Output plan → wait for 'proceed' → execute → audit → verify → fix (surgical) → verify again.\n\nTOKEN DATA:\n{{TOKEN_JSON}}"
+  }
+}

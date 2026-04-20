@@ -1,0 +1,141 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "updatedAt": "2026-04-17",
+    "figmaFileKey": "m2iOWX3I9aDI5kgyw4wCo0",
+    "purpose": "Master Figma library variable binding map. Use this file for ALL component creation — both new and existing. Every color must be bound via figma.variables.setBoundVariableForPaint(), never hardcoded.",
+    "_collections": {
+      "tokens":     "VariableCollectionId:575:225",
+      "primitives": "VariableCollectionId:5:2156"
+    }
+  },
+
+  "_hardRule": "NEVER use raw hex values, {r,g,b} objects, or hexToRgb() helpers when applying fills or strokes in Figma plugin scripts. ALWAYS look up the variable ID from this file and call figma.variables.setBoundVariableForPaint().",
+
+  "_codePattern": [
+    "// 1. Load the variable by ID",
+    "const v = await figma.variables.getVariableByIdAsync(BINDINGS.<role>.variableId);",
+    "",
+    "// 2. Create a bound paint (variable overrides the base color at runtime)",
+    "const paint = figma.variables.setBoundVariableForPaint(",
+    "  { type: 'SOLID', color: { r: 0, g: 0, b: 0 } },",
+    "  'color',",
+    "  v",
+    ");",
+    "",
+    "// 3. Assign",
+    "node.fills  = [paint];   // for fills",
+    "node.strokes = [paint];  // for strokes"
+  ],
+
+  "bindings": {
+
+    "background": {
+      "bgDefault":  { "role": "Default page / card background (white)",    "hex": "#FFFFFF", "variableName": "ZA/Background/BG-Primary-Default",  "variableId": "VariableID:575:273", "collection": "tokens" },
+      "bgSubtle":   { "role": "Subtle section background, disabled fills", "hex": "#F5F7F9", "variableName": "ZA/Background/BG-Primary-Subtle",   "variableId": "VariableID:575:275", "collection": "tokens" },
+      "bgRaised":   { "role": "Raised panel / scroll track background",    "hex": "#EBEFF3", "variableName": "ZA/Background/BG-Primary-Raised",   "variableId": "VariableID:592:38",  "collection": "tokens" },
+      "hover":      { "role": "Row / item hover highlight",                "hex": "blue tint","variableName": "Hover",                             "variableId": "VariableID:2168:2208","collection": "tokens" },
+      "sideNavBg":  { "role": "Side nav bar selected item background",     "hex": "#E0E6F4", "variableName": "Side nave bar bg",                  "variableId": "VariableID:3933:2566","collection": "tokens" }
+    },
+
+    "text": {
+      "textPrimary":   { "role": "Primary body text, headings",             "hex": "#0C0E11", "variableName": "ZA/Text/Text Primary",       "variableId": "VariableID:575:276", "collection": "tokens" },
+      "textDesc":      { "role": "Secondary / description text",            "hex": "#3D4653", "variableName": "ZA/Text/Text Description",   "variableId": "VariableID:575:277", "collection": "tokens" },
+      "textDisabled":  { "role": "Disabled state text",                     "hex": "#93A2B6", "variableName": "ZA/Text/Text Disabled",      "variableId": "VariableID:575:278", "collection": "tokens" },
+      "textLink":      { "role": "Hyperlink / text link color",             "hex": "#00A6FF", "variableName": "Text Link",                  "variableId": "VariableID:706:113", "collection": "tokens" }
+    },
+
+    "stroke": {
+      "stroke1":   { "role": "Default dividers, input borders, table rows", "hex": "#DFE4EB", "variableName": "ZA/stroke/Stroke 1",          "variableId": "VariableID:579:41",  "collection": "tokens" },
+      "stroke2":   { "role": "Stronger borders / card outlines",            "hex": "#C6CED9", "variableName": "ZA/stroke/Stroke 2",          "variableId": "VariableID:579:42",  "collection": "tokens" },
+      "stroke3":   { "role": "Subtle stroke",                               "hex": "#DFE4EB", "variableName": "ZA/stroke/Stroke 1",          "variableId": "VariableID:579:41",  "collection": "tokens" }
+    },
+
+    "button": {
+      "btnPrimary":  { "role": "Primary button fill (blue CTA)",            "hex": "#2C66DD", "variableName": "ZA/Button/Button Fill/Button Primary",   "variableId": "VariableID:577:38",  "collection": "tokens" }
+    },
+
+    "accent": {
+      "blue":    { "role": "Primary accent — focus, links, checked state",    "hex": "#2C66DD", "variableName": "Color/Accent Colors/Blue",    "variableId": "VariableID:187:160", "collection": "primitives" },
+      "green":   { "role": "Success accent",                                   "hex": "#0C8844", "variableName": "Color/Accent Colors/Green",   "variableId": "VariableID:189:168", "collection": "primitives" },
+      "red":     { "role": "Error / danger accent",                            "hex": "#CC3929", "variableName": "Color/Accent Colors/Red",     "variableId": "VariableID:189:167", "collection": "primitives" },
+      "yellow":  { "role": "Warning accent",                                   "hex": "#EBB625", "variableName": "Color/Accent Colors/Yellow",  "variableId": "VariableID:189:169", "collection": "primitives" }
+    },
+
+    "accentBlue": {
+      "blueShade40":  { "role": "Blue checked + disabled fill",              "hex": "#184091", "variableName": "Color/Accent Colors/Blue/Shades/Blue 40", "variableId": "VariableID:391:92",  "collection": "primitives" },
+      "blueTint50":   { "role": "Blue disabled (primary button / toggle ON)", "hex": "#80A3EB", "variableName": "Color/Accent Colors/Blue/Tints/Blue 50",  "variableId": "VariableID:391:117", "collection": "primitives" }
+    },
+
+    "neutral": {
+      "neutral95shade": { "role": "Deepest dark (near-black text)",          "hex": "#0C0E11", "variableName": "Color/Neutral/Shades/Neutral 95", "variableId": "VariableID:572:3681", "collection": "primitives" },
+      "neutral70shade": { "role": "Dark grey (unchecked disabled borders)",  "hex": "#313842", "variableName": "Color/Neutral/Shades/Neutral 70", "variableId": "VariableID:572:3678", "collection": "primitives" },
+      "neutral60shade": { "role": "Medium grey (description text alt)",      "hex": "#3D4653", "variableName": "Color/Neutral/Shades/Neutral 60", "variableId": "VariableID:572:3677", "collection": "primitives" },
+      "neutral40shade": { "role": "Disabled text / unchecked enabled border","hex": "#556274", "variableName": "Color/Neutral/Shades/Neutral 40", "variableId": "VariableID:572:3675", "collection": "primitives" },
+      "neutral40tint":  { "role": "Toggle OFF fill / scroll thumb",          "hex": "#A0ADBF", "variableName": "Color/Neutral/Tint/Neutral 40",  "variableId": "VariableID:572:3687", "collection": "primitives" },
+      "neutral70tint":  { "role": "Stroke default / toggle OFF disabled",    "hex": "#C6CED9", "variableName": "Color/Neutral/Tint/Neutral 70",  "variableId": "VariableID:572:3690", "collection": "primitives" },
+      "neutral90tint":  { "role": "Stroke hover / secondary button hover",   "hex": "#DFE4EB", "variableName": "Color/Neutral/Tint/Neutral 90",  "variableId": "VariableID:572:3692", "collection": "primitives" },
+      "neutral95tint":  { "role": "Subtle background / header rows",         "hex": "#EBEFF3", "variableName": "Color/Neutral/Tint/Neutral 95",  "variableId": "VariableID:572:3693", "collection": "primitives" },
+      "neutral100tint": { "role": "Lightest background / disabled fill",     "hex": "#F5F7F9", "variableName": "Color/Neutral/Tint/Neutral 100", "variableId": "VariableID:592:39",   "collection": "primitives" },
+      "neutral30tint":  { "role": "Placeholder / disabled text",             "hex": "#93A2B6", "variableName": "Color/Neutral/Tint/Neutral 30",  "variableId": "VariableID:572:3686", "collection": "primitives" }
+    },
+
+    "base": {
+      "white": { "role": "Pure white — card backgrounds, icon fills, knob fill", "hex": "#FFFFFF", "variableName": "Color/Base/White", "variableId": "VariableID:189:170", "collection": "primitives" },
+      "black": { "role": "Pure black — icons, dark text",                         "hex": "#000000", "variableName": "Color/Base/Black", "variableId": "VariableID:189:171", "collection": "primitives" }
+    }
+  },
+
+  "hexIndex": {
+    "#FFFFFF": "bindings.base.white",
+    "#000000": "bindings.base.black",
+    "#0C0E11": "bindings.text.textPrimary",
+    "#3D4653": "bindings.text.textDesc",
+    "#93A2B6": "bindings.text.textDisabled",
+    "#00A6FF": "bindings.text.textLink",
+    "#2C66DD": "bindings.button.btnPrimary",
+    "#184091": "bindings.accentBlue.blueShade40",
+    "#80A3EB": "bindings.accentBlue.blueTint50",
+    "#0C8844": "bindings.accent.green",
+    "#CC3929": "bindings.accent.red",
+    "#EBB625": "bindings.accent.yellow",
+    "#DFE4EB": "bindings.stroke.stroke1",
+    "#C6CED9": "bindings.stroke.stroke2",
+    "#A0ADBF": "bindings.neutral.neutral40tint",
+    "#313842": "bindings.neutral.neutral70shade",
+    "#556274": "bindings.neutral.neutral40shade",
+    "#F5F7F9": "bindings.background.bgSubtle",
+    "#EBEFF3": "bindings.background.bgRaised",
+    "#E0E6F4": "bindings.background.sideNavBg"
+  },
+
+  "roleIndex": {
+    "primaryButtonFill":      "VariableID:577:38",
+    "white":                  "VariableID:189:170",
+    "black":                  "VariableID:189:171",
+    "textPrimary":            "VariableID:575:276",
+    "textDescription":        "VariableID:575:277",
+    "textDisabled":           "VariableID:575:278",
+    "textLink":               "VariableID:706:113",
+    "bgDefault":              "VariableID:575:273",
+    "bgSubtle":               "VariableID:575:275",
+    "bgRaised":               "VariableID:592:38",
+    "rowHover":               "VariableID:2168:2208",
+    "sideNavSelected":        "VariableID:3933:2566",
+    "stroke1":                "VariableID:579:41",
+    "stroke2":                "VariableID:579:42",
+    "accentBlue":             "VariableID:187:160",
+    "accentGreen":            "VariableID:189:168",
+    "accentRed":              "VariableID:189:167",
+    "accentYellow":           "VariableID:189:169",
+    "blueDisabledLight":      "VariableID:391:117",
+    "blueCheckedDisabled":    "VariableID:391:92",
+    "neutralDisabledText":    "VariableID:572:3686",
+    "neutralToggleOff":       "VariableID:572:3687",
+    "neutralStrokeDefault":   "VariableID:572:3690",
+    "neutralStrokeSubtle":    "VariableID:572:3692",
+    "neutralBgSubtle":        "VariableID:572:3693",
+    "neutralUncheckedEnabled":"VariableID:572:3675",
+    "neutralUncheckedDisabled":"VariableID:572:3678"
+  }
+}

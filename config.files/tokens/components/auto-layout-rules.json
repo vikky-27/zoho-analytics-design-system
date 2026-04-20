@@ -1,0 +1,361 @@
+{
+  "_meta": {
+    "description": "Auto-layout rules for every design system component. The agent MUST apply these exactly before making any Figma MCP call. No absolute positioning — every component uses auto-layout.",
+    "fields": {
+      "direction":                "HORIZONTAL | VERTICAL",
+      "paddingTop/Right/Bottom/Left": "px value from resolved-tokens.json spacing.padding",
+      "itemSpacing":              "px gap between children from resolved-tokens.json spacing.gap",
+      "primaryAxisSizingMode":   "HUG (shrink to content) | FILL (expand to parent) | FIXED (explicit px)",
+      "counterAxisSizingMode":   "HUG | FILL | FIXED",
+      "primaryAxisAlignItems":   "MIN (start) | CENTER | MAX (end) | SPACE_BETWEEN",
+      "counterAxisAlignItems":   "MIN (top) | CENTER | MAX (bottom)",
+      "cornerRadius":            "px from resolved-tokens.json spacing.radius or borderRadius",
+      "naturalWidth":            "reference pixel width from design system (do not resize unless noted)",
+      "naturalHeight":           "reference pixel height — NEVER resize height",
+      "canResizeWidth":          "true = resize to fill container | false = use naturalWidth",
+      "strokeWeight":            "border thickness in px",
+      "maxIterations":           "hard cap on fix-loop retries before escalating to human",
+      "textProperties":          "MANDATORY — every component MUST expose all editable text as TEXT component properties. Each entry: { name, layerName, default, description }. Bind text layers via componentPropertyReferences."
+    }
+  },
+
+  "Button": {
+    "container": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              4,
+      "paddingRight":            16,
+      "paddingBottom":           4,
+      "paddingLeft":             16,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "HUG",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "CENTER",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            8,
+      "naturalHeight":           32,
+      "naturalWidth":            null,
+      "canResizeWidth":          false,
+      "strokeWeight":            1
+    },
+    "fills": {
+      "primary":   { "light": "semantic.light.button.fillPrimary",   "dark": "semantic.dark.button.fillPrimary" },
+      "secondary": { "light": "semantic.light.button.fillSecondary", "dark": "semantic.dark.button.fillSecondary" },
+      "disabled":  { "light": "semantic.light.button.fillPrimaryDisabled", "dark": "semantic.dark.button.fillPrimaryDisabled" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "textColor": {
+      "primary":   { "light": "semantic.light.text.onAccent",   "dark": "semantic.dark.text.onAccent" },
+      "secondary": { "light": "semantic.light.text.primary",    "dark": "semantic.dark.text.primary" }
+    },
+    "iconSize": "sizing.icon.md",
+    "shadow": "shadow.sm",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label", "layerName": "label--button-text", "default": "Button", "description": "Button label shown inside the component" }
+    ]
+  },
+
+  "Input": {
+    "container": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              6,
+      "paddingRight":            12,
+      "paddingBottom":           6,
+      "paddingLeft":             12,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            8,
+      "naturalHeight":           32,
+      "naturalWidth":            336,
+      "canResizeWidth":          true,
+      "strokeWeight":            1
+    },
+    "fills": {
+      "default":  { "light": "semantic.light.button.fillInput",           "dark": "semantic.dark.button.fillInput" },
+      "disabled": { "light": "semantic.light.background.subtle",          "dark": "semantic.dark.background.subtle" }
+    },
+    "stroke": {
+      "default":  { "light": "semantic.light.stroke.stroke2",  "dark": "semantic.dark.stroke.stroke2" },
+      "hover":    { "light": "color.accent.blue",              "dark": "color.accent.blue" },
+      "error":    { "light": "color.accent.red",               "dark": "color.accent.red" },
+      "focus":    { "light": "semantic.light.stroke.stroke3",  "dark": "semantic.dark.stroke.stroke3" },
+      "disabled": { "light": "semantic.light.stroke.disabled", "dark": "semantic.dark.stroke.disabled" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "placeholderColor": {
+      "light": "semantic.light.text.placeholder",
+      "dark":  "semantic.dark.text.placeholder"
+    },
+    "iconSize": "sizing.icon.md",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label",       "layerName": "label--field-label",    "default": "Label",            "description": "Optional field label displayed above the input" },
+      { "name": "Placeholder", "layerName": "label--placeholder",    "default": "Enter text...",    "description": "Placeholder shown when the input is empty" },
+      { "name": "Error Text",  "layerName": "label--error-message",  "default": "Error message",    "description": "Validation error shown below the input" },
+      { "name": "Helper Text", "layerName": "label--helper-text",    "default": "Helper text",      "description": "Optional hint text shown below the input" }
+    ]
+  },
+
+  "Toggle": {
+    "container": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "SPACE_BETWEEN",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            0,
+      "naturalHeight":           20,
+      "naturalWidth":            336,
+      "canResizeWidth":          true,
+      "strokeWeight":            0
+    },
+    "track": {
+      "width":        36,
+      "height":       20,
+      "cornerRadius": 9999,
+      "fillOn":       { "light": "color.accent.blue",                    "dark": "color.accent.blue" },
+      "fillOff":      { "light": "semantic.light.button.fillToggleOff",  "dark": "semantic.dark.button.fillToggleOff" },
+      "fillDisabled": { "light": "semantic.light.button.fillToggleDisabled", "dark": "semantic.dark.button.fillToggleDisabled" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label", "layerName": "label--toggle-text", "default": "Toggle label", "description": "Text label displayed next to the toggle switch" }
+    ]
+  },
+
+  "Checkbox": {
+    "standalone": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             0,
+      "primaryAxisSizingMode":   "FIXED",
+      "counterAxisSizingMode":   "FIXED",
+      "cornerRadius":            2,
+      "naturalHeight":           12,
+      "naturalWidth":            12,
+      "canResizeWidth":          false,
+      "strokeWeight":            1
+    },
+    "row": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            0,
+      "naturalHeight":           20,
+      "naturalWidth":            242,
+      "canResizeWidth":          true,
+      "strokeWeight":            0
+    },
+    "fills": {
+      "checked":   { "light": "color.accent.blue",               "dark": "color.accent.blue" },
+      "unchecked": { "light": "semantic.light.text.onAccent",    "dark": "semantic.dark.background.default" },
+      "disabled":  { "light": "semantic.light.button.fillPrimaryDisabled", "dark": "semantic.dark.button.fillPrimaryDisabled" }
+    },
+    "stroke": {
+      "default":  { "light": "semantic.light.stroke.stroke3",  "dark": "semantic.dark.stroke.stroke3" },
+      "checked":  { "light": "color.accent.blue",              "dark": "color.accent.blue" },
+      "disabled": { "light": "semantic.light.stroke.disabled", "dark": "semantic.dark.stroke.disabled" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label", "layerName": "label--checkbox-text", "default": "Checkbox label", "description": "Text label displayed next to the checkbox" }
+    ]
+  },
+
+  "RadioButton": {
+    "standalone": {
+      "direction":               "HORIZONTAL",
+      "primaryAxisSizingMode":   "FIXED",
+      "counterAxisSizingMode":   "FIXED",
+      "cornerRadius":            9999,
+      "naturalHeight":           16,
+      "naturalWidth":            16,
+      "canResizeWidth":          false,
+      "strokeWeight":            1
+    },
+    "row": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            0,
+      "naturalHeight":           20,
+      "naturalWidth":            210,
+      "canResizeWidth":          true,
+      "strokeWeight":            0
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label", "layerName": "label--radio-text", "default": "Option label", "description": "Text label displayed next to the radio button" }
+    ]
+  },
+
+  "LinkText": {
+    "container": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             4,
+      "primaryAxisSizingMode":   "HUG",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "CENTER",
+      "cornerRadius":            0,
+      "naturalHeight":           20,
+      "naturalWidth":            58,
+      "canResizeWidth":          false,
+      "strokeWeight":            0
+    },
+    "textColor": {
+      "default":  { "light": "semantic.light.text.link",        "dark": "semantic.dark.text.link" },
+      "disabled": { "light": "semantic.light.text.linkDisabled","dark": "semantic.dark.text.linkDisabled" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Label", "layerName": "label--link-text", "default": "Click here", "description": "Visible text of the hyperlink" }
+    ]
+  },
+
+  "Notification": {
+    "container": {
+      "direction":               "VERTICAL",
+      "paddingTop":              16,
+      "paddingRight":            16,
+      "paddingBottom":           16,
+      "paddingLeft":             16,
+      "itemSpacing":             12,
+      "primaryAxisSizingMode":   "FIXED",
+      "counterAxisSizingMode":   "FIXED",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "MIN",
+      "cornerRadius":            8,
+      "naturalHeight":           304,
+      "naturalWidth":            430,
+      "canResizeWidth":          false,
+      "strokeWeight":            0
+    },
+    "fills": {
+      "success": { "value": "#E7F3ED", "description": "Green-tinted notification background" },
+      "error":   { "value": "#FAECEA", "description": "Red-tinted notification background" },
+      "warning": { "value": "#FDF8E9", "description": "Yellow-tinted notification background" },
+      "default": { "light": "semantic.light.card.bgPrimary", "dark": "semantic.dark.card.bgPrimary" }
+    },
+    "accentColor": {
+      "success": "color.accent.green",
+      "error":   "color.accent.red",
+      "warning": "color.accent.yellow",
+      "default": "color.accent.blue"
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Title",       "layerName": "label--notification-title",   "default": "Notification title",   "description": "Main heading of the notification banner" },
+      { "name": "Description", "layerName": "label--notification-body",    "default": "Notification message", "description": "Body text of the notification banner" },
+      { "name": "Action",      "layerName": "label--notification-action",  "default": "Dismiss",              "description": "Label for the action link or button inside the notification" }
+    ]
+  },
+
+  "Card": {
+    "container": {
+      "direction":               "VERTICAL",
+      "paddingTop":              24,
+      "paddingRight":            24,
+      "paddingBottom":           24,
+      "paddingLeft":             24,
+      "itemSpacing":             16,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "HUG",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "MIN",
+      "cornerRadius":            8,
+      "naturalHeight":           null,
+      "naturalWidth":            null,
+      "canResizeWidth":          true,
+      "strokeWeight":            1
+    },
+    "fills": {
+      "default": { "light": "semantic.light.card.bgPrimary",  "dark": "semantic.dark.card.bgPrimary" },
+      "subtle":  { "light": "semantic.light.card.bgPrimary2", "dark": "semantic.dark.card.bgPrimary2" }
+    },
+    "stroke": {
+      "default": { "light": "semantic.light.stroke.stroke2", "dark": "semantic.dark.stroke.stroke2" }
+    },
+    "shadow": "shadow.md",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Title",       "layerName": "label--card-title",       "default": "Card title",       "description": "Heading displayed at the top of the card" },
+      { "name": "Description", "layerName": "label--card-description", "default": "Card description", "description": "Supporting body text below the card title" }
+    ]
+  },
+
+  "Modal": {
+    "textProperties": [
+      { "name": "Title",            "layerName": "label--modal-title",     "default": "Modal title",      "description": "Heading of the dialog" },
+      { "name": "Description",      "layerName": "label--modal-body",      "default": "Modal description","description": "Body copy explaining the action or content" },
+      { "name": "Primary Action",   "layerName": "label--modal-primary",   "default": "Confirm",          "description": "Label for the primary confirm button" },
+      { "name": "Secondary Action", "layerName": "label--modal-secondary", "default": "Cancel",           "description": "Label for the cancel or dismiss button" }
+    ]
+  },
+
+  "StatCard": {
+    "textProperties": [
+      { "name": "Title",       "layerName": "label--stat-title",   "default": "Metric name",   "description": "Name of the metric displayed on the stat card" },
+      { "name": "Value",       "layerName": "label--stat-value",   "default": "0",             "description": "Primary numeric or text value" },
+      { "name": "Description", "layerName": "label--stat-desc",    "default": "vs last period","description": "Trend or subtitle line below the value" }
+    ]
+  },
+
+  "ListView": {
+    "textProperties": [
+      { "name": "Column 1 Header", "layerName": "label--col1-header", "default": "Name",        "description": "Header label for column 1" },
+      { "name": "Column 2 Header", "layerName": "label--col2-header", "default": "Status",      "description": "Header label for column 2" },
+      { "name": "Column 3 Header", "layerName": "label--col3-header", "default": "Owner",       "description": "Header label for column 3" },
+      { "name": "Column 4 Header", "layerName": "label--col4-header", "default": "Last Updated","description": "Header label for column 4" },
+      { "name": "Empty State",     "layerName": "label--empty-state", "default": "No data",     "description": "Message shown when the list has no rows" }
+    ]
+  },
+
+  "Badge": {
+    "textProperties": [
+      { "name": "Label", "layerName": "label--badge-text", "default": "Badge", "description": "Text displayed inside the badge or tag pill" }
+    ]
+  },
+
+  "SegmentedControl": {
+    "textProperties": [
+      { "name": "Segment 1", "layerName": "label--seg1", "default": "Tab 1", "description": "Label for segment/tab 1" },
+      { "name": "Segment 2", "layerName": "label--seg2", "default": "Tab 2", "description": "Label for segment/tab 2" },
+      { "name": "Segment 3", "layerName": "label--seg3", "default": "Tab 3", "description": "Label for segment/tab 3" }
+    ]
+  }
+}

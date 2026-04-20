@@ -1,0 +1,17 @@
+{
+  "Border": {
+    "Mode 1": {
+      "width": {
+        "none": { "$value": "0px", "$type": "dimension", "$description": "No border — borderless surfaces." },
+        "sm":   { "$value": "1px", "$type": "dimension", "$description": "Default border width — cards, inputs, dividers." },
+        "md":   { "$value": "2px", "$type": "dimension", "$description": "Emphasis border — focus rings, selected states." },
+        "lg":   { "$value": "4px", "$type": "dimension", "$description": "Strong border — active indicators, sidebar accent lines." }
+      },
+      "style": {
+        "solid":  { "$value": "solid",  "$type": "string", "$description": "Default border style." },
+        "dashed": { "$value": "dashed", "$type": "string", "$description": "Dashed border — dropzones, empty states, placeholder areas." },
+        "dotted": { "$value": "dotted", "$type": "string", "$description": "Dotted border — subtle separators." }
+      }
+    }
+  }
+}

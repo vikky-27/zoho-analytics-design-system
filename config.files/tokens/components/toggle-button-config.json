@@ -1,0 +1,1620 @@
+{
+  "nodes": [
+    {
+      "id": "2609:3459",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 543,
+      "y": 46,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Text Button"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3459;2608:5628",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0C0E11"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#0C0E11"
+          }
+        },
+        {
+          "id": "I2609:3459;2608:5629",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 275,
+          "y": 2,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Enabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3459;2608:5629;2608:5688",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2609:3460",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 543,
+      "y": 108,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Text Button"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3460;2608:5631",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0C0E11"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#0C0E11"
+          }
+        },
+        {
+          "id": "I2609:3460;2608:5632",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 245,
+          "y": 18,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#A0ADBF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Enabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3460;2608:5632;2608:5690",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2609:3461",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 543,
+      "y": 170,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Text Button"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3461;2608:5634",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#93A2B6"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#93A2B6"
+          }
+        },
+        {
+          "id": "I2609:3461;2608:5635",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 275,
+          "y": 2,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#80A3EB"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Disabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3461;2608:5635;2608:5692",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2609:3462",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 543,
+      "y": 232,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Text Button"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3462;2608:5637",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 0,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#93A2B6"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#93A2B6"
+          }
+        },
+        {
+          "id": "I2609:3462;2608:5638",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 245,
+          "y": 18,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6CED9"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Disabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3462;2608:5638;2608:5694",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2609:3463",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 244,
+      "y": 46,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Button Text"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3463;2608:5640",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 30,
+          "y": 2,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Enabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3463;2608:5640;2608:5688",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:3463;2608:5641",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 34,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0C0E11"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#0C0E11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:3464",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 244,
+      "y": 108,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Button Text"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3464;2608:5643",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 0,
+          "y": 18,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#A0ADBF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Enabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3464;2608:5643;2608:5690",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:3464;2608:5644",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 34,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#0C0E11"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#0C0E11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:3465",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 244,
+      "y": 170,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Button Text"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3465;2608:5646",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 30,
+          "y": 2,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#80A3EB"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Disabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3465;2608:5646;2608:5692",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:3465;2608:5647",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 34,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#93A2B6"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#93A2B6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:3466",
+      "name": "Toggle Button",
+      "type": "INSTANCE",
+      "width": 275,
+      "height": 20,
+      "x": 244,
+      "y": 232,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2677:0": {
+          "type": "TEXT",
+          "value": "Radio button - on/off - enable/disable"
+        },
+        "ON": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Oder": {
+          "type": "VARIANT",
+          "value": "Button Text"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:3466;2608:5649",
+          "name": "Toggle button",
+          "type": "INSTANCE",
+          "width": 30,
+          "height": 16,
+          "x": 0,
+          "y": 18,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#C6CED9"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 40,
+          "cornerRadii": {
+            "topLeft": 40,
+            "topRight": 40,
+            "bottomRight": 40,
+            "bottomLeft": 40
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 2,
+            "paddingRight": 2,
+            "paddingBottom": 2,
+            "paddingLeft": 2,
+            "itemSpacing": 0,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "ON/OFF": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "State": {
+              "type": "VARIANT",
+              "value": "Disabled"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:3466;2608:5649;2608:5694",
+              "name": "Ellipse 623",
+              "type": "ELLIPSE",
+              "width": 12,
+              "height": 12,
+              "x": 14,
+              "y": 2,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:3466;2608:5650",
+          "name": "Radio button - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 241,
+          "height": 20,
+          "x": 34,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#93A2B6"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Radio button - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#93A2B6"
+          }
+        }
+      ]
+    }
+  ],
+  "statesAndOptions": {
+    "componentSets": [],
+    "instances": [
+      {
+        "nodeId": "2609:3459",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5627",
+        "mainComponentName": "ON=ON, Enable=ON, Oder=Text Button",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Text Button"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3459;2608:5629",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5687",
+        "mainComponentName": "ON/OFF=On, State=Enabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Enabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3460",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5630",
+        "mainComponentName": "ON=OFF, Enable=ON, Oder=Text Button",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Text Button"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3460;2608:5632",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5689",
+        "mainComponentName": "ON/OFF=Off, State=Enabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Enabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3461",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5633",
+        "mainComponentName": "ON=ON, Enable=OFF, Oder=Text Button",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Text Button"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3461;2608:5635",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5691",
+        "mainComponentName": "ON/OFF=On, State=Disabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Disabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3462",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5636",
+        "mainComponentName": "ON=OFF, Enable=OFF, Oder=Text Button",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Text Button"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3462;2608:5638",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5693",
+        "mainComponentName": "ON/OFF=Off, State=Disabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Disabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3463",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5639",
+        "mainComponentName": "ON=ON, Enable=ON, Oder=Button Text",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Button Text"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3463;2608:5640",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5687",
+        "mainComponentName": "ON/OFF=On, State=Enabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Enabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3464",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5642",
+        "mainComponentName": "ON=OFF, Enable=ON, Oder=Button Text",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Button Text"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3464;2608:5643",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5689",
+        "mainComponentName": "ON/OFF=Off, State=Enabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Enabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3465",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5645",
+        "mainComponentName": "ON=ON, Enable=OFF, Oder=Button Text",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Button Text"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3465;2608:5646",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5691",
+        "mainComponentName": "ON/OFF=On, State=Disabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Disabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:3466",
+        "nodeName": "Toggle Button",
+        "mainComponentId": "2608:5648",
+        "mainComponentName": "ON=OFF, Enable=OFF, Oder=Button Text",
+        "currentProperties": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "value": "Radio button - on/off - enable/disable"
+          },
+          "ON": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Oder": {
+            "type": "VARIANT",
+            "value": "Button Text"
+          }
+        },
+        "componentSetId": "2608:5626",
+        "componentSetName": "Toggle Button",
+        "allVariantOptions": {
+          "ON": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "OFF",
+            "ON"
+          ],
+          "Oder": [
+            "Text Button",
+            "Button Text"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2677:0": {
+            "type": "TEXT",
+            "defaultValue": "Radio button - on/off - enable/disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:3466;2608:5649",
+        "nodeName": "Toggle button",
+        "mainComponentId": "2608:5693",
+        "mainComponentName": "ON/OFF=Off, State=Disabled",
+        "currentProperties": {
+          "ON/OFF": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "State": {
+            "type": "VARIANT",
+            "value": "Disabled"
+          }
+        },
+        "componentSetId": "2608:5686",
+        "componentSetName": "Toggle button",
+        "allVariantOptions": {
+          "ON/OFF": [
+            "Off",
+            "On"
+          ],
+          "State": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      }
+    ]
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "onEnabled":    { "variableName": "ZA/Button/Button Fill/Button Primary",      "variableId": "VariableID:577:38",  "value": "#2C66DD" },
+    "offEnabled":   { "variableName": "Color/Neutral/Tint/Neutral 40",             "variableId": "VariableID:572:3687","value": "#A0ADBF" },
+    "onDisabled":   { "variableName": "Color/Accent Colors/Blue/Tints/Blue 50",    "variableId": "VariableID:391:117", "value": "#80A3EB" },
+    "offDisabled":  { "variableName": "Color/Neutral/Tint/Neutral 70",             "variableId": "VariableID:572:3690","value": "#C6CED9" },
+    "knob":         { "variableName": "Color/Base/White",                          "variableId": "VariableID:189:170", "value": "#FFFFFF" },
+    "labelEnabled": { "variableName": "ZA/Text/Text Primary",                      "variableId": "VariableID:575:276", "value": "#0C0E11" },
+    "labelDisabled":{ "variableName": "Color/Neutral/Tint/Neutral 30",             "variableId": "VariableID:572:3686","value": "#93A2B6" }
+  }
+}

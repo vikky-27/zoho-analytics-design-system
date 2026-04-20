@@ -1,0 +1,362 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "component-spec-schema",
+  "title": "Component Spec — Validated Input Contract",
+  "description": "Every component brief fed to the AI agent pipeline MUST conform to this schema. The agent validates this BEFORE generating a JSON plan and BEFORE making any Figma MCP call. Any validation failure stops the pipeline — report the error and wait for a corrected brief.",
+
+  "_sources": {
+    "Section 8":  "Component spec format — base structure",
+    "Section 9":  "Agent system prompt rules — agentRules block",
+    "Section 10": "Naming convention — layerNaming block",
+    "Section 4":  "Quality gates — qualityGates block",
+    "auto-layout-rules.json": "Cross-reference for autolayout values",
+    "resolved-tokens.json":   "All token values must exist here before use"
+  },
+
+  "type": "object",
+  "required": ["component", "description", "variants", "sizes", "states", "autolayout", "tokens", "naming"],
+
+  "properties": {
+
+    "component": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Z][a-zA-Z0-9]*$",
+      "description": "PascalCase component name. Becomes the Figma frame/component-set name.",
+      "examples": ["Button", "Input", "Toggle", "Notification", "Card", "CatalogStatCard"]
+    },
+
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "One sentence describing the component purpose and primary usage context."
+    },
+
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Variant axes. Each entry becomes a Figma variant property value.",
+      "examples": [
+        ["primary", "secondary", "ghost", "danger"],
+        ["success", "error", "warning", "default"]
+      ]
+    },
+
+    "sizes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["sm", "md", "lg"] },
+      "description": "Supported sizes. Drives which padding/font-size tokens are applied.",
+      "default": ["md"]
+    },
+
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["default", "hover", "active", "disabled", "loading", "error", "success", "focus"]
+      },
+      "description": "Interactive states. Each becomes a Figma variant value. 'default' is always required."
+    },
+
+    "autolayout": {
+      "type": "object",
+      "required": ["direction", "padding", "gap", "alignment", "sizing"],
+      "description": "Auto-layout config. Values MUST use token alias format {token.path}. No raw px values. Cross-reference auto-layout-rules.json for per-component defaults.",
+      "properties": {
+        "direction": {
+          "enum": ["horizontal", "vertical"],
+          "description": "Primary axis direction — horizontal for buttons/inputs, vertical for cards/panels."
+        },
+        "padding": {
+          "type": "string",
+          "pattern": "^\\{[a-zA-Z0-9 .#_/-]+\\}$",
+          "description": "Token alias for padding applied to all sides, e.g. {spacing.padding.M}",
+          "examples": ["{spacing.padding.M}", "{spacing.padding.S}", "{spacing.padding.L}"]
+        },
+        "paddingVertical": {
+          "type": "string",
+          "pattern": "^\\{[a-zA-Z0-9 .#_/-]+\\}$",
+          "description": "Optional override for top/bottom padding only.",
+          "examples": ["{spacing.padding.XS}", "{spacing.padding.XXS}"]
+        },
+        "gap": {
+          "type": "string",
+          "pattern": "^\\{[a-zA-Z0-9 .#_/-]+\\}$",
+          "description": "Token alias for itemSpacing between children.",
+          "examples": ["{spacing.gap.M}", "{spacing.gap.S}"]
+        },
+        "alignment": {
+          "enum": ["center", "start", "end", "spaceBetween"],
+          "description": "Primary axis alignment. Maps to Figma primaryAxisAlignItems."
+        },
+        "counterAlignment": {
+          "enum": ["center", "start", "end"],
+          "default": "center",
+          "description": "Counter-axis alignment. Maps to Figma counterAxisAlignItems."
+        },
+        "sizing": {
+          "enum": ["hug", "fill", "fixed"],
+          "description": "hug = shrink to content | fill = expand to parent | fixed = set explicit width/height"
+        }
+      }
+    },
+
+    "tokens": {
+      "type": "object",
+      "required": ["background", "text", "borderRadius"],
+      "description": "Token assignments for this component. All values are dot-path keys from resolved-tokens.json. The agent resolves these to final hex/px before any MCP call.",
+      "properties": {
+        "background": {
+          "type": "string",
+          "description": "Fill token path for light mode.",
+          "examples": ["semantic.light.button.fillPrimary", "semantic.light.card.bgPrimary", "color.accent.blue"]
+        },
+        "backgroundDark": {
+          "type": "string",
+          "description": "Fill token path for dark mode. Omit if same as background."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text color token path for light mode.",
+          "examples": ["semantic.light.text.onAccent", "semantic.light.text.primary"]
+        },
+        "textDark": {
+          "type": "string",
+          "description": "Text color token path for dark mode."
+        },
+        "borderRadius": {
+          "type": "string",
+          "description": "Corner radius token path.",
+          "examples": ["borderRadius.md", "borderRadius.lg", "borderRadius.full", "spacing.radius.M"]
+        },
+        "border": {
+          "type": "string",
+          "description": "Border width token path. Omit if no border.",
+          "examples": ["border.width.sm", "border.width.md"]
+        },
+        "borderColor": {
+          "type": "string",
+          "description": "Border color token path for light mode.",
+          "examples": ["semantic.light.stroke.stroke2", "color.accent.blue"]
+        },
+        "borderColorDark": {
+          "type": "string",
+          "description": "Border color token path for dark mode."
+        },
+        "shadow": {
+          "type": "string",
+          "description": "Shadow token path. Use shadow.none for flat surfaces.",
+          "examples": ["shadow.sm", "shadow.md", "shadow.lg", "shadow.none"]
+        },
+        "minWidth": {
+          "type": "string",
+          "description": "Min-width token path. Required when sizing = hug and component has a minimum.",
+          "examples": ["sizing.button.minWidth", "sizing.input.minWidth"]
+        },
+        "height": {
+          "type": "string",
+          "description": "Fixed height token path. Required when sizing = fixed.",
+          "examples": ["sizing.button.heightMd", "sizing.input.heightMd"]
+        }
+      }
+    },
+
+    "naming": {
+      "type": "string",
+      "description": "Figma layer naming template. Must follow ComponentName/{variant}/{size}/{state}. Axes not applicable to a component may be omitted.",
+      "examples": [
+        "Button/{variant}/{size}/{state}",
+        "Notification/{variant}/{state}",
+        "Card/{variant}"
+      ]
+    },
+
+    "layerNaming": {
+      "type": "object",
+      "description": "Naming convention for all child layers inside the component. From Section 10 of the design brief.",
+      "properties": {
+        "frame":     { "type": "string", "description": "PascalCase frame names.", "examples": ["ButtonFrame", "InputWrapper"] },
+        "textLayer": { "type": "string", "pattern": "^label--[a-z-]+$", "description": "label--{purpose}", "examples": ["label--button-text", "label--placeholder"] },
+        "iconSlot":  { "type": "string", "pattern": "^icon--[a-z-]+$",  "description": "icon--{position}",  "examples": ["icon--left", "icon--right"] },
+        "breakpointFrame": { "type": "string", "description": "ComponentName/Breakpoint", "examples": ["Button/Desktop", "Card/Mobile"] }
+      }
+    },
+
+    "breakpoints": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["Desktop/L", "Tab/M", "Mobile/S"] },
+      "description": "Target breakpoints. If omitted, defaults to Desktop/L only.",
+      "default": ["Desktop/L"]
+    },
+
+    "page": {
+      "type": "string",
+      "description": "Target Figma page name. Agent verifies page exists before executing. Creates it if missing.",
+      "examples": ["Components", "Design System", "Foundations"]
+    },
+
+    "section": {
+      "type": "string",
+      "description": "Target Figma section/frame name within the page. Agent screenshots page first to find clear space.",
+      "examples": ["Buttons", "Form Controls", "Feedback", "Cards"]
+    },
+
+    "referenceScreenshot": {
+      "type": "string",
+      "description": "Optional path to reference image used by vision agent for visual verification.",
+      "examples": ["./references/button-default.png"]
+    }
+  },
+
+  "agentRules": {
+    "_source": "Brief Section 9 — AI Agent System Prompt",
+    "description": "These 5 rules are hard constraints. The agent must apply them for every component, every run.",
+    "rules": [
+      {
+        "id": "R1",
+        "rule": "Never use hardcoded hex values, pixel values, or font sizes.",
+        "enforcement": "All values must be dot-path references resolved against resolved-tokens.json before any Figma MCP call. If a path is not found in resolved-tokens.json, STOP and report the missing token."
+      },
+      {
+        "id": "R2",
+        "rule": "Before making any Figma MCP call, output the complete component JSON plan and wait for confirmation.",
+        "enforcement": "Agent outputs the full plan, prints WAITING FOR CONFIRMATION, and takes no MCP action until the user replies 'proceed' or provides corrections."
+      },
+      {
+        "id": "R3",
+        "rule": "After creating the component, take a screenshot and verify it matches the spec.",
+        "enforcement": "If verification fails, output exactly what is wrong and re-attempt. Max 3 attempts. On 3rd failure, output ESCALATE TO HUMAN and stop."
+      },
+      {
+        "id": "R4",
+        "rule": "All layers must use auto-layout. No absolute positioning unless explicitly specified.",
+        "enforcement": "Every frame and group must have a direction, padding, gap, and sizingMode set. Reference auto-layout-rules.json for the component's defaults."
+      },
+      {
+        "id": "R5",
+        "rule": "Follow the naming convention: ComponentName/Variant/Size/State for components, label--{purpose} for text layers, icon--{position} for icon slots.",
+        "enforcement": "Agent validates all layer names against the naming template in this spec before committing to Figma."
+      }
+    ]
+  },
+
+  "qualityGates": {
+    "_source": "Brief Section 4 — Quality gates (all must pass before publish)",
+    "description": "Three automated checks run after Figma MCP execution. All three must pass before the component is marked ready for human review.",
+    "gates": [
+      {
+        "id": "G1",
+        "name": "Visual Diff",
+        "description": "Screenshot the created component and compare against the spec (and referenceScreenshot if provided).",
+        "passCriteria": [
+          "Layout direction matches spec (horizontal/vertical)",
+          "Padding and gap are visually consistent with token values",
+          "All variant states are present and visually distinct",
+          "Text is readable and uses correct font family (Zoho Puvi)"
+        ],
+        "failAction": "Increment retry counter. Output diff notes. Re-attempt with corrections. Escalate after 3 failures."
+      },
+      {
+        "id": "G2",
+        "name": "Token Audit",
+        "description": "Scan all Figma nodes in the created component for hardcoded fills, strokes, radii, or font values.",
+        "passCriteria": [
+          "Zero hardcoded hex colour values on any node",
+          "Zero raw px values on padding/gap/radius not bound to a variable",
+          "All text nodes use Zoho Puvi or Lato font family"
+        ],
+        "failAction": "List every offending node and value. Replace with correct token. Re-run audit. Do not proceed to G3 until G2 passes."
+      },
+      {
+        "id": "G3",
+        "name": "A11y Check",
+        "description": "Verify accessibility baseline for the component.",
+        "passCriteria": [
+          "Text contrast ratio ≥ 4.5:1 against background (WCAG AA)",
+          "Interactive targets ≥ 44×44px (or 28px minimum for compact contexts)",
+          "All text layers have semantic label names (label--*)"
+        ],
+        "failAction": "Output which criteria failed and which nodes are affected. Fix tokens or sizing. Re-run check."
+      }
+    ],
+    "publishRule": "Never publish to Figma component library without explicit human approval. Output READY FOR REVIEW with a summary of all three gate results. Wait for user to confirm before publishing."
+  },
+
+  "examples": [
+    {
+      "component": "Button",
+      "description": "Primary action button used across all surfaces for CTA actions.",
+      "variants": ["primary", "secondary", "ghost", "danger"],
+      "sizes": ["sm", "md", "lg"],
+      "states": ["default", "hover", "active", "disabled", "loading"],
+      "autolayout": {
+        "direction": "horizontal",
+        "padding": "{spacing.padding.M}",
+        "paddingVertical": "{spacing.padding.XS}",
+        "gap": "{spacing.gap.M}",
+        "alignment": "center",
+        "counterAlignment": "center",
+        "sizing": "hug"
+      },
+      "tokens": {
+        "background":    "semantic.light.button.fillPrimary",
+        "backgroundDark":"semantic.dark.button.fillPrimary",
+        "text":          "semantic.light.text.onAccent",
+        "textDark":      "semantic.dark.text.onAccent",
+        "borderRadius":  "borderRadius.md",
+        "shadow":        "shadow.sm",
+        "minWidth":      "sizing.button.minWidth",
+        "height":        "sizing.button.heightMd"
+      },
+      "naming": "Button/{variant}/{size}/{state}",
+      "layerNaming": {
+        "frame":     "ButtonFrame",
+        "textLayer": "label--button-text",
+        "iconSlot":  "icon--left"
+      },
+      "breakpoints": ["Desktop/L", "Tab/M", "Mobile/S"],
+      "page": "Components",
+      "section": "Buttons"
+    },
+    {
+      "component": "Input",
+      "description": "Text input field for forms. Supports multiple states and optional right-side icon slot.",
+      "variants": ["default", "withIcon"],
+      "sizes": ["sm", "md", "lg"],
+      "states": ["default", "hover", "focus", "error", "disabled"],
+      "autolayout": {
+        "direction": "horizontal",
+        "padding": "{spacing.padding.S}",
+        "gap": "{spacing.gap.M}",
+        "alignment": "start",
+        "counterAlignment": "center",
+        "sizing": "fill"
+      },
+      "tokens": {
+        "background":    "semantic.light.button.fillInput",
+        "backgroundDark":"semantic.dark.button.fillInput",
+        "text":          "semantic.light.text.primary",
+        "textDark":      "semantic.dark.text.primary",
+        "borderRadius":  "borderRadius.md",
+        "border":        "border.width.sm",
+        "borderColor":   "semantic.light.stroke.stroke2",
+        "height":        "sizing.input.heightMd"
+      },
+      "naming": "Input/{variant}/{size}/{state}",
+      "layerNaming": {
+        "frame":     "InputWrapper",
+        "textLayer": "label--placeholder",
+        "iconSlot":  "icon--right"
+      },
+      "breakpoints": ["Desktop/L", "Tab/M", "Mobile/S"],
+      "page": "Components",
+      "section": "Form Controls"
+    }
+  ]
+}

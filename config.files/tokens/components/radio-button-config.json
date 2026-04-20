@@ -1,0 +1,786 @@
+{
+  "nodes": [
+    {
+      "id": "2609:4555",
+      "name": "Component 114",
+      "type": "INSTANCE",
+      "width": 210,
+      "height": 20,
+      "x": 394,
+      "y": 38,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2399:0": {
+          "type": "TEXT",
+          "value": "Input - on/off - enable /disable"
+        },
+        "On": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "On"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4555;2608:6589",
+          "name": "Radio Button",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 8,
+          "cornerRadii": {
+            "topLeft": 8,
+            "topRight": 8,
+            "bottomRight": 8,
+            "bottomLeft": 8
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 5,
+            "paddingRight": 5,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "On/off": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "Enable": {
+              "type": "VARIANT",
+              "value": "Yes"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:4555;2608:6589;2608:6602",
+              "name": "Ellipse 2",
+              "type": "ELLIPSE",
+              "width": 6,
+              "height": 6,
+              "x": 3,
+              "y": 3,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:4555;2608:6590",
+          "name": "Input - on/off - enable /disable",
+          "type": "TEXT",
+          "width": 194,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Input - on/off - enable /disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#FFFFFF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4556",
+      "name": "Component 115",
+      "type": "INSTANCE",
+      "width": 210,
+      "height": 20,
+      "x": 394,
+      "y": 87,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2399:0": {
+          "type": "TEXT",
+          "value": "Input - on/off - enable /disable"
+        },
+        "On": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "On"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4556;2608:6592",
+          "name": "Radio Button",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#3D4653"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 8,
+          "cornerRadii": {
+            "topLeft": 8,
+            "topRight": 8,
+            "bottomRight": 8,
+            "bottomLeft": 8
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 5,
+            "paddingRight": 5,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "On/off": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "Enable": {
+              "type": "VARIANT",
+              "value": "Yes"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:4556;2608:6592;2608:6606",
+              "name": "Ellipse 2",
+              "type": "ELLIPSE",
+              "width": 4,
+              "height": 4,
+              "x": 4,
+              "y": 4,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "I2609:4556;2608:6593",
+          "name": "Input - on/off - enable /disable",
+          "type": "TEXT",
+          "width": 194,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Input - on/off - enable /disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#FFFFFF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4557",
+      "name": "Component 116",
+      "type": "INSTANCE",
+      "width": 210,
+      "height": 20,
+      "x": 394,
+      "y": 133,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2399:0": {
+          "type": "TEXT",
+          "value": "Input - on/off - enable /disable"
+        },
+        "On": {
+          "type": "VARIANT",
+          "value": "ON"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "Off"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4557;2608:6595",
+          "name": "Radio Button",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 8,
+          "cornerRadii": {
+            "topLeft": 8,
+            "topRight": 8,
+            "bottomRight": 8,
+            "bottomLeft": 8
+          },
+          "opacity": 0.5,
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 5,
+            "paddingRight": 5,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "On/off": {
+              "type": "VARIANT",
+              "value": "On"
+            },
+            "Enable": {
+              "type": "VARIANT",
+              "value": "No"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:4557;2608:6595;2608:6604",
+              "name": "Ellipse 2",
+              "type": "ELLIPSE",
+              "width": 6,
+              "height": 6,
+              "x": 3,
+              "y": 3,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:4557;2608:6596",
+          "name": "Input - on/off - enable /disable",
+          "type": "TEXT",
+          "width": 194,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#556274"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Input - on/off - enable /disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#556274"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4558",
+      "name": "Component 117",
+      "type": "INSTANCE",
+      "width": 210,
+      "height": 20,
+      "x": 394,
+      "y": 182,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Text#2399:0": {
+          "type": "TEXT",
+          "value": "Input - on/off - enable /disable"
+        },
+        "On": {
+          "type": "VARIANT",
+          "value": "OFF"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "Off"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4558;2608:6598",
+          "name": "Radio Button",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#C6C9D5"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 8,
+          "cornerRadii": {
+            "topLeft": 8,
+            "topRight": 8,
+            "bottomRight": 8,
+            "bottomLeft": 8
+          },
+          "opacity": 0.5,
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 5,
+            "paddingRight": 5,
+            "paddingBottom": 5,
+            "paddingLeft": 5,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "componentPropertyValues": {
+            "On/off": {
+              "type": "VARIANT",
+              "value": "Off"
+            },
+            "Enable": {
+              "type": "VARIANT",
+              "value": "No"
+            }
+          },
+          "children": [
+            {
+              "id": "I2609:4558;2608:6598;2608:6608",
+              "name": "Ellipse 2",
+              "type": "ELLIPSE",
+              "width": 4,
+              "height": 4,
+              "x": 4,
+              "y": 4,
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "I2609:4558;2608:6599",
+          "name": "Input - on/off - enable /disable",
+          "type": "TEXT",
+          "width": 194,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#556274"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Input - on/off - enable /disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#556274"
+          }
+        }
+      ]
+    }
+  ],
+  "statesAndOptions": {
+    "componentSets": [],
+    "instances": [
+      {
+        "nodeId": "2609:4555",
+        "nodeName": "Component 114",
+        "mainComponentId": "2608:6588",
+        "mainComponentName": "On=ON, Enable=On",
+        "currentProperties": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "value": "Input - on/off - enable /disable"
+          },
+          "On": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "On"
+          }
+        },
+        "componentSetId": "2608:6587",
+        "componentSetName": "Radio Button options",
+        "allVariantOptions": {
+          "On": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "Off",
+            "On"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "defaultValue": "Input - on/off - enable /disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:4555;2608:6589",
+        "nodeName": "Radio Button",
+        "mainComponentId": "2608:6601",
+        "mainComponentName": "On/off=On, Enable=Yes",
+        "currentProperties": {
+          "On/off": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Yes"
+          }
+        },
+        "componentSetId": "2608:6600",
+        "componentSetName": "Radio Button",
+        "allVariantOptions": {
+          "On/off": [
+            "On",
+            "Off"
+          ],
+          "Enable": [
+            "Yes",
+            "No"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4556",
+        "nodeName": "Component 115",
+        "mainComponentId": "2608:6591",
+        "mainComponentName": "On=OFF, Enable=On",
+        "currentProperties": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "value": "Input - on/off - enable /disable"
+          },
+          "On": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "On"
+          }
+        },
+        "componentSetId": "2608:6587",
+        "componentSetName": "Radio Button options",
+        "allVariantOptions": {
+          "On": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "Off",
+            "On"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "defaultValue": "Input - on/off - enable /disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:4556;2608:6592",
+        "nodeName": "Radio Button",
+        "mainComponentId": "2608:6605",
+        "mainComponentName": "On/off=Off, Enable=Yes",
+        "currentProperties": {
+          "On/off": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Yes"
+          }
+        },
+        "componentSetId": "2608:6600",
+        "componentSetName": "Radio Button",
+        "allVariantOptions": {
+          "On/off": [
+            "On",
+            "Off"
+          ],
+          "Enable": [
+            "Yes",
+            "No"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4557",
+        "nodeName": "Component 116",
+        "mainComponentId": "2608:6594",
+        "mainComponentName": "On=ON, Enable=Off",
+        "currentProperties": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "value": "Input - on/off - enable /disable"
+          },
+          "On": {
+            "type": "VARIANT",
+            "value": "ON"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Off"
+          }
+        },
+        "componentSetId": "2608:6587",
+        "componentSetName": "Radio Button options",
+        "allVariantOptions": {
+          "On": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "Off",
+            "On"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "defaultValue": "Input - on/off - enable /disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:4557;2608:6595",
+        "nodeName": "Radio Button",
+        "mainComponentId": "2608:6603",
+        "mainComponentName": "On/off=On, Enable=No",
+        "currentProperties": {
+          "On/off": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "No"
+          }
+        },
+        "componentSetId": "2608:6600",
+        "componentSetName": "Radio Button",
+        "allVariantOptions": {
+          "On/off": [
+            "On",
+            "Off"
+          ],
+          "Enable": [
+            "Yes",
+            "No"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4558",
+        "nodeName": "Component 117",
+        "mainComponentId": "2608:6597",
+        "mainComponentName": "On=OFF, Enable=Off",
+        "currentProperties": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "value": "Input - on/off - enable /disable"
+          },
+          "On": {
+            "type": "VARIANT",
+            "value": "OFF"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Off"
+          }
+        },
+        "componentSetId": "2608:6587",
+        "componentSetName": "Radio Button options",
+        "allVariantOptions": {
+          "On": [
+            "ON",
+            "OFF"
+          ],
+          "Enable": [
+            "Off",
+            "On"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2399:0": {
+            "type": "TEXT",
+            "defaultValue": "Input - on/off - enable /disable"
+          }
+        }
+      },
+      {
+        "nodeId": "I2609:4558;2608:6598",
+        "nodeName": "Radio Button",
+        "mainComponentId": "2608:6607",
+        "mainComponentName": "On/off=Off, Enable=No",
+        "currentProperties": {
+          "On/off": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "No"
+          }
+        },
+        "componentSetId": "2608:6600",
+        "componentSetName": "Radio Button",
+        "allVariantOptions": {
+          "On/off": [
+            "On",
+            "Off"
+          ],
+          "Enable": [
+            "Yes",
+            "No"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      }
+    ]
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "selectedFill":       { "variableName": "ZA/Button/Button Fill/Button Primary", "variableId": "VariableID:577:38",  "value": "#2C66DD" },
+    "enabledStroke":      { "variableName": "Color/Neutral/Shades/Neutral 40",      "variableId": "VariableID:572:3675","value": "#556274" },
+    "disabledStroke":     { "variableName": "Color/Neutral/Tint/Neutral 70",        "variableId": "VariableID:572:3690","value": "#C6CED9" },
+    "enabledLabel":       { "variableName": "Color/Base/White",                     "variableId": "VariableID:189:170", "value": "#FFFFFF" },
+    "disabledLabel":      { "variableName": "Color/Neutral/Shades/Neutral 40",      "variableId": "VariableID:572:3675","value": "#556274" }
+  }
+}

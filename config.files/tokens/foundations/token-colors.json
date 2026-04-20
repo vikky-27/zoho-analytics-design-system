@@ -1,0 +1,134 @@
+{
+  "Aliases": {
+    "Accent Color":            { "$value": "{Color.Accent Colors.Blue}",           "$type": "color", "$description": "Primary brand/accent color. Maps to Blue accent." },
+    "Disabled Light":          { "$value": "{Color.Neutral.Tint.Neutral 50}",      "$type": "color", "$description": "Disabled fill for primary buttons in light mode." },
+    "Disabled Dark":           { "$value": "{Color.Neutral.Shades.Neutral 50}",    "$type": "color", "$description": "Disabled fill for primary buttons in dark mode." },
+    "Accent Hover state Light":{ "$value": "{Color.Accent Colors.Hover.Blue H}",   "$type": "color", "$description": "Hover state of the accent color in light mode." },
+    "Accent Hover state Dark": { "$value": "{Color.Accent Colors.Hover.Blue H}",   "$type": "color", "$description": "Hover state of the accent color in dark mode." },
+    "Other Hover":             { "$value": "{Color.Accent Colors.Blue 20}",        "$type": "color", "$description": "General hover overlay (20% opacity blue). Light mode only." }
+  },
+  "Token: Colors": {
+    "Light": {
+      "Background": {
+        "BG-Primary-Default": { "$value": "{Color.Base.White}",               "$type": "color", "$description": "Default page and panel background. Used in Explorer, Settings." },
+        "BG-Primary-Grey":    { "$value": "{Color.Base.Shades.Grey 00}",      "$type": "color", "$description": "Slightly off-white background for contrast areas." },
+        "BG-Primary-Subtle":  { "$value": "{Color.Neutral.Tint.Neutral 100}", "$type": "color", "$description": "Subtle tinted background for cards and inset areas." },
+        "BG-Primary-Raised":  { "$value": "{Color.Neutral.Tint.Neutral 95}",  "$type": "color", "$description": "Raised surface background, one level above Default." }
+      },
+      "Text": {
+        "Text Primary":        { "$value": "{Color.Neutral.Shades.Neutral 95}", "$type": "color", "$description": "Primary body text and headings." },
+        "Text Description":    { "$value": "{Color.Neutral.Shades.Neutral 60}", "$type": "color", "$description": "Secondary/description text, captions, metadata." },
+        "Text Disabled":       { "$value": "{Color.Neutral.Tint.Neutral 30}",  "$type": "color", "$description": "Disabled state text." },
+        "Text Placeholder":    { "$value": "{Color.Neutral.Tint.Neutral 30}",  "$type": "color", "$description": "Input placeholder text." },
+        "Text On AccentColor": { "$value": "{Color.Base.White}",               "$type": "color", "$description": "Text placed on top of accent-coloured surfaces (e.g. primary button label)." }
+      },
+      "Button": {
+        "Button Fill": {
+          "Button Primary":     { "$value": "{Accent Color}",                       "$type": "color", "$description": "Primary CTA button background." },
+          "Primary Disabled":   { "$value": "{Disabled Light}",                     "$type": "color", "$description": "Disabled primary button background." },
+          "Secondary Disabled": { "$value": "{Color.Neutral.Tint.Neutral 100}",     "$type": "color", "$description": "Disabled secondary button background." },
+          "Secondary":          { "$value": "{Color.Neutral.Tint.Neutral 90}",      "$type": "color", "$description": "Secondary button background." },
+          "Input Fill":         { "$value": "{Color.Base.White}",                   "$type": "color", "$description": "Text input field background." },
+          "Accent Hover":       { "$value": "{Accent Hover state Light}",           "$type": "color", "$description": "Primary button hover background." },
+          "ON OFF":             { "$value": "{Color.Neutral.Tint.Neutral 40}",      "$type": "color", "$description": "Toggle switch inactive track fill." },
+          "ON OFF Disabled":    { "$value": "{Color.Neutral.Tint.Neutral 70}",      "$type": "color", "$description": "Toggle switch disabled track fill." }
+        },
+        "Button Stroke": {
+          "Secondary":          { "$value": "{Color.Base.Shades.Grey 70}",          "$type": "color", "$description": "Border for secondary button default state." },
+          "Secondary Disabled": { "$value": "{Color.Base.Shades.Grey 70}",          "$type": "color", "$description": "Border for secondary button disabled state." }
+        }
+      },
+      "Stroke": {
+        "Stroke 1":        { "$value": "{Color.Neutral.Tint.Neutral 90}", "$type": "color", "$description": "Lightest divider/border — section separators." },
+        "Stroke 2":        { "$value": "{Color.Neutral.Tint.Neutral 80}", "$type": "color", "$description": "Default card and input border." },
+        "Stroke 3":        { "$value": "{Color.Neutral.Tint.Neutral 70}", "$type": "color", "$description": "Emphasis border — focused inputs, selected states." },
+        "Stroke Disabled": { "$value": "{Color.Neutral.Tint.Neutral 80}", "$type": "color", "$description": "Disabled input/element border." }
+      },
+      "Text Link":    { "$value": "#006AFF", "$type": "color", "$description": "Hyperlink text colour." },
+      "Notification": {
+        "Button Primary":  { "$value": "{Accent Color}",                  "$type": "color", "$description": "CTA button inside notification banners." },
+        "textSecondary":   { "$value": "{Color.Base.Shades.Grey 70}",     "$type": "color", "$description": "Secondary text inside notification banners." },
+        "Text Disabled":   { "$value": "{Color.Base.Shades.Grey 50}",     "$type": "color", "$description": "Disabled text inside notification banners." }
+      },
+      "Card": {
+        "BG-Primary":   { "$value": "{Color.Base.White}",               "$type": "color", "$description": "Default card background." },
+        "BG-Primary 2": { "$value": "{Color.Neutral.Tint.Neutral 100}", "$type": "color", "$description": "Subtle card background for nested content." },
+        "BG-Primary 3": { "$value": "{Color.Base.Shades.Grey 00}",      "$type": "color", "$description": "Card background on grey page surfaces." },
+        "BG-Primary 4": { "$value": "{Color.Neutral.Tint.Neutral 95}",  "$type": "color", "$description": "Raised card background, one level above Default." }
+      },
+      "Error":         { "$value": "{Color.Accent Colors.Red}",          "$type": "color", "$description": "Error state fill and text colour." },
+      "Always White":  { "$value": "#FFFFFF",                            "$type": "color", "$description": "Always white regardless of theme — e.g. logo on coloured bg." },
+      "Link Disabled": { "$value": "#66A6FF",                            "$type": "color", "$description": "Disabled hyperlink colour." },
+      "Hover":         { "$value": "{Other Hover}",                      "$type": "color", "$description": "Generic hover overlay for interactive elements." },
+      "Dropshadow": {
+        "S": { "$value": "#181C210A", "$type": "color", "$description": "Small drop shadow colour (4% opacity)." },
+        "M": { "$value": "#181C210F", "$type": "color", "$description": "Medium drop shadow colour (6% opacity)." },
+        "L": { "$value": "#181C2114", "$type": "color", "$description": "Large drop shadow colour (8% opacity)." }
+      },
+      "Tooltip":       { "$value": "{Color.Neutral.Shades.Neutral 80}",  "$type": "color", "$description": "Tooltip background colour." },
+      "sideNavBarBg":  { "$value": "{Color.Neutral.Tint.Neutral 95}",    "$type": "color", "$description": "Side navigation bar background in light mode." },
+      "sideBarBgHover":{ "$value": "#E0E6F4",                            "$type": "color", "$description": "Side navigation item hover background in light mode." }
+    },
+    "Dark": {
+      "Background": {
+        "BG-Primary-Default": { "$value": "{Color.Neutral.Shades.Neutral 95}", "$type": "color", "$description": "Default page and panel background in dark mode. Used in Explorer, Settings." },
+        "BG-Primary-Grey":    { "$value": "{Color.Base.Tint.Grey 00}",         "$type": "color", "$description": "Slightly off-dark background for contrast areas." },
+        "BG-Primary-Subtle":  { "$value": "{Color.Neutral.Shades.Neutral 90}", "$type": "color", "$description": "Subtle surface background for cards and inset areas in dark mode." },
+        "BG-Primary-Raised":  { "$value": "{Color.Neutral.Shades.Neutral 95}", "$type": "color", "$description": "Raised surface background in dark mode, one level above Default." }
+      },
+      "Text": {
+        "Text Primary":        { "$value": "{Color.Base.White}",                  "$type": "color", "$description": "Primary body text and headings in dark mode." },
+        "Text Description":    { "$value": "{Color.Neutral.Shades.Neutral 40}",   "$type": "color", "$description": "Secondary/description text, captions, metadata in dark mode." },
+        "Text Disabled":       { "$value": "{Color.Neutral.Shades.Neutral 40}",   "$type": "color", "$description": "Disabled state text in dark mode." },
+        "Text Placeholder":    { "$value": "{Color.Neutral.Tint.Neutral 70}",     "$type": "color", "$description": "Input placeholder text in dark mode." },
+        "Text On AccentColor": { "$value": "{Color.Neutral.Shades.Neutral 95}",   "$type": "color", "$description": "Text on accent-coloured surfaces in dark mode (e.g. primary button label)." }
+      },
+      "Button": {
+        "Button Fill": {
+          "Button Primary":     { "$value": "{Accent Color}",                       "$type": "color", "$description": "Primary CTA button background." },
+          "Primary Disabled":   { "$value": "{Disabled Dark}",                      "$type": "color", "$description": "Disabled primary button background in dark mode." },
+          "Secondary Disabled": { "$value": "{Color.Neutral.Shades.Neutral 90}",    "$type": "color", "$description": "Disabled secondary button background in dark mode." },
+          "Secondary":          { "$value": "{Color.Neutral.Shades.Neutral 90}",    "$type": "color", "$description": "Secondary button background in dark mode." },
+          "Input Fill":         { "$value": "{Color.Neutral.Shades.Neutral 95}",    "$type": "color", "$description": "Text input field background in dark mode." },
+          "Accent Hover":       { "$value": "{Accent Hover state Dark}",            "$type": "color", "$description": "Primary button hover background in dark mode." },
+          "ON OFF":             { "$value": "{Color.Neutral.Shades.Neutral 40}",    "$type": "color", "$description": "Toggle switch inactive track fill in dark mode." },
+          "ON OFF Disabled":    { "$value": "{Color.Neutral.Shades.Neutral 70}",    "$type": "color", "$description": "Toggle switch disabled track fill in dark mode." }
+        },
+        "Button Stroke": {
+          "Secondary":          { "$value": "{Color.Base.Shades.Grey 20}",          "$type": "color", "$description": "Border for secondary button default state in dark mode." },
+          "Secondary Disabled": { "$value": "{Color.Base.Shades.Grey 20}",          "$type": "color", "$description": "Border for secondary button disabled state in dark mode." }
+        }
+      },
+      "Stroke": {
+        "Stroke 1":        { "$value": "{Color.Neutral.Shades.Neutral 80}", "$type": "color", "$description": "Lightest divider/border in dark mode." },
+        "Stroke 2":        { "$value": "{Color.Neutral.Shades.Neutral 70}", "$type": "color", "$description": "Default card and input border in dark mode." },
+        "Stroke 3":        { "$value": "{Color.Neutral.Shades.Neutral 60}", "$type": "color", "$description": "Emphasis border in dark mode — focused inputs, selected states." },
+        "Stroke Disabled": { "$value": "{Color.Neutral.Shades.Neutral 60}", "$type": "color", "$description": "Disabled input/element border in dark mode." }
+      },
+      "Text Link":    { "$value": "#00A6FF", "$type": "color", "$description": "Hyperlink text colour in dark mode." },
+      "Notification": {
+        "Button Primary":  { "$value": "{Accent Color}",                  "$type": "color", "$description": "CTA button inside notification banners in dark mode." },
+        "textSecondary":   { "$value": "{Color.Base.Shades.Grey 20}",     "$type": "color", "$description": "Secondary text inside notification banners in dark mode." },
+        "Text Disabled":   { "$value": "{Color.Base.Tint.Grey 50}",       "$type": "color", "$description": "Disabled text inside notification banners in dark mode." }
+      },
+      "Card": {
+        "BG-Primary":   { "$value": "{Color.Neutral.Shades.Neutral 90}", "$type": "color", "$description": "Default card background in dark mode." },
+        "BG-Primary 2": { "$value": "{Color.Neutral.Shades.Neutral 80}", "$type": "color", "$description": "Nested card background in dark mode." },
+        "BG-Primary 3": { "$value": "{Color.Neutral.Shades.Neutral 90}", "$type": "color", "$description": "Card background on dark page surfaces." },
+        "BG-Primary 4": { "$value": "{Color.Neutral.Shades.Neutral 95}", "$type": "color", "$description": "Raised card background in dark mode." }
+      },
+      "Error":         { "$value": "{Color.Accent Colors.Red}",           "$type": "color", "$description": "Error state fill and text colour in dark mode." },
+      "Always White":  { "$value": "#FFFFFF",                             "$type": "color", "$description": "Always white regardless of theme — e.g. logo on coloured bg." },
+      "Link Disabled": { "$value": "#006499",                             "$type": "color", "$description": "Disabled hyperlink colour in dark mode." },
+      "Hover":         { "$value": "{Color.Base.White 20}",               "$type": "color", "$description": "Generic hover overlay for interactive elements in dark mode." },
+      "Dropshadow": {
+        "S": { "$value": "{Color.Neutral.Shades.Neutral 70}", "$type": "color", "$description": "Small drop shadow in dark mode." },
+        "M": { "$value": "{Color.Neutral.Shades.Neutral 90}", "$type": "color", "$description": "Medium drop shadow in dark mode." },
+        "L": { "$value": "{Color.Neutral.Shades.Neutral 90}", "$type": "color", "$description": "Large drop shadow in dark mode." }
+      },
+      "Tooltip":       { "$value": "{Color.Neutral.Tint.Neutral 90}",    "$type": "color", "$description": "Tooltip background colour in dark mode." },
+      "sideNavBarBg":  { "$value": "{Color.Neutral.Shades.Neutral 90}",  "$type": "color", "$description": "Side navigation bar background in dark mode." },
+      "sideBarBgHover":{ "$value": "#E0E6F4",                            "$type": "color", "$description": "Side navigation item hover background in dark mode." }
+    }
+  }
+}

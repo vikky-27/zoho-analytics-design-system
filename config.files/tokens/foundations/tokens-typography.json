@@ -1,0 +1,122 @@
+{
+  "Typography": {
+    "Mode 1": {
+      "fontFamily": {
+        "primary":   { "$value": "Zoho Puvi", "$type": "fontFamily", "$description": "Primary brand typeface — all headings and UI text." },
+        "secondary": { "$value": "Lato",      "$type": "fontFamily", "$description": "Secondary typeface — long-form body text, fallback." }
+      },
+      "fontWeight": {
+        "regular":  { "$value": 400, "$type": "fontWeight", "$description": "Default body and description text." },
+        "medium":   { "$value": 500, "$type": "fontWeight", "$description": "Labels, input values, subtle emphasis." },
+        "semibold": { "$value": 600, "$type": "fontWeight", "$description": "Subheadings, button labels." },
+        "bold":     { "$value": 700, "$type": "fontWeight", "$description": "Headings, strong emphasis." }
+      },
+      "lineHeight": {
+        "tight":   { "$value": 1.2,  "$type": "number", "$description": "Hero and display headings." },
+        "snug":    { "$value": 1.3,  "$type": "number", "$description": "Page and section headings." },
+        "normal":  { "$value": 1.5,  "$type": "number", "$description": "Default body text." },
+        "relaxed": { "$value": 1.7,  "$type": "number", "$description": "Long-form readable text." }
+      },
+      "letterSpacing": {
+        "tight":  { "$value": "-0.02em", "$type": "dimension", "$description": "Large display headings — tighten for visual density." },
+        "normal": { "$value": "0em",     "$type": "dimension", "$description": "Default — no tracking adjustment." },
+        "wide":   { "$value": "0.04em",  "$type": "dimension", "$description": "Uppercase labels, tags, nav items." },
+        "wider":  { "$value": "0.08em",  "$type": "dimension", "$description": "All-caps micro text, eyebrow labels." }
+      },
+      "scale": {
+        "hero": {
+          "fontSize":      { "$value": "40px", "$type": "dimension",  "$description": "Hero — largest display heading. Full-page title, landing screens." },
+          "fontWeight":    { "$value": 700,    "$type": "fontWeight", "$description": "Bold — Hero is always bold." },
+          "lineHeight":    { "$value": 1.2,    "$type": "number",     "$description": "Tight line height for display text." },
+          "letterSpacing": { "$value": "-0.02em", "$type": "dimension" }
+        },
+        "page": {
+          "fontSize":      { "$value": "28px", "$type": "dimension",  "$description": "Page — top-level page heading (h1 equivalent)." },
+          "fontWeight":    { "$value": 700,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.3,    "$type": "number" },
+          "letterSpacing": { "$value": "-0.01em", "$type": "dimension" }
+        },
+        "section": {
+          "fontSize":      { "$value": "22px", "$type": "dimension",  "$description": "Section — section heading (h2 equivalent). Matches column header size in Figma type specimen." },
+          "fontWeight":    { "$value": 700,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.3,    "$type": "number" },
+          "letterSpacing": { "$value": "0em",  "$type": "dimension" }
+        },
+        "subsection": {
+          "fontSize":      { "$value": "18px", "$type": "dimension",  "$description": "Subsection — tertiary heading (h3 equivalent), card titles." },
+          "fontWeight":    { "$value": 600,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.35,   "$type": "number" },
+          "letterSpacing": { "$value": "0em",  "$type": "dimension" }
+        },
+        "bodyXl": {
+          "fontSize":      { "$value": "16px", "$type": "dimension",  "$description": "Body XL — large body text, prominent descriptions." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.5,    "$type": "number" }
+        },
+        "bodyLg": {
+          "fontSize":      { "$value": "15px", "$type": "dimension",  "$description": "Body L — standard body text for content-heavy areas." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.5,    "$type": "number" }
+        },
+        "bodyMd": {
+          "fontSize":      { "$value": "14px", "$type": "dimension",  "$description": "Body M — default body text across all UI surfaces." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.5,    "$type": "number" }
+        },
+        "bodySm": {
+          "fontSize":      { "$value": "13px", "$type": "dimension",  "$description": "Body S — compact body text, dense tables." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.5,    "$type": "number" }
+        },
+        "bodyXs": {
+          "fontSize":      { "$value": "12px", "$type": "dimension",  "$description": "Body XS — small inline text, helper text below inputs." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.4,    "$type": "number" }
+        },
+        "bodyXxs": {
+          "fontSize":      { "$value": "11px", "$type": "dimension",  "$description": "Body XXS — minimum readable body text, badge labels, count chips." },
+          "fontWeight":    { "$value": 500,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.4,    "$type": "number" }
+        },
+        "captionLg": {
+          "fontSize":      { "$value": "12px", "$type": "dimension",  "$description": "Caption L — image captions, form field hints." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.4,    "$type": "number" },
+          "letterSpacing": { "$value": "0.02em", "$type": "dimension" }
+        },
+        "captionMd": {
+          "fontSize":      { "$value": "11px", "$type": "dimension",  "$description": "Caption M — metadata, timestamps, secondary labels." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.4,    "$type": "number" },
+          "letterSpacing": { "$value": "0.02em", "$type": "dimension" }
+        },
+        "captionSm": {
+          "fontSize":      { "$value": "10px", "$type": "dimension",  "$description": "Caption S — legal text, fine print, version numbers." },
+          "fontWeight":    { "$value": 400,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.4,    "$type": "number" },
+          "letterSpacing": { "$value": "0.04em", "$type": "dimension" }
+        },
+        "captionXs": {
+          "fontSize":      { "$value": "10px", "$type": "dimension",  "$description": "Caption XS — all-caps micro labels, eyebrow text. Use with wide letter-spacing." },
+          "fontWeight":    { "$value": 600,    "$type": "fontWeight" },
+          "lineHeight":    { "$value": 1.3,    "$type": "number" },
+          "letterSpacing": { "$value": "0.08em", "$type": "dimension" }
+        }
+      }
+    }
+  },
+  "Font Size": {
+    "Mode 1": {
+      "1":  { "$value": "4px",  "$type": "dimension", "$description": "Font Size scale unit 1 — 4px. Referenced as {Font Size.1} in Figma layout padding." },
+      "2":  { "$value": "8px",  "$type": "dimension", "$description": "Font Size scale unit 2 — 8px." },
+      "3":  { "$value": "12px", "$type": "dimension" },
+      "4":  { "$value": "16px", "$type": "dimension" },
+      "5":  { "$value": "20px", "$type": "dimension" },
+      "6":  { "$value": "24px", "$type": "dimension" },
+      "7":  { "$value": "28px", "$type": "dimension" },
+      "8":  { "$value": "32px", "$type": "dimension", "$description": "Font Size scale unit 8 — 32px. Used as top/bottom padding in typography specimen rows." },
+      "9":  { "$value": "36px", "$type": "dimension" },
+      "10": { "$value": "40px", "$type": "dimension" }
+    }
+  }
+}

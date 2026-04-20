@@ -1,0 +1,40 @@
+{
+  "Accent Colors": {
+    "Blue": {
+      "Accent Color":              { "$value": "{Color.Accent Colors.Blue}",                    "$type": "color" },
+      "Accent Hover state Light":  { "$value": "{Color.Accent Colors.Blue.Shades.Blue 30}",     "$type": "color" },
+      "Tap state":                 { "$value": "{Color.Accent Colors.Blue.Tints.Blue 20}",      "$type": "color" },
+      "Disabled Light":            { "$value": "{Color.Accent Colors.Blue.Tints.Blue 50}",      "$type": "color" },
+      "Other Hover":               { "$value": "{Color.Accent Colors.Blue 20}",                 "$type": "color" },
+      "Disabled Dark":             { "$value": "{Color.Accent Colors.Blue.Shades.Blue 40}",     "$type": "color" },
+      "Accent Hover state Dark":   { "$value": "{Color.Accent Colors.Blue.Tints.Blue 30}",      "$type": "color" }
+    },
+    "Green": {
+      "Accent Color":              { "$value": "{Color.Accent Colors.Green}",                   "$type": "color" },
+      "Accent Hover state Light":  { "$value": "{Color.Accent Colors.Green.Shades.Blue 30}",    "$type": "color" },
+      "Tap state":                 { "$value": "{Color.Accent Colors.Green.Tints.Blue 20}",     "$type": "color" },
+      "Disabled Light":            { "$value": "{Color.Accent Colors.Green.Tints.Blue 50}",     "$type": "color" },
+      "Other Hover":               { "$value": "{Color.Accent Colors.Green 20}",                "$type": "color" },
+      "Disabled Dark":             { "$value": "{Color.Accent Colors.Green.Shades.Blue 50}",    "$type": "color" },
+      "Accent Hover state Dark":   { "$value": "{Color.Accent Colors.Green.Tints.Blue 30}",     "$type": "color" }
+    },
+    "Red": {
+      "Accent Color":              { "$value": "{Color.Accent Colors.Red}",                     "$type": "color" },
+      "Accent Hover state Light":  { "$value": "{Color.Accent Colors.Red.Shades.Blue 30}",      "$type": "color" },
+      "Tap state":                 { "$value": "{Color.Accent Colors.Red.Tints.Blue 20}",       "$type": "color" },
+      "Disabled Light":            { "$value": "{Color.Accent Colors.Red.Tints.Blue 50}",       "$type": "color" },
+      "Other Hover":               { "$value": "{Color.Accent Colors.Red 20}",                  "$type": "color" },
+      "Disabled Dark":             { "$value": "{Color.Accent Colors.Red.Shades.Blue 50}",      "$type": "color" },
+      "Accent Hover state Dark":   { "$value": "{Color.Accent Colors.Red.Tints.Blue 30}",       "$type": "color" }
+    },
+    "Yellow": {
+      "Accent Color":              { "$value": "{Color.Accent Colors.Yellow}",                  "$type": "color" },
+      "Accent Hover state Light":  { "$value": "{Color.Accent Colors.Yellow.Shades.Blue 30}",   "$type": "color" },
+      "Tap state":                 { "$value": "{Color.Accent Colors.Yellow.Tints.Blue 20}",    "$type": "color" },
+      "Disabled Light":            { "$value": "{Color.Accent Colors.Yellow.Tints.Blue 50}",    "$type": "color" },
+      "Other Hover":               { "$value": "{Color.Accent Colors.Yellow 20}",               "$type": "color" },
+      "Disabled Dark":             { "$value": "{Color.Accent Colors.Yellow.Shades.Blue 50}",   "$type": "color" },
+      "Accent Hover state Dark":   { "$value": "{Color.Accent Colors.Yellow.Tints.Blue 30}",    "$type": "color" }
+    }
+  }
+}

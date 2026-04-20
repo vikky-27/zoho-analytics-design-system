@@ -1,0 +1,100 @@
+{
+  "_meta": {
+    "version": "4.0.0",
+    "updatedAt": "2026-04-17",
+    "figmaFileKey": "m2iOWX3I9aDI5kgyw4wCo0",
+    "componentSetNodeId": "4592:2597",
+    "sectionNodeId": "4592:2598",
+    "sectionName": "04 – ListView Component",
+    "tokenRule": "All colors, fonts, spacing, and radii MUST reference resolved-tokens.json. Never use hardcoded hex or font names in plugin code."
+  },
+
+  "component": {
+    "name": "ListView",
+    "type": "COMPONENT_SET",
+    "variantProperties": {
+      "Rows":    { "values": ["3", "5", "8"] },
+      "Columns": { "values": ["4", "7", "10"], "note": "10 = horizontal scroll, viewport 980px, content 1422px" }
+    },
+    "componentProperties": {
+      "Show Checkbox": { "type": "BOOLEAN", "default": true, "figmaKey": "Show Checkbox#4592:0", "cellName": "CheckboxCell", "appliesTo": [10] },
+      "Show Tag":      { "type": "BOOLEAN", "default": true, "figmaKey": "Show Tag#4592:10",      "cellName": "TagCell",      "appliesTo": [7, 10] },
+      "Show Toggle":   { "type": "BOOLEAN", "default": true, "figmaKey": "Show Toggle#4592:20",   "cellName": "ToggleCell",   "appliesTo": [7, 10] },
+      "Show Actions":  { "type": "BOOLEAN", "default": true, "figmaKey": "Show Actions#4592:30",  "cellName": "ActionsCell",  "appliesTo": [7, 10] }
+    },
+    "variants": {
+      "Rows=3, Columns=4":  { "nodeId": "4590:2594", "w": 680,  "h": 192 },
+      "Rows=3, Columns=7":  { "nodeId": "4590:2631", "w": 980,  "h": 192 },
+      "Rows=3, Columns=10": { "nodeId": "4590:2701", "w": 980,  "h": 204, "scrollContentW": 1422 },
+      "Rows=5, Columns=4":  { "nodeId": "4590:2810", "w": 680,  "h": 288 },
+      "Rows=5, Columns=7":  { "nodeId": "4590:2865", "w": 980,  "h": 288 },
+      "Rows=5, Columns=10": { "nodeId": "4590:2971", "w": 980,  "h": 300, "scrollContentW": 1422 },
+      "Rows=8, Columns=4":  { "nodeId": "4590:3134", "w": 680,  "h": 432 },
+      "Rows=8, Columns=7":  { "nodeId": "4590:3216", "w": 980,  "h": 432 },
+      "Rows=8, Columns=10": { "nodeId": "4590:3376", "w": 980,  "h": 444, "scrollContentW": 1422 }
+    }
+  },
+
+  "columns": {
+    "4": [
+      { "key": "name",     "label": "Name",   "width": 220, "optional": false },
+      { "key": "type",     "label": "Type",   "width": 140, "optional": false },
+      { "key": "date",     "label": "Date",   "width": 180, "optional": false },
+      { "key": "value",    "label": "Value",  "width": 140, "optional": false }
+    ],
+    "7": [
+      { "key": "name",    "label": "Name",    "width": 220, "optional": false },
+      { "key": "type",    "label": "Type",    "width": 140, "optional": false },
+      { "key": "date",    "label": "Date",    "width": 180, "optional": false },
+      { "key": "value",   "label": "Value",   "width": 140, "optional": false },
+      { "key": "tag",     "label": "Status",  "width": 130, "optional": true, "prop": "Show Tag",     "cellName": "TagCell" },
+      { "key": "toggle",  "label": "Active",  "width": 80,  "optional": true, "prop": "Show Toggle",  "cellName": "ToggleCell" },
+      { "key": "actions", "label": "Actions", "width": 90,  "optional": true, "prop": "Show Actions", "cellName": "ActionsCell" }
+    ],
+    "10": [
+      { "key": "checkbox",  "label": "",          "width": 52,  "optional": true,  "prop": "Show Checkbox", "cellName": "CheckboxCell" },
+      { "key": "name",      "label": "Name",      "width": 220, "optional": false },
+      { "key": "type",      "label": "Type",      "width": 140, "optional": false },
+      { "key": "date",      "label": "Date",      "width": 180, "optional": false },
+      { "key": "value",     "label": "Value",     "width": 140, "optional": false },
+      { "key": "category",  "label": "Category",  "width": 130, "optional": false },
+      { "key": "priority",  "label": "Priority",  "width": 110, "optional": false },
+      { "key": "modified",  "label": "Modified",  "width": 150, "optional": false },
+      { "key": "tag",       "label": "Status",    "width": 130, "optional": true,  "prop": "Show Tag",     "cellName": "TagCell" },
+      { "key": "toggle",    "label": "Active",    "width": 80,  "optional": true,  "prop": "Show Toggle",  "cellName": "ToggleCell" },
+      { "key": "actions",   "label": "Actions",   "width": 90,  "optional": true,  "prop": "Show Actions", "cellName": "ActionsCell" }
+    ]
+  },
+
+  "rowStates": {
+    "default":  { "token": "semantic.light.background.default", "value": "#FFFFFF", "rowIndex": "all others" },
+    "hover":    { "token": "semantic.light.feedback.hover",     "value": "#2C66DD at 15% opacity", "rowIndex": 0 },
+    "selected": { "token": "semantic.light.sideNavHover",       "value": "#E0E6F4", "rowIndex": 2 },
+    "note": "No alternating row colors. Rows 0 and 2 demonstrate hover/selected states."
+  },
+
+  "existingComponentsUsed": {
+    "checkbox": { "name": "Check box",     "setNodeId": "2608:6618", "variantOff": "2608:6623", "variantOn": "2608:6619" },
+    "toggle":   { "name": "Toggle button", "setNodeId": "2608:5686", "variantOff": "2608:5689", "variantOn": "2608:5687" }
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "_collection_tokens":     "VariableCollectionId:575:225",
+    "_collection_primitives": "VariableCollectionId:5:2156",
+    "rowDefault":    { "variableName": "ZA/Background/BG-Primary-Default",   "variableId": "VariableID:575:273",  "value": "#FFFFFF" },
+    "rowHover":      { "variableName": "Hover",                               "variableId": "VariableID:2168:2208","value": "blue tint" },
+    "rowSelected":   { "variableName": "Side nave bar bg",                    "variableId": "VariableID:3933:2566","value": "#E0E6F4" },
+    "headerBg":      { "variableName": "ZA/Background/BG-Primary-Subtle",     "variableId": "VariableID:575:275",  "value": "#F5F7F9" },
+    "divider":       { "variableName": "ZA/stroke/Stroke 1",                  "variableId": "VariableID:579:41",   "value": "#DFE4EB" },
+    "textPrimary":   { "variableName": "ZA/Text/Text Primary",                "variableId": "VariableID:575:276",  "value": "#0C0E11" },
+    "textSecondary": { "variableName": "ZA/Text/Text Description",            "variableId": "VariableID:575:277",  "value": "#3D4653" },
+    "scrollTrack":   { "variableName": "ZA/Background/BG-Primary-Raised",     "variableId": "VariableID:592:38",   "value": "#EBEFF3" },
+    "scrollThumb":   { "variableName": "Color/Neutral/Tint/Neutral 40",       "variableId": "VariableID:572:3687", "value": "#A0ADBF" },
+    "badgeFill":     { "variableName": "Color/Base/White",                    "variableId": "VariableID:189:170",  "value": "#FFFFFF" },
+    "badgeRunning":  { "variableName": "Color/Accent Colors/Blue",            "variableId": "VariableID:187:160",  "value": "#2C66DD" },
+    "badgePassed":   { "variableName": "Color/Accent Colors/Green",           "variableId": "VariableID:189:168",  "value": "#0C8844" },
+    "badgeFailed":   { "variableName": "Color/Accent Colors/Red",             "variableId": "VariableID:189:167",  "value": "#CC3929" },
+    "badgePending":  { "variableName": "Color/Accent Colors/Yellow",          "variableId": "VariableID:189:169",  "value": "#EBB625" }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "981:1372",
+  "name": "Notification",
+  "type": "COMPONENT_SET",
+  "width": 430,
+  "height": 304,
+  "x": 1044,
+  "y": 500,
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": "#FFFFFF"
+    }
+  ],
+  "strokes": [
+    {
+      "type": "SOLID",
+      "color": "#0C0E11"
+    }
+  ],
+  "strokeWeight": 1,
+  "cornerRadius": 5,
+  "cornerRadii": {
+    "topLeft": 5,
+    "topRight": 5,
+    "bottomRight": 5,
+    "bottomLeft": 5
+  },
+  "layout": {
+    "direction": "VERTICAL",
+    "paddingTop": 20,
+    "paddingRight": 20,
+    "paddingBottom": 20,
+    "paddingLeft": 20,
+    "itemSpacing": 24,
+    "primaryAxisAlignItems": "MIN",
+    "counterAxisAlignItems": "MIN"
+  },
+  "properties": {
+    "Text#2476:0": {
+      "type": "TEXT",
+      "defaultValue": "Notification - Success/Error/Warning/Default "
+    },
+    "Property 1": [
+      "Success",
+      "Warning",
+      "Default",
+      "Error"
+    ]
+  },
+  "variants": [
+    {
+      "id": "981:1373",
+      "name": "Property 1=Success",
+      "properties": {
+        "Property 1": "Success"
+      }
+    },
+    {
+      "id": "981:1383",
+      "name": "Property 1=Error",
+      "properties": {
+        "Property 1": "Error"
+      }
+    },
+    {
+      "id": "981:1395",
+      "name": "Property 1=Warning",
+      "properties": {
+        "Property 1": "Warning"
+      }
+    },
+    {
+      "id": "981:1405",
+      "name": "Property 1=Default",
+      "properties": {
+        "Property 1": "Default"
+      }
+    }
+  ],
+  "statesAndOptions": {
+    "componentSets": [
+      {
+        "id": "981:1372",
+        "name": "Notification",
+        "variantAxes": {
+          "Property 1": [
+            "Success",
+            "Warning",
+            "Default",
+            "Error"
+          ]
+        },
+        "componentPropertyDefinitions": {
+          "Text#2476:0": {
+            "type": "TEXT",
+            "defaultValue": "Notification - Success/Error/Warning/Default "
+          }
+        },
+        "variants": [
+          {
+            "id": "981:1373",
+            "name": "Property 1=Success",
+            "properties": {
+              "Property 1": "Success"
+            }
+          },
+          {
+            "id": "981:1383",
+            "name": "Property 1=Error",
+            "properties": {
+              "Property 1": "Error"
+            }
+          },
+          {
+            "id": "981:1395",
+            "name": "Property 1=Warning",
+            "properties": {
+              "Property 1": "Warning"
+            }
+          },
+          {
+            "id": "981:1405",
+            "name": "Property 1=Default",
+            "properties": {
+              "Property 1": "Default"
+            }
+          }
+        ]
+      }
+    ],
+    "instances": []
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "successAccent":  { "variableName": "Color/Accent Colors/Green",              "variableId": "VariableID:189:168", "value": "#0C8844" },
+    "errorAccent":    { "variableName": "Color/Accent Colors/Red",                "variableId": "VariableID:189:167", "value": "#CC3929" },
+    "warningAccent":  { "variableName": "Color/Accent Colors/Yellow",             "variableId": "VariableID:189:169", "value": "#EBB625" },
+    "infoAccent":     { "variableName": "ZA/Button/Button Fill/Button Primary",   "variableId": "VariableID:577:38",  "value": "#2C66DD" },
+    "bgWhite":        { "variableName": "Color/Base/White",                       "variableId": "VariableID:189:170", "value": "#FFFFFF" },
+    "textPrimary":    { "variableName": "ZA/Text/Text Primary",                   "variableId": "VariableID:575:276", "value": "#0C0E11" },
+    "textDesc":       { "variableName": "ZA/Text/Text Description",               "variableId": "VariableID:575:277", "value": "#3D4653" },
+    "divider":        { "variableName": "ZA/stroke/Stroke 1",                     "variableId": "VariableID:579:41",  "value": "#DFE4EB" }
+  }
+}

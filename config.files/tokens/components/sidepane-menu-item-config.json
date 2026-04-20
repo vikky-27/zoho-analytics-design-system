@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "description": "Auto-generated component config for SidepaneMenuItem. Built by Orchestrator Agent — Step 11.",
+    "outputPath": "tokens/components/sidepane-menu-item-config.json",
+    "generatedBy": "Orchestrator Agent — Step 11",
+    "sourceRef": "pipeline/config/component-file-template.json"
+  },
+
+  "component": {
+    "name": "SidepaneMenuItem",
+    "description": "64×64px navigation item for the Zoho Analytics side panel. Displays an icon slot (icon--nav) and a label (label--nav-item). Three interaction states: Default, Hover, Selected.",
+    "figmaSource": {
+      "fileKey": "m2iOWX3I9aDI5kgyw4wCo0",
+      "componentSetId": "4644:44",
+      "componentSetKey": "pending-publish",
+      "pageUrl": "https://www.figma.com/design/m2iOWX3I9aDI5kgyw4wCo0/Design-System--Zoho-Analytics?node-id=4644-44"
+    },
+    "addedAt": "2026-04-20",
+    "tokenBindings": {
+      "backgroundDefault":   "semantic.light.background.grey        → ZA/Background/BG-Primary-Grey      → VariableID:575:274",
+      "backgroundHover":     "semantic.light.sideNavHover           → Side bar BG hove                   → VariableID:3934:2702",
+      "backgroundSelected":  "semantic.light.button.fillPrimary     → ZA/Button/Button Fill/Button Primary → VariableID:577:38",
+      "textDefault":         "semantic.light.text.primary            → ZA/Text/Text Primary                → VariableID:575:276",
+      "textSelected":        "semantic.light.text.onAccent           → ZA/Text/Text On AccentColor         → VariableID:786:303",
+      "iconSelected":        "color.base.white                       → Always White                        → VariableID:808:968",
+      "padding":             "spacing.padding.XS → 8px",
+      "gap":                 "spacing.gap.S → 4px",
+      "width":               "64px (fixed)",
+      "height":              "64px (fixed)"
+    }
+  },
+
+  "variantAxes": [
+    {
+      "name": "State",
+      "values": ["Default", "Hover", "Selected"],
+      "default": "Default"
+    }
+  ],
+
+  "variants": [
+    {
+      "combo": { "State": "Default" },
+      "nodeId": "4643:44",
+      "useCase": "Idle navigation item — not hovered, not the current active page"
+    },
+    {
+      "combo": { "State": "Hover" },
+      "nodeId": "4643:48",
+      "useCase": "User is hovering over this nav item with mouse"
+    },
+    {
+      "combo": { "State": "Selected" },
+      "nodeId": "4643:52",
+      "useCase": "This nav item is the currently active/open section"
+    }
+  ],
+
+  "properties": [
+    {
+      "key": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Selected"],
+      "description": "Interaction state of the nav item"
+    },
+    {
+      "key": "Label#4644:0",
+      "type": "TEXT",
+      "values": ["Explorer", "Dashboards", "Reports", "Data", "Ask Zia", "Data Sources", "Code Studio", "Auto ML", "Settings", "Trash"],
+      "description": "Navigation item label displayed below the icon"
+    }
+  ],
+
+  "layout": {
+    "direction": "VERTICAL",
+    "paddingTop":    "8 (from spacing.padding.XS)",
+    "paddingRight":  "8 (from spacing.padding.XS)",
+    "paddingBottom": "8 (from spacing.padding.XS)",
+    "paddingLeft":   "8 (from spacing.padding.XS)",
+    "itemSpacing":   "4 (from spacing.gap.S)",
+    "primaryAxisSizingMode":  "FIXED",
+    "counterAxisSizingMode":  "FIXED",
+    "primaryAxisAlignItems":  "CENTER",
+    "counterAxisAlignItems":  "CENTER",
+    "naturalHeight": "64px",
+    "naturalWidth":  "64px"
+  },
+
+  "textProperties": [
+    {
+      "name":        "Label",
+      "layerName":   "label--nav-item",
+      "propKey":     "Label#4644:0",
+      "default":     "Explorer",
+      "description": "Navigation item label shown below the icon in the sidebar"
+    }
+  ],
+
+  "showcase": {
+    "frameName":   "SidepaneMenuItem/Showcase",
+    "rows":        "Nav items (Explorer / Dashboards / Reports / Data / Ask Zia)",
+    "cols":        "State (Default / Hover / Selected)",
+    "figmaNodeId": "4646:44"
+  },
+
+  "companion": {
+    "name": "SidepaneFAB",
+    "description": "42×42px blue action button at the top of the side panel. White + icon. border-radius 8px.",
+    "nodeId": "4645:44",
+    "tokenBindings": {
+      "background":   "semantic.light.button.fillPrimary → VariableID:577:38",
+      "iconColor":    "color.base.white → VariableID:808:968",
+      "borderRadius": "borderRadius.md → 8px"
+    }
+  },
+
+  "auditStatus": {
+    "tokenAudit": "WARN",
+    "tokenAuditNotes": "0 FAILs. 3 WARNs: font-size 12px on label--nav-item not bound to typography variable (typography variables not in scope for this collection).",
+    "a11yCheck":  "PASS",
+    "a11yNotes":  "Contrast: Default=17.73:1, Hover=15.45:1, Selected=5.18:1 — all ≥4.5:1 WCAG AA. Touch target 64×64px ≥44px. Layer naming: icon--nav, label--nav-item.",
+    "runAt":      "2026-04-20"
+  }
+}

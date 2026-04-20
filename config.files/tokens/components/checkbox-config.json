@@ -1,0 +1,978 @@
+{
+  "nodes": [
+    {
+      "id": "2609:4541",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 12,
+      "height": 12,
+      "x": 203,
+      "y": 188,
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#2C66DD"
+        }
+      ],
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#2C66DD"
+        }
+      ],
+      "strokeWeight": 1,
+      "cornerRadius": 2,
+      "cornerRadii": {
+        "topLeft": 2,
+        "topRight": 2,
+        "bottomRight": 2,
+        "bottomLeft": 2
+      },
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 3,
+        "paddingRight": 3,
+        "paddingBottom": 3,
+        "paddingLeft": 3,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Check": {
+          "type": "VARIANT",
+          "value": "Yes"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "Yes"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4541;2608:6620",
+          "name": "Vector 1",
+          "type": "VECTOR",
+          "width": 6,
+          "height": 6,
+          "x": 3,
+          "y": 3,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 1
+        }
+      ]
+    },
+    {
+      "id": "2609:4542",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 12,
+      "height": 12,
+      "x": 236,
+      "y": 188,
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": "#184091"
+        }
+      ],
+      "strokeWeight": 1,
+      "cornerRadius": 2,
+      "cornerRadii": {
+        "topLeft": 2,
+        "topRight": 2,
+        "bottomRight": 2,
+        "bottomLeft": 2
+      },
+      "opacity": 0.5,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 3,
+        "paddingRight": 3,
+        "paddingBottom": 3,
+        "paddingLeft": 3,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Check": {
+          "type": "VARIANT",
+          "value": "Yes"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "No"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4542;2608:6622",
+          "name": "Vector 1",
+          "type": "VECTOR",
+          "width": 7,
+          "height": 7,
+          "x": 3,
+          "y": 2.5,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 1
+        }
+      ]
+    },
+    {
+      "id": "2609:4543",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 12,
+      "height": 12,
+      "x": 203,
+      "y": 221,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#556274"
+        }
+      ],
+      "strokeWeight": 1,
+      "cornerRadius": 2,
+      "cornerRadii": {
+        "topLeft": 2,
+        "topRight": 2,
+        "bottomRight": 2,
+        "bottomLeft": 2
+      },
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 3,
+        "paddingRight": 3,
+        "paddingBottom": 3,
+        "paddingLeft": 3,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Check": {
+          "type": "VARIANT",
+          "value": "No"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "Yes"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4543;2608:6624",
+          "name": "Vector 1",
+          "type": "VECTOR",
+          "width": 7,
+          "height": 7,
+          "x": 3,
+          "y": 2.5,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 1,
+          "opacity": 0
+        }
+      ]
+    },
+    {
+      "id": "2609:4544",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 12,
+      "height": 12,
+      "x": 236,
+      "y": 221,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": "#313842"
+        }
+      ],
+      "strokeWeight": 1,
+      "cornerRadius": 2,
+      "cornerRadii": {
+        "topLeft": 2,
+        "topRight": 2,
+        "bottomRight": 2,
+        "bottomLeft": 2
+      },
+      "opacity": 0.5,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 3,
+        "paddingRight": 3,
+        "paddingBottom": 3,
+        "paddingLeft": 3,
+        "itemSpacing": 10,
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "Check": {
+          "type": "VARIANT",
+          "value": "No"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "No"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4544;2608:6626",
+          "name": "Vector 1",
+          "type": "VECTOR",
+          "width": 7,
+          "height": 7,
+          "x": 3,
+          "y": 2.5,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 1,
+          "opacity": 0
+        }
+      ]
+    },
+    {
+      "id": "2609:4545",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 242,
+      "height": 20,
+      "x": 203,
+      "y": 30,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "ON": {
+          "type": "VARIANT",
+          "value": "On"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4545;2608:6576",
+          "name": "Check box/Yes/Yes",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#2C66DD"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 2,
+          "cornerRadii": {
+            "topLeft": 2,
+            "topRight": 2,
+            "bottomRight": 2,
+            "bottomLeft": 2
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 3,
+            "paddingRight": 3,
+            "paddingBottom": 3,
+            "paddingLeft": 3,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "children": [
+            {
+              "id": "I2609:4545;2608:6576;2414:3607",
+              "name": "Vector 1",
+              "type": "VECTOR",
+              "width": 6,
+              "height": 6,
+              "x": 3,
+              "y": 3,
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "cornerRadius": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:4545;2608:6577",
+          "name": "Check box - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 226,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Check box - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#FFFFFF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4546",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 242,
+      "height": 20,
+      "x": 203,
+      "y": 66,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "ON": {
+          "type": "VARIANT",
+          "value": "Off"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "ON"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4546;2608:6579",
+          "name": "Check box/No/Yes",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#556274"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 2,
+          "cornerRadii": {
+            "topLeft": 2,
+            "topRight": 2,
+            "bottomRight": 2,
+            "bottomLeft": 2
+          },
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 3,
+            "paddingRight": 3,
+            "paddingBottom": 3,
+            "paddingLeft": 3,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "children": [
+            {
+              "id": "I2609:4546;2608:6579;2414:3611",
+              "name": "Vector 1",
+              "type": "VECTOR",
+              "width": 7,
+              "height": 7,
+              "x": 3,
+              "y": 2.5,
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "cornerRadius": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "I2609:4546;2608:6580",
+          "name": "Check box - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 226,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#FFFFFF"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Check box - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#FFFFFF"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4547",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 242,
+      "height": 20,
+      "x": 203,
+      "y": 102,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "ON": {
+          "type": "VARIANT",
+          "value": "On"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4547;2608:6582",
+          "name": "Check box/Yes/No",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#184091"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 2,
+          "cornerRadii": {
+            "topLeft": 2,
+            "topRight": 2,
+            "bottomRight": 2,
+            "bottomLeft": 2
+          },
+          "opacity": 0.5,
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 3,
+            "paddingRight": 3,
+            "paddingBottom": 3,
+            "paddingLeft": 3,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "children": [
+            {
+              "id": "I2609:4547;2608:6582;2414:3609",
+              "name": "Vector 1",
+              "type": "VECTOR",
+              "width": 7,
+              "height": 7,
+              "x": 3,
+              "y": 2.5,
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "cornerRadius": 1
+            }
+          ]
+        },
+        {
+          "id": "I2609:4547;2608:6583",
+          "name": "Check box - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 226,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#556274"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Check box - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#556274"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2609:4548",
+      "name": "Check box",
+      "type": "INSTANCE",
+      "width": 242,
+      "height": 20,
+      "x": 203,
+      "y": 138,
+      "strokeWeight": 1,
+      "layout": {
+        "direction": "HORIZONTAL",
+        "paddingTop": 0,
+        "paddingRight": 0,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "itemSpacing": "{Spacing System.Padding! Gap! Spacing!.XXS}",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER"
+      },
+      "componentPropertyValues": {
+        "ON": {
+          "type": "VARIANT",
+          "value": "Off"
+        },
+        "Enable": {
+          "type": "VARIANT",
+          "value": "OFF"
+        }
+      },
+      "children": [
+        {
+          "id": "I2609:4548;2608:6585",
+          "name": "Check box/No/No",
+          "type": "INSTANCE",
+          "width": 12,
+          "height": 12,
+          "x": 0,
+          "y": 4,
+          "strokes": [
+            {
+              "type": "SOLID",
+              "color": "#313842"
+            }
+          ],
+          "strokeWeight": 1,
+          "cornerRadius": 2,
+          "cornerRadii": {
+            "topLeft": 2,
+            "topRight": 2,
+            "bottomRight": 2,
+            "bottomLeft": 2
+          },
+          "opacity": 0.5,
+          "layout": {
+            "direction": "HORIZONTAL",
+            "paddingTop": 3,
+            "paddingRight": 3,
+            "paddingBottom": 3,
+            "paddingLeft": 3,
+            "itemSpacing": 10,
+            "primaryAxisAlignItems": "MIN",
+            "counterAxisAlignItems": "CENTER"
+          },
+          "children": [
+            {
+              "id": "I2609:4548;2608:6585;2414:3613",
+              "name": "Vector 1",
+              "type": "VECTOR",
+              "width": 7,
+              "height": 7,
+              "x": 3,
+              "y": 2.5,
+              "strokes": [
+                {
+                  "type": "SOLID",
+                  "color": "#FFFFFF"
+                }
+              ],
+              "strokeWeight": 1,
+              "cornerRadius": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "I2609:4548;2608:6586",
+          "name": "Check box - on/off - enable/disable",
+          "type": "TEXT",
+          "width": 226,
+          "height": 20,
+          "x": 16,
+          "y": 0,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": "#556274"
+            }
+          ],
+          "strokeWeight": 1,
+          "characters": "Check box - on/off - enable/disable",
+          "fontSize": 14,
+          "fontFamily": "Zoho Puvi Regular",
+          "textAlign": "LEFT",
+          "color": {
+            "type": "SOLID",
+            "color": "#556274"
+          }
+        }
+      ]
+    }
+  ],
+  "statesAndOptions": {
+    "componentSets": [],
+    "instances": [
+      {
+        "nodeId": "2609:4541",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6619",
+        "mainComponentName": "Check=Yes, Enable=Yes",
+        "currentProperties": {
+          "Check": {
+            "type": "VARIANT",
+            "value": "Yes"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Yes"
+          }
+        },
+        "componentSetId": "2608:6618",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "Check": [
+            "No",
+            "Yes"
+          ],
+          "Enable": [
+            "No",
+            "Yes"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4542",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6621",
+        "mainComponentName": "Check=Yes, Enable=No",
+        "currentProperties": {
+          "Check": {
+            "type": "VARIANT",
+            "value": "Yes"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "No"
+          }
+        },
+        "componentSetId": "2608:6618",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "Check": [
+            "No",
+            "Yes"
+          ],
+          "Enable": [
+            "No",
+            "Yes"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4543",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6623",
+        "mainComponentName": "Check=No, Enable=Yes",
+        "currentProperties": {
+          "Check": {
+            "type": "VARIANT",
+            "value": "No"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "Yes"
+          }
+        },
+        "componentSetId": "2608:6618",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "Check": [
+            "No",
+            "Yes"
+          ],
+          "Enable": [
+            "No",
+            "Yes"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4544",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6625",
+        "mainComponentName": "Check=No, Enable=No",
+        "currentProperties": {
+          "Check": {
+            "type": "VARIANT",
+            "value": "No"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "No"
+          }
+        },
+        "componentSetId": "2608:6618",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "Check": [
+            "No",
+            "Yes"
+          ],
+          "Enable": [
+            "No",
+            "Yes"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "2609:4545",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6575",
+        "mainComponentName": "ON=On, Enable=ON",
+        "currentProperties": {
+          "ON": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          }
+        },
+        "componentSetId": "2608:6574",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "ON": [
+            "Off",
+            "On"
+          ],
+          "Enable": [
+            "ON",
+            "OFF"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "I2609:4545;2608:6576",
+        "nodeName": "Check box/Yes/Yes",
+        "mainComponentId": "2414:3606",
+        "mainComponentName": "Check box/Yes/Yes",
+        "currentProperties": {}
+      },
+      {
+        "nodeId": "2609:4546",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6578",
+        "mainComponentName": "ON=Off, Enable=ON",
+        "currentProperties": {
+          "ON": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "ON"
+          }
+        },
+        "componentSetId": "2608:6574",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "ON": [
+            "Off",
+            "On"
+          ],
+          "Enable": [
+            "ON",
+            "OFF"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "I2609:4546;2608:6579",
+        "nodeName": "Check box/No/Yes",
+        "mainComponentId": "2414:3610",
+        "mainComponentName": "Check box/No/Yes",
+        "currentProperties": {}
+      },
+      {
+        "nodeId": "2609:4547",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6581",
+        "mainComponentName": "ON=On, Enable=OFF",
+        "currentProperties": {
+          "ON": {
+            "type": "VARIANT",
+            "value": "On"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          }
+        },
+        "componentSetId": "2608:6574",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "ON": [
+            "Off",
+            "On"
+          ],
+          "Enable": [
+            "ON",
+            "OFF"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "I2609:4547;2608:6582",
+        "nodeName": "Check box/Yes/No",
+        "mainComponentId": "2414:3608",
+        "mainComponentName": "Check box/Yes/No",
+        "currentProperties": {}
+      },
+      {
+        "nodeId": "2609:4548",
+        "nodeName": "Check box",
+        "mainComponentId": "2608:6584",
+        "mainComponentName": "ON=Off, Enable=OFF",
+        "currentProperties": {
+          "ON": {
+            "type": "VARIANT",
+            "value": "Off"
+          },
+          "Enable": {
+            "type": "VARIANT",
+            "value": "OFF"
+          }
+        },
+        "componentSetId": "2608:6574",
+        "componentSetName": "Check box",
+        "allVariantOptions": {
+          "ON": [
+            "Off",
+            "On"
+          ],
+          "Enable": [
+            "ON",
+            "OFF"
+          ]
+        },
+        "componentPropertyDefinitions": {}
+      },
+      {
+        "nodeId": "I2609:4548;2608:6585",
+        "nodeName": "Check box/No/No",
+        "mainComponentId": "2414:3612",
+        "mainComponentName": "Check box/No/No",
+        "currentProperties": {}
+      }
+    ]
+  },
+
+  "figmaVariables": {
+    "_rule": "All colors are bound to these Figma library variable IDs via figma.variables.setBoundVariableForPaint(). Never use raw hex or {r,g,b} in plugin scripts.",
+    "checkedEnabled":   { "variableName": "ZA/Button/Button Fill/Button Primary",         "variableId": "VariableID:577:38",  "value": "#2C66DD" },
+    "checkedDisabled":  { "variableName": "Color/Accent Colors/Blue/Shades/Blue 40",      "variableId": "VariableID:391:92",  "value": "#184091" },
+    "uncheckedEnabled": { "variableName": "Color/Neutral/Shades/Neutral 40",              "variableId": "VariableID:572:3675","value": "#556274" },
+    "uncheckedDisabled":{ "variableName": "Color/Neutral/Shades/Neutral 70",              "variableId": "VariableID:572:3678","value": "#313842" },
+    "checkmark":        { "variableName": "Color/Base/White",                             "variableId": "VariableID:189:170", "value": "#FFFFFF" }
+  }
+}

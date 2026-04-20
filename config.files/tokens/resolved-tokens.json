@@ -1,0 +1,301 @@
+{
+  "_meta": {
+    "description": "Fully resolved token lookup — all aliases flattened to final hex/px values. Generated from foundations/*.json. The AI agent MUST use this file for all Figma MCP calls. Never use raw hex or hardcoded values.",
+    "sources": [
+      "foundations/primitives.json",
+      "foundations/token-colors.json",
+      "foundations/tokens-spacing.json",
+      "foundations/tokens-typography.json",
+      "foundations/tokens-shadow.json",
+      "foundations/tokens-sizing.json",
+      "foundations/tokens-border-radius.json",
+      "foundations/tokens-border.json"
+    ],
+    "rule": "Every fill, stroke, radius, padding, gap, font, or shadow applied via Figma MCP must reference a key from this file."
+  },
+
+  "color": {
+    "accent": {
+      "blue":         { "value": "#2C66DD", "usage": "Primary CTA, links, active states" },
+      "blueHover":    { "value": "#1E51B8", "usage": "Blue hover state" },
+      "blueTap":      { "value": "#6A92E5", "usage": "Blue tap/active state" },
+      "blueOverlay":  { "value": "#2C66DD33", "usage": "Blue hover overlay (20% opacity)" },
+      "red":          { "value": "#CC3929", "usage": "Error, danger, destructive actions" },
+      "redHover":     { "value": "#A12D20", "usage": "Red hover state" },
+      "redTap":       { "value": "#DA7367", "usage": "Red tap/active state" },
+      "green":        { "value": "#0C8844", "usage": "Success, positive feedback" },
+      "greenHover":   { "value": "#08592D", "usage": "Green hover state" },
+      "greenTap":     { "value": "#53AA7A", "usage": "Green tap/active state" },
+      "yellow":       { "value": "#EBB625", "usage": "Warning, caution states" },
+      "yellowHover":  { "value": "#C99812", "usage": "Yellow hover state" },
+      "yellowTap":    { "value": "#EFCA65", "usage": "Yellow tap/active state" }
+    },
+    "base": {
+      "white":     { "value": "#FFFFFF" },
+      "black":     { "value": "#000000" },
+      "white20":   { "value": "#FFFFFF33", "usage": "White overlay at 20% — dark mode hover" }
+    },
+    "neutral": {
+      "shade10":  { "value": "#74859D" },
+      "shade20":  { "value": "#6E7E94" },
+      "shade30":  { "value": "#627084" },
+      "shade40":  { "value": "#556274" },
+      "shade50":  { "value": "#495463" },
+      "shade60":  { "value": "#3D4653" },
+      "shade70":  { "value": "#313842" },
+      "shade80":  { "value": "#252A32" },
+      "shade90":  { "value": "#181C21" },
+      "shade95":  { "value": "#0C0E11" },
+      "tint10":   { "value": "#8092A9" },
+      "tint20":   { "value": "#8797AE" },
+      "tint30":   { "value": "#93A2B6" },
+      "tint40":   { "value": "#A0ADBF" },
+      "tint50":   { "value": "#ACB8C8" },
+      "tint60":   { "value": "#B9C3D1" },
+      "tint70":   { "value": "#C6CED9" },
+      "tint80":   { "value": "#D2D9E2" },
+      "tint90":   { "value": "#DFE4EB" },
+      "tint95":   { "value": "#EBEFF3" },
+      "tint100":  { "value": "#F5F7F9" }
+    },
+    "grey": {
+      "shade00":  { "value": "#F5F5F5" },
+      "shade05":  { "value": "#E9E9E9" },
+      "shade10":  { "value": "#DCDCDC" },
+      "shade20":  { "value": "#C4C4C4" },
+      "shade30":  { "value": "#ABABAB" },
+      "shade40":  { "value": "#939393" },
+      "shade50":  { "value": "#7A7A7A" },
+      "shade60":  { "value": "#626262" },
+      "shade70":  { "value": "#494949" },
+      "shade80":  { "value": "#313131" },
+      "shade90":  { "value": "#181818" },
+      "shade100": { "value": "#0C0C0C" }
+    }
+  },
+
+  "semantic": {
+    "light": {
+      "background": {
+        "default":  { "value": "#FFFFFF",  "token": "Token: Colors.Light.Background.BG-Primary-Default",  "usage": "Main page/panel background" },
+        "grey":     { "value": "#F5F5F5",  "token": "Token: Colors.Light.Background.BG-Primary-Grey",     "usage": "Off-white contrast areas" },
+        "subtle":   { "value": "#F5F7F9",  "token": "Token: Colors.Light.Background.BG-Primary-Subtle",   "usage": "Inset cards, tinted areas" },
+        "raised":   { "value": "#EBEFF3",  "token": "Token: Colors.Light.Background.BG-Primary-Raised",   "usage": "Raised surface, one level above default" }
+      },
+      "text": {
+        "primary":     { "value": "#0C0E11", "token": "Token: Colors.Light.Text.Text Primary",        "usage": "Body text, headings" },
+        "description": { "value": "#3D4653", "token": "Token: Colors.Light.Text.Text Description",    "usage": "Secondary text, captions" },
+        "disabled":    { "value": "#93A2B6", "token": "Token: Colors.Light.Text.Text Disabled",       "usage": "Disabled state text" },
+        "placeholder": { "value": "#93A2B6", "token": "Token: Colors.Light.Text.Text Placeholder",    "usage": "Input placeholder" },
+        "onAccent":    { "value": "#FFFFFF",  "token": "Token: Colors.Light.Text.Text On AccentColor", "usage": "Text on primary/accent fills" },
+        "link":        { "value": "#006AFF",  "token": "Token: Colors.Light.Text Link",               "usage": "Hyperlinks" },
+        "linkDisabled":{ "value": "#66A6FF",  "token": "Token: Colors.Light.Link Disabled",           "usage": "Disabled hyperlinks" }
+      },
+      "button": {
+        "fillPrimary":          { "value": "#2C66DD", "token": "Token: Colors.Light.Button.Button Fill.Button Primary",    "usage": "Primary CTA fill" },
+        "fillPrimaryDisabled":  { "value": "#ACB8C8", "token": "Token: Colors.Light.Button.Button Fill.Primary Disabled",  "usage": "Disabled primary fill" },
+        "fillSecondary":        { "value": "#DFE4EB", "token": "Token: Colors.Light.Button.Button Fill.Secondary",         "usage": "Secondary button fill" },
+        "fillSecondaryDisabled":{ "value": "#F5F7F9", "token": "Token: Colors.Light.Button.Button Fill.Secondary Disabled","usage": "Disabled secondary fill" },
+        "fillInput":            { "value": "#FFFFFF",  "token": "Token: Colors.Light.Button.Button Fill.Input Fill",        "usage": "Text input background" },
+        "fillAccentHover":      { "value": "#1E51B8", "token": "Token: Colors.Light.Button.Button Fill.Accent Hover",      "usage": "Primary button hover" },
+        "fillToggleOff":        { "value": "#A0ADBF", "token": "Token: Colors.Light.Button.Button Fill.ON OFF",            "usage": "Toggle inactive track" },
+        "fillToggleDisabled":   { "value": "#C6CED9", "token": "Token: Colors.Light.Button.Button Fill.ON OFF Disabled",   "usage": "Toggle disabled track" },
+        "strokeSecondary":      { "value": "#494949", "token": "Token: Colors.Light.Button.Button Stroke.Secondary",       "usage": "Secondary button border" }
+      },
+      "stroke": {
+        "stroke1":   { "value": "#DFE4EB", "token": "Token: Colors.Light.Stroke.Stroke 1", "usage": "Lightest divider/separator" },
+        "stroke2":   { "value": "#D2D9E2", "token": "Token: Colors.Light.Stroke.Stroke 2", "usage": "Default card/input border" },
+        "stroke3":   { "value": "#C6CED9", "token": "Token: Colors.Light.Stroke.Stroke 3", "usage": "Focused input, selected border" },
+        "disabled":  { "value": "#D2D9E2", "token": "Token: Colors.Light.Stroke.Stroke Disabled", "usage": "Disabled border" }
+      },
+      "card": {
+        "bgPrimary":  { "value": "#FFFFFF",  "token": "Token: Colors.Light.Card.BG-Primary",   "usage": "Default card background" },
+        "bgPrimary2": { "value": "#F5F7F9",  "token": "Token: Colors.Light.Card.BG-Primary 2", "usage": "Subtle nested card" },
+        "bgPrimary3": { "value": "#F5F5F5",  "token": "Token: Colors.Light.Card.BG-Primary 3", "usage": "Card on grey surface" },
+        "bgPrimary4": { "value": "#EBEFF3",  "token": "Token: Colors.Light.Card.BG-Primary 4", "usage": "Raised card background" }
+      },
+      "feedback": {
+        "error":      { "value": "#CC3929", "token": "Token: Colors.Light.Error",  "usage": "Error fill/text" },
+        "hover":      { "value": "#2C66DD33","token": "Token: Colors.Light.Hover", "usage": "Generic hover overlay" }
+      },
+      "shadow": {
+        "S": { "value": "#181C210A", "token": "Token: Colors.Light.Dropshadow.S" },
+        "M": { "value": "#181C210F", "token": "Token: Colors.Light.Dropshadow.M" },
+        "L": { "value": "#181C2114", "token": "Token: Colors.Light.Dropshadow.L" }
+      },
+      "tooltip":     { "value": "#252A32", "token": "Token: Colors.Light.Tooltip" },
+      "sideNavBg":   { "value": "#EBEFF3", "token": "Token: Colors.Light.sideNavBarBg" },
+      "sideNavHover":{ "value": "#E0E6F4", "token": "Token: Colors.Light.sideBarBgHover" }
+    },
+    "dark": {
+      "background": {
+        "default":  { "value": "#0C0E11", "token": "Token: Colors.Dark.Background.BG-Primary-Default",  "usage": "Main page/panel background" },
+        "grey":     { "value": "#07080A", "token": "Token: Colors.Dark.Background.BG-Primary-Grey",     "usage": "Off-dark contrast areas" },
+        "subtle":   { "value": "#181C21", "token": "Token: Colors.Dark.Background.BG-Primary-Subtle",   "usage": "Inset cards, tinted areas" },
+        "raised":   { "value": "#0C0E11", "token": "Token: Colors.Dark.Background.BG-Primary-Raised",   "usage": "Raised surface" }
+      },
+      "text": {
+        "primary":     { "value": "#FFFFFF",  "token": "Token: Colors.Dark.Text.Text Primary",        "usage": "Body text, headings" },
+        "description": { "value": "#556274",  "token": "Token: Colors.Dark.Text.Text Description",    "usage": "Secondary text, captions" },
+        "disabled":    { "value": "#556274",  "token": "Token: Colors.Dark.Text.Text Disabled",       "usage": "Disabled state text" },
+        "placeholder": { "value": "#C6CED9",  "token": "Token: Colors.Dark.Text.Text Placeholder",    "usage": "Input placeholder" },
+        "onAccent":    { "value": "#0C0E11",  "token": "Token: Colors.Dark.Text.Text On AccentColor", "usage": "Text on primary/accent fills" },
+        "link":        { "value": "#00A6FF",  "token": "Token: Colors.Dark.Text Link",                "usage": "Hyperlinks" },
+        "linkDisabled":{ "value": "#006499",  "token": "Token: Colors.Dark.Link Disabled",            "usage": "Disabled hyperlinks" }
+      },
+      "button": {
+        "fillPrimary":          { "value": "#2C66DD", "token": "Token: Colors.Dark.Button.Button Fill.Button Primary" },
+        "fillPrimaryDisabled":  { "value": "#495463", "token": "Token: Colors.Dark.Button.Button Fill.Primary Disabled" },
+        "fillSecondary":        { "value": "#181C21", "token": "Token: Colors.Dark.Button.Button Fill.Secondary" },
+        "fillSecondaryDisabled":{ "value": "#181C21", "token": "Token: Colors.Dark.Button.Button Fill.Secondary Disabled" },
+        "fillInput":            { "value": "#0C0E11", "token": "Token: Colors.Dark.Button.Button Fill.Input Fill" },
+        "fillAccentHover":      { "value": "#1E51B8", "token": "Token: Colors.Dark.Button.Button Fill.Accent Hover" },
+        "fillToggleOff":        { "value": "#556274", "token": "Token: Colors.Dark.Button.Button Fill.ON OFF" },
+        "fillToggleDisabled":   { "value": "#313842", "token": "Token: Colors.Dark.Button.Button Fill.ON OFF Disabled" },
+        "strokeSecondary":      { "value": "#C4C4C4", "token": "Token: Colors.Dark.Button.Button Stroke.Secondary" }
+      },
+      "stroke": {
+        "stroke1":  { "value": "#252A32", "token": "Token: Colors.Dark.Stroke.Stroke 1" },
+        "stroke2":  { "value": "#313842", "token": "Token: Colors.Dark.Stroke.Stroke 2" },
+        "stroke3":  { "value": "#3D4653", "token": "Token: Colors.Dark.Stroke.Stroke 3" },
+        "disabled": { "value": "#3D4653", "token": "Token: Colors.Dark.Stroke.Stroke Disabled" }
+      },
+      "card": {
+        "bgPrimary":  { "value": "#181C21", "token": "Token: Colors.Dark.Card.BG-Primary" },
+        "bgPrimary2": { "value": "#252A32", "token": "Token: Colors.Dark.Card.BG-Primary 2" },
+        "bgPrimary3": { "value": "#181C21", "token": "Token: Colors.Dark.Card.BG-Primary 3" },
+        "bgPrimary4": { "value": "#0C0E11", "token": "Token: Colors.Dark.Card.BG-Primary 4" }
+      },
+      "feedback": {
+        "error": { "value": "#CC3929", "token": "Token: Colors.Dark.Error" },
+        "hover": { "value": "#FFFFFF33","token": "Token: Colors.Dark.Hover" }
+      },
+      "tooltip":     { "value": "#DFE4EB", "token": "Token: Colors.Dark.Tooltip" },
+      "sideNavBg":   { "value": "#181C21", "token": "Token: Colors.Dark.sideNavBarBg" },
+      "sideNavHover":{ "value": "#E0E6F4", "token": "Token: Colors.Dark.sideBarBgHover" }
+    }
+  },
+
+  "spacing": {
+    "_note": "Base scale from Primitives.Spacing. All values are px strings.",
+    "1":  "1px",
+    "2":  "2px",
+    "4":  "4px",
+    "8":  "8px",
+    "12": "12px",
+    "16": "16px",
+    "20": "20px",
+    "24": "24px",
+    "32": "32px",
+    "40": "40px",
+    "radius": {
+      "XS":   "2px",
+      "S":    "4px",
+      "M":    "8px",
+      "L":    "12px",
+      "XL":   "16px",
+      "2XL":  "24px",
+      "3XL":  "32px",
+      "4XL":  "40px",
+      "ICON": "1px"
+    },
+    "padding": {
+      "XXXS": "2px",
+      "XXS":  "4px",
+      "XS":   "8px",
+      "S":    "12px",
+      "M":    "16px",
+      "L":    "24px",
+      "XL":   "32px",
+      "2XL":  "40px"
+    },
+    "gap": {
+      "xs": "2px",
+      "S":  "4px",
+      "M":  "8px",
+      "L":  "12px",
+      "XL": "12px"
+    },
+    "borderWidth": {
+      "M": "1px",
+      "L": "2px"
+    }
+  },
+
+  "borderRadius": {
+    "none": "0px",
+    "sm":   "4px",
+    "md":   "8px",
+    "lg":   "12px",
+    "xl":   "16px",
+    "2xl":  "24px",
+    "full": "9999px"
+  },
+
+  "border": {
+    "width": {
+      "none": "0px",
+      "sm":   "1px",
+      "md":   "2px",
+      "lg":   "4px"
+    },
+    "style": {
+      "solid":  "solid",
+      "dashed": "dashed",
+      "dotted": "dotted"
+    }
+  },
+
+  "shadow": {
+    "none": { "x": 0, "y": 0,  "blur": 0,  "spread": 0, "color": "#00000000" },
+    "sm":   { "x": 0, "y": 1,  "blur": 4,  "spread": 0, "color": "#181C210A", "usage": "Buttons, chips" },
+    "md":   { "x": 0, "y": 4,  "blur": 12, "spread": 0, "color": "#181C210F", "usage": "Cards, dropdowns" },
+    "lg":   { "x": 0, "y": 8,  "blur": 24, "spread": 0, "color": "#181C2114", "usage": "Modals, panels" },
+    "xl":   { "x": 0, "y": 16, "blur": 48, "spread": 0, "color": "#181C2120", "usage": "Popovers, command palettes" },
+    "inner":{ "x": 0, "y": 2,  "blur": 4,  "spread": 0, "color": "#181C2114", "inset": true, "usage": "Pressed states" }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "primary":   "Zoho Puvi",
+      "secondary": "Lato"
+    },
+    "fontWeight": {
+      "regular":  400,
+      "medium":   500,
+      "semibold": 600,
+      "bold":     700
+    },
+    "lineHeight": {
+      "tight":   1.2,
+      "snug":    1.3,
+      "normal":  1.5,
+      "relaxed": 1.7
+    },
+    "scale": {
+      "hero":       { "fontSize": "40px", "fontWeight": 700, "lineHeight": 1.2,  "letterSpacing": "-0.02em", "fontFamily": "Zoho Puvi" },
+      "page":       { "fontSize": "28px", "fontWeight": 700, "lineHeight": 1.3,  "letterSpacing": "-0.01em", "fontFamily": "Zoho Puvi" },
+      "section":    { "fontSize": "22px", "fontWeight": 700, "lineHeight": 1.3,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "subsection": { "fontSize": "18px", "fontWeight": 600, "lineHeight": 1.35, "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodyXl":     { "fontSize": "16px", "fontWeight": 400, "lineHeight": 1.5,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodyLg":     { "fontSize": "15px", "fontWeight": 400, "lineHeight": 1.5,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodyMd":     { "fontSize": "14px", "fontWeight": 400, "lineHeight": 1.5,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodySm":     { "fontSize": "13px", "fontWeight": 400, "lineHeight": 1.5,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodyXs":     { "fontSize": "12px", "fontWeight": 400, "lineHeight": 1.4,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "bodyXxs":    { "fontSize": "11px", "fontWeight": 500, "lineHeight": 1.4,  "letterSpacing": "0em",     "fontFamily": "Zoho Puvi" },
+      "captionLg":  { "fontSize": "12px", "fontWeight": 400, "lineHeight": 1.4,  "letterSpacing": "0.02em",  "fontFamily": "Zoho Puvi" },
+      "captionMd":  { "fontSize": "11px", "fontWeight": 400, "lineHeight": 1.4,  "letterSpacing": "0.02em",  "fontFamily": "Zoho Puvi" },
+      "captionSm":  { "fontSize": "10px", "fontWeight": 400, "lineHeight": 1.4,  "letterSpacing": "0.04em",  "fontFamily": "Zoho Puvi" },
+      "captionXs":  { "fontSize": "10px", "fontWeight": 600, "lineHeight": 1.3,  "letterSpacing": "0.08em",  "fontFamily": "Zoho Puvi" }
+    }
+  },
+
+  "sizing": {
+    "button":   { "heightSm": "28px", "heightMd": "36px", "heightLg": "44px", "minWidth": "64px",  "maxWidth": "320px" },
+    "input":    { "heightSm": "28px", "heightMd": "36px", "heightLg": "44px", "minWidth": "120px", "maxWidth": "480px" },
+    "icon":     { "xs": "12px", "sm": "16px", "md": "20px", "lg": "24px", "xl": "32px" },
+    "avatar":   { "xs": "20px", "sm": "24px", "md": "32px", "lg": "40px", "xl": "48px" },
+    "checkbox": { "sm": "14px", "md": "16px", "lg": "20px" },
+    "toggle":   { "widthSm": "28px", "widthMd": "36px", "heightSm": "16px", "heightMd": "20px" }
+  }
+}
