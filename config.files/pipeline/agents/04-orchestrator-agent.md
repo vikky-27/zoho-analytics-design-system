@@ -174,9 +174,12 @@ async function scanAllPages(searchTerm) {
 }
 ```
 
-#### Strategy 3 — Check `tokens/components/*.json` filenames
+#### Strategy 3 — Check `docs/COMPONENT-REGISTRY.md`
 
-If both strategies fail, check whether a config JSON exists for this component name. The file name = the component exists somewhere.
+If both strategies fail, read `docs/COMPONENT-REGISTRY.md`:
+- If status is `✅ Done` → the component was built previously. Re-run Strategy 1/2 with the aliases listed in the registry's Quick Reference table.
+- If status is `🔄 Partial` → config or doc is missing. Build the missing piece only.
+- If status is `⏳ Pending` → component has not been built yet. Proceed to custom build. After building, update the registry entry to `✅ Done` and fill in `figmaNodeId` and `variantKeys`.
 
 #### Match confidence rules
 

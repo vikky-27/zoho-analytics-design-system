@@ -83,8 +83,13 @@
       "fallback": "Run when strategy 1 returns 0 results or confidence < 70%"
     },
     "strategy3_localDocsCheck": {
-      "method": "Check tokens/components/*.json files for a matching component name",
-      "fallback": "Run when strategies 1 and 2 both fail"
+      "method": "Read docs/COMPONENT-REGISTRY.md — master component list with status (Done/Partial/Pending), aliases, variant axes, boolean and text properties for every component",
+      "fallback": "Run when strategies 1 and 2 both fail",
+      "statusActions": {
+        "Done":    "Component was previously built. Re-run strategies 1 and 2 using aliases from the registry Quick Reference table.",
+        "Partial": "Config or doc is missing. Build the missing piece only — do not rebuild what exists.",
+        "Pending": "Component has not been built yet. Proceed to custom build. After publish, update registry status to Done."
+      }
     },
     "confidenceThresholds": {
       "high": "Exact name match → use immediately",
