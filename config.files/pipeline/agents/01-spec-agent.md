@@ -30,6 +30,13 @@ Your only job is to take a raw component brief and produce a complete, validated
 
 > ⛔ **When you receive Vision Agent output with `mode: "multi-input-synthesis"`, skip Steps 2–4 below and use the `multiInputSynthesis` block directly.** The Vision Agent has already identified the variants, states, boolean properties, and per-variant styles. Your job is to validate, add any missing standard states, map tokens, and output the unified spec.
 
+> 🔒 **Property schema confirmation gate:** For multi-screenshot input, the Vision Agent must have already output a `PROPERTY SCHEMA CONFIRMATION` block AND the user must have replied `"confirmed"` before you receive control. If you do not see evidence of user confirmation in the conversation history, output:
+> ```
+> ⛔ BLOCKED — Property schema not confirmed.
+> Vision Agent must output PROPERTY SCHEMA CONFIRMATION and receive user reply "confirmed" before the Spec Agent builds the spec.
+> ```
+> Do not proceed until confirmed.
+
 ---
 
 ## Output Contract

@@ -1,0 +1,89 @@
+{
+  "_meta": {
+    "description": "Auto-generated component config for EmptyState. Built by Orchestrator Agent.",
+    "outputPath": "tokens/components/empty-state-config.json",
+    "generatedBy": "Orchestrator Agent",
+    "addedAt": "2026-04-20"
+  },
+
+  "component": {
+    "name": "EmptyState",
+    "figmaSource": {
+      "fileKey": "m2iOWX3I9aDI5kgyw4wCo0",
+      "componentId": "4675:1060",
+      "page": "🟠 - Components",
+      "pageId": "1500:1217",
+      "sectionId": "4675:1084"
+    },
+    "description": "Full-bleed empty state UI block. Shows when a list, table, or section has no data. Contains an illustration slot, heading, description, link action, and primary CTA — each independently toggleable via BOOLEAN properties.",
+    "tokenBindings": {
+      "componentBg":        "white (no token, transparent default)",
+      "primaryTextColor":   "ZA/Text/Text Primary        → VariableID:575:276",
+      "descriptionColor":   "ZA/Text/Text Description    → VariableID:575:277",
+      "linkColor":          "Text Link                   → VariableID:706:113",
+      "buttonFill":         "ZA/Button/Button Primary    → VariableID:577:38",
+      "buttonTextColor":    "Always White                → VariableID:808:968",
+      "illustrationCircle": "ZA/Background/BG-Primary-Subtle → VariableID:575:275"
+    }
+  },
+
+  "componentProperties": {
+    "boolean": [
+      { "key": "svg#4675:0",           "propName": "svg",           "default": true,  "controls": "illustration-slot visibility" },
+      { "key": "primaryText#4675:1",   "propName": "primaryText",   "default": true,  "controls": "primary-text visibility" },
+      { "key": "secondaryText#4675:2", "propName": "secondaryText", "default": true,  "controls": "secondary-text visibility" },
+      { "key": "linkBtn#4675:3",       "propName": "linkBtn",       "default": true,  "controls": "link-btn visibility" },
+      { "key": "primaryBtn#4675:4",    "propName": "primaryBtn",    "default": true,  "controls": "primary-btn visibility" }
+    ],
+    "text": [
+      { "key": "Title#4675:5",       "propName": "Title",       "default": "No items found",                                    "bindsTo": "primary-text.characters" },
+      { "key": "Description#4675:6", "propName": "Description", "default": "There are no items to display. Get started by adding one.", "bindsTo": "secondary-text.characters" },
+      { "key": "BtnLabel#4675:7",    "propName": "BtnLabel",    "default": "Add Item",                                          "bindsTo": "btn-text.characters" },
+      { "key": "LinkLabel#4675:8",   "propName": "LinkLabel",   "default": "How to configure?",                                 "bindsTo": "link-text.characters" }
+    ]
+  },
+
+  "layers": {
+    "illustration-slot": { "type": "FRAME", "size": "240×240", "clipsContent": false, "note": "Contains bg-circle (ELLIPSE), decorative dots, icon-area placeholder" },
+    "bg-circle":         { "type": "ELLIPSE", "size": "180×180", "fill": "VariableID:575:275 (BG-Primary-Subtle)" },
+    "icon-area":         { "type": "FRAME", "size": "80×80", "note": "Swappable illustration icon — replace with context-specific SVG" },
+    "text-area":         { "type": "FRAME", "layout": "VERTICAL, FILL width, CENTER aligned", "gap": "8px" },
+    "primary-text":      { "type": "TEXT", "fontSize": 16, "fontStyle": "Bold", "fill": "VariableID:575:276" },
+    "secondary-text":    { "type": "TEXT", "fontSize": 13, "fontStyle": "Regular", "fill": "VariableID:575:277" },
+    "actions-area":      { "type": "FRAME", "layout": "VERTICAL, FILL width, CENTER aligned", "gap": "12px" },
+    "link-btn":          { "type": "FRAME", "layout": "HORIZONTAL HUG", "fill": "none" },
+    "link-text":         { "type": "TEXT", "fontSize": 13, "decoration": "UNDERLINE", "fill": "VariableID:706:113" },
+    "primary-btn":       { "type": "FRAME", "layout": "HORIZONTAL HUG", "padding": "9px 20px", "radius": "4px", "fill": "VariableID:577:38" },
+    "btn-text":          { "type": "TEXT", "fontSize": 13, "fontStyle": "Bold", "fill": "VariableID:808:968" }
+  },
+
+  "layout": {
+    "direction": "VERTICAL",
+    "width": "640px (fixed)",
+    "height": "hug contents",
+    "paddingTop": "48px", "paddingBottom": "48px",
+    "paddingLeft": "40px", "paddingRight": "40px",
+    "itemSpacing": "24px",
+    "primaryAxisAlign": "CENTER",
+    "counterAxisAlign": "CENTER"
+  },
+
+  "usage": {
+    "variants": [
+      { "name": "Full",          "svg": true, "primaryText": true, "secondaryText": true, "linkBtn": true,  "primaryBtn": true  },
+      { "name": "No Actions",    "svg": true, "primaryText": true, "secondaryText": true, "linkBtn": false, "primaryBtn": false },
+      { "name": "Icon Only",     "svg": true, "primaryText": true, "secondaryText": false,"linkBtn": false, "primaryBtn": true  },
+      { "name": "Minimal",       "svg": true, "primaryText": true, "secondaryText": false,"linkBtn": false, "primaryBtn": false }
+    ],
+    "examples": [
+      { "context": "No Domains (Code Studio)", "Title": "No Domains configured",   "Description": "To improve security...", "BtnLabel": "Add Domain", "LinkLabel": "How to configure domain?" },
+      { "context": "No Archive Schedule",      "Title": "No archive schedule run", "Description": "The archive schedule has not yet been executed...", "primaryBtn": false, "linkBtn": false }
+    ]
+  },
+
+  "auditStatus": {
+    "tokenAudit": "PASS",
+    "notes": "All fills bound to Token: Colors variables. Illustration circle → BG-Primary-Subtle, texts → Text Primary/Description, link → Text Link, button → Button Primary/Always White.",
+    "runAt": "2026-04-20"
+  }
+}

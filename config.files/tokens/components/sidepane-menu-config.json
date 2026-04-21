@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "description": "Auto-generated component config for SidepaneMenu (full sidepane). Built by Orchestrator Agent.",
+    "outputPath": "tokens/components/sidepane-menu-config.json",
+    "generatedBy": "Orchestrator Agent — Step 11",
+    "sourceRef": "Figma node 4637:3753 (sidepane-menu frame)"
+  },
+
+  "component": {
+    "name": "SidepaneMenu",
+    "description": "Full 64×1068px navigation sidepane for Zoho Analytics. Contains: blue FAB (+) button, 10 nav items each with real SVG icon + label, Viewer toggle, and collapse arrow. Three interaction states: Default, Hover (Explorer hovered), Selected (Explorer active).",
+    "figmaSource": {
+      "fileKey": "m2iOWX3I9aDI5kgyw4wCo0",
+      "sourceFrames": {
+        "Default":  "3917:4030",
+        "Hover":    "3934:2567",
+        "Selected": "3934:2703"
+      },
+      "componentSetId": "4661:449",
+      "sectionId": "4661:450",
+      "pageUrl": "https://www.figma.com/design/m2iOWX3I9aDI5kgyw4wCo0/Design-System--Zoho-Analytics?node-id=4661-449"
+    },
+    "addedAt": "2026-04-20",
+    "tokenBindings": {
+      "componentBackground":    "semantic.light.background.grey → ZA/Background/BG-Primary-Grey → VariableID:575:274",
+      "fabBackground":          "semantic.light.button.fillPrimary → ZA/Button/Button Primary → VariableID:577:38",
+      "explorerHoverBg":        "semantic.light.sideNavHover → Side bar BG hove → VariableID:3934:2702 (preserved from source frame fill)",
+      "explorerSelectedBg":     "semantic.light.button.fillPrimary → #2C66DD (preserved from source frame fill)",
+      "explorerSelectedText":   "color.base.white → #FFFFFF (preserved from source frame fill)"
+    }
+  },
+
+  "variantAxes": [
+    {
+      "name": "State",
+      "values": ["Default", "Hover", "Selected"],
+      "default": "Default",
+      "description": "Which nav item, if any, is in the active/hover state (Explorer is the reference item)"
+    }
+  ],
+
+  "variants": [
+    {
+      "combo": { "State": "Default" },
+      "nodeId": "4661:65",
+      "sourceFrameId": "3917:4030",
+      "useCase": "Normal idle state — no item highlighted"
+    },
+    {
+      "combo": { "State": "Hover" },
+      "nodeId": "4661:193",
+      "sourceFrameId": "3934:2567",
+      "useCase": "User is hovering over the Explorer item"
+    },
+    {
+      "combo": { "State": "Selected" },
+      "nodeId": "4661:321",
+      "sourceFrameId": "3934:2703",
+      "useCase": "Explorer is the currently active section"
+    }
+  ],
+
+  "navItems": [
+    { "index": 1,  "name": "Explorer",     "icon": "Path 15652 (folder)",    "frameId": "3930:4334" },
+    { "index": 2,  "name": "Dashboard",    "icon": "Dashboard (4 squares)",   "frameId": "3930:4344" },
+    { "index": 3,  "name": "Reports",      "icon": "Report (chart)",           "frameId": "3930:4353" },
+    { "index": 4,  "name": "Data",         "icon": "Data (grid/table)",        "frameId": "3930:4367" },
+    { "index": 5,  "name": "Ask Zia",      "icon": "Zia-Logo-Blue 1024×1024", "frameId": "3930:4377" },
+    { "index": 6,  "name": "Data Sources", "icon": "Group 51 (connectors)",   "frameId": "3930:4384" },
+    { "index": 7,  "name": "Code Studio",  "icon": "Frame 2234 (brackets)",   "frameId": "3930:4396" },
+    { "index": 8,  "name": "Auto ML",      "icon": "Group 55180 (gears)",     "frameId": "3930:4409" },
+    { "index": 9,  "name": "Settings",     "icon": "Group 1416 (gear)",       "frameId": "3930:4423" },
+    { "index": 10, "name": "Trash",        "icon": "Group 1415 (trash bin)",  "frameId": "3930:4431" }
+  ],
+
+  "layout": {
+    "width":  "64px (fixed)",
+    "height": "1068px (fixed)",
+    "structure": [
+      { "zone": "FAB",        "y": "12px",   "height": "42px",  "description": "Blue (+) action button, 42×42px, border-radius 8px" },
+      { "zone": "Nav items",  "y": "60px",   "height": "640px", "description": "10 nav items, each 64×64px, stacked vertically" },
+      { "zone": "Viewer",     "y": "913px",  "height": "64px",  "description": "Viewer toggle switch + label" },
+      { "zone": "Collapse",   "y": "1004px", "height": "64px",  "description": "Collapse/expand arrow button" }
+    ]
+  },
+
+  "auditStatus": {
+    "tokenAudit": "WARN",
+    "tokenAuditNotes": "Component bg and FAB bound to Token: Colors variables. 16 hardcoded fills are from original Figma design's icon compositions and Viewer toggle section (not new violations). These are pre-existing design assets from source frames 3917:4030, 3934:2567, 3934:2703.",
+    "a11yCheck": "WARN",
+    "a11yNotes": "Default contrast 11.64:1 PASS. Hover contrast 15.45:1 PASS. Selected contrast 3.39:1 — below WCAG AA 4.5 for small text (Zoho brand decision: #2C66DD + white). Touch target 64×1068px OK.",
+    "runAt": "2026-04-20"
+  }
+}

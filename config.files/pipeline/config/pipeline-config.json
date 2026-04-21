@@ -22,8 +22,8 @@
       { "step": 8,  "name": "Token audit (G2)",          "tool": "token-audit.js",              "blockOnFail": true  },
       { "step": 9,  "name": "Screenshot + verify (G1)",  "tool": "verify-rubric.json",          "blockOnFail": false },
       { "step": 10, "name": "A11y check (G3)",           "tool": "figma_execute",               "blockOnFail": false },
-      { "step": 11, "name": "Human review + publish",    "tool": "human-approval",              "blockOnFail": true  },
-      { "step": 12, "name": "Generate component files",  "tool": "agent",                       "blockOnFail": false }
+      { "step": 11, "name": "Human review + publish",               "tool": "human-approval",              "blockOnFail": true  },
+      { "step": 12, "name": "Generate component files + notify",   "tool": "agent",                       "blockOnFail": false }
     ]
   },
 
@@ -157,6 +157,25 @@
     "C10_layerNaming":      ["Rename each layer via node.name = '...' per naming convention in component spec."]
   },
 
+  "tokenVariableNotification": {
+    "description": "Track variable state before and after build. Always notify the user of any new tokens or variables created, even if the list is empty.",
+    "snapshotTiming": "Take preBuildSnapshot at the END of STEP 6 (pre-flight), before any STEP 7 MCP write calls.",
+    "diffTiming": "Compute diff immediately after figma_publish completes in STEP 12.",
+    "snapshotCode": "const _preCollections = await figma.variables.getLocalVariableCollectionsAsync(); const _preVarIds = new Set(); for (const c of _preCollections) { const vars = await figma.variables.getVariablesByCollectionIdAsync(c.id); vars.forEach(v => _preVarIds.add(v.id)); }",
+    "diffCode": "const _postCollections = await figma.variables.getLocalVariableCollectionsAsync(); const newVars = []; for (const coll of _postCollections) { const vars = await figma.variables.getVariablesByCollectionIdAsync(coll.id); for (const v of vars) { if (!_preVarIds.has(v.id)) { const modeId = Object.keys(v.valuesByMode)[0]; newVars.push({ collection: coll.name, name: v.name, value: v.valuesByMode[modeId], type: v.resolvedType }); } } }",
+    "outputTemplate": "NEW TOKENS / VARIABLES ADDED\n─────────────────────────────────────────────────\nCollection:  {collectionName}\nNew variables:\n  • {variableName} — {resolvedValue} ({type})\n\nThese have been added to your Figma file.\nUpdate tokens/figma-variable-bindings.json if these are permanent.",
+    "outputWhenEmpty": "NEW TOKENS / VARIABLES ADDED\n─────────────────────────────────────────────────\nNo new variables created.",
+    "rule": "Always output this block at the end of STEP 12 — even when the list is empty."
+  },
+
+  "propertySchemaGate": {
+    "description": "For multi-screenshot input, the Vision Agent must output a PROPERTY SCHEMA CONFIRMATION block and receive user reply 'confirmed' before the Spec Agent or Orchestrator proceeds. This single confirmation eliminates all property-discovery iterations.",
+    "trigger": "inputMode = 'multi-input-synthesis'",
+    "confirmationKeyword": "confirmed",
+    "blockingRule": "Do NOT advance to Spec Agent validation or Orchestrator STEP 4 (plan generation) until the user has replied 'confirmed' to the PROPERTY SCHEMA CONFIRMATION block.",
+    "sourceRef": "pipeline/config/property-extraction-rules.json → humanConfirmationRequired"
+  },
+
   "publishRules": {
     "requireHumanApproval": true,
     "neverAutoPublish": true,
@@ -193,6 +212,6 @@
 
   "agentSystemPrompt": {
     "description": "Inject this context when initialising any agent. Replace {{TOKEN_JSON}} with resolved-tokens.json contents.",
-    "prompt": "You are a Figma component agent for Zoho Analytics Design System.\n\nCRITICAL RULES:\n1. Colors MUST be Figma variable bindings — never raw hex or {r,g,b}. Use boundPaint(variableId) from figma-variable-bindings.json.\n2. Run 5 pre-flight checks (PF1–PF5) before any Figma MCP write call.\n3. On verification failure, apply SURGICAL fixes only — re-run only the MCP operations for failed checks. Do not rebuild the full component.\n4. If the same check fails twice in a row, escalate that check to human. Do not spend a 3rd attempt on it.\n5. Maximum 3 total iterations. Use them wisely — pre-flight failures do not count.\n6. Output plan → wait for 'proceed' → execute → audit → verify → fix (surgical) → verify again.\n\nTOKEN DATA:\n{{TOKEN_JSON}}"
+    "prompt": "You are a Figma component agent for Zoho Analytics Design System.\n\nCRITICAL RULES:\n1. Colors MUST be Figma variable bindings — never raw hex or {r,g,b}. Use boundPaint(variableId) from figma-variable-bindings.json.\n2. Run 5 pre-flight checks (PF1–PF5) before any Figma MCP write call. Snapshot variable IDs at end of pre-flight.\n3. On verification failure, apply SURGICAL fixes only — re-run only the MCP operations for failed checks. Do not rebuild the full component.\n4. If the same check fails twice in a row, escalate that check to human. Do not spend a 3rd attempt on it.\n5. Maximum 3 total iterations. Use them wisely — pre-flight failures do not count.\n6. Output plan → wait for 'proceed' → execute → audit → verify → fix (surgical) → verify again.\n7. For multi-screenshot input: Vision Agent outputs PROPERTY SCHEMA CONFIRMATION → user replies 'confirmed' → THEN spec/orchestrator proceed. Do not build before confirmed.\n8. After publish: diff variable state against pre-build snapshot. Always output NEW TOKENS / VARIABLES ADDED block.\n\nTOKEN DATA:\n{{TOKEN_JSON}}"
   }
 }

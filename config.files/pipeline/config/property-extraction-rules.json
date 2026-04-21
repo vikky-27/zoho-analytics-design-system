@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "description": "Rules for extracting a complete component property schema from screenshots or Figma context BEFORE any Figma MCP build call. Used by Vision Agent (multi-input synthesis) and Spec Agent (property validation). Purpose: eliminate iterations caused by discovering properties mid-build.",
+    "mandatoryRule": "For 2+ screenshots: property schema MUST be 100% complete and human-confirmed before the Orchestrator runs Step 7 (Figma MCP execution). Do not start building until every visual difference between screenshots has been assigned to a VARIANT value, BOOLEAN toggle, or TEXT property."
+  },
+
+  "propertyTypes": {
+    "VARIANT": {
+      "definition": "A named axis where each value produces a structurally or visually distinct component version.",
+      "examples": ["State (Default/Hover/Disabled/Error)", "Primary (Yes/No)", "Size (sm/md/lg)", "Type (Success/Error/Warning)"],
+      "figmaAPI": "cs.addComponentProperty('State', 'VARIANT', 'Default') on the COMPONENT_SET node",
+      "signals": [
+        "Fill color changes completely between screenshots",
+        "Stroke color or weight changes",
+        "Icon changes (different icon, not just visibility)",
+        "Structural layout changes (icon appears/disappears changes layout, not just visibility)",
+        "Background color changes"
+      ]
+    },
+    "BOOLEAN": {
+      "definition": "A toggle that shows or hides a child layer. Does not change fills, layout direction, or text content.",
+      "examples": ["Show Icon", "Show Badge", "Show Checkbox", "Show Actions"],
+      "figmaAPI": "cs.addComponentProperty('Show Icon', 'BOOLEAN', true) — then bind child layer: layer.componentPropertyReferences = { visible: cs.componentPropertyDefinitions['Show Icon#id'].id }",
+      "signals": [
+        "An element (icon, badge, tag, button) is present in some screenshots and absent in others",
+        "Hiding the element does not change the layout direction or parent frame size",
+        "The element is fully contained — removing it just collapses that slot"
+      ]
+    },
+    "TEXT": {
+      "definition": "Exposes a text layer's content as an editable property in the Figma properties panel.",
+      "examples": ["Label", "Placeholder", "Description", "Error Message", "Badge Count"],
+      "figmaAPI": "cs.addComponentProperty('Label', 'TEXT', 'Default Label') — then bind: textLayer.componentPropertyReferences = { characters: cs.componentPropertyDefinitions['Label#id'].id }",
+      "signals": [
+        "Any visible text that would change per use (button labels, input placeholder, notification message)",
+        "Every distinct text string that a designer would want to edit without touching layers"
+      ]
+    }
+  },
+
+  "classificationRules": {
+    "rule1": "When the same element is present in all screenshots but with different fills → VARIANT axis (not BOOLEAN)",
+    "rule2": "When an element exists in some screenshots and not others → BOOLEAN toggle",
+    "rule3": "When layout direction or structure changes between screenshots → VARIANT axis",
+    "rule4": "When only content (text string) differs → TEXT property",
+    "rule5": "When opacity drops below 50% AND colors are washed out AND no interaction → Disabled state (VARIANT)",
+    "rule6": "When fill is darker than default AND no structural change → Hover state (VARIANT)",
+    "rule7": "Minimum required TEXT properties for every component: at least one TEXT prop for each distinct user-facing label",
+    "ambiguity": "When unsure if something is VARIANT vs BOOLEAN: if hiding it changes the overall frame size via auto-layout = BOOLEAN. If removing it would break the layout = VARIANT."
+  },
+
+  "mandatoryOutputPerComponent": {
+    "description": "Vision Agent MUST output all three blocks for multi-input synthesis. Spec Agent MUST validate all three before building.",
+    "requiredBlocks": [
+      "variantAxes — every axis with every value + evidence screenshot",
+      "booleanProperties — every toggleable element + evidence",
+      "textProperties — every user-facing text string"
+    ],
+    "completenessCheck": "For every visual difference between any two screenshots, there MUST be an entry in variantAxes, booleanProperties, or textProperties. If a difference is unaccounted for, output it in unmatchedDifferences and ask the user before proceeding."
+  },
+
+  "humanConfirmationRequired": {
+    "trigger": "After Vision Agent outputs the property schema and BEFORE Spec Agent finalises the spec",
+    "output": "PROPERTY SCHEMA CONFIRMATION\n─────────────────────────────────────────\nVariant axes:      {list}\nBoolean toggles:   {list}\nText properties:   {list}\nTotal variants:    {count} (= {axis1 values} × {axis2 values} × ...)\n\nReply 'confirmed' to proceed with this schema.\nReply 'edit' to change any property before building starts.",
+    "rule": "Do NOT advance to Spec Agent or Orchestrator until user replies 'confirmed'. This single confirmation prevents all property-discovery iterations."
+  },
+
+  "multiQueryLibrarySearch": {
+    "description": "Rules for searching the Design System library for existing components. Always run all 3 strategies before declaring no match.",
+    "strategy1_publishedLibrary": {
+      "method": "figma_get_library_components with 3+ query variations",
+      "queryVariants": [
+        "Exact name: 'Button'",
+        "Common abbreviation: 'Btn'",
+        "Category: 'CTA', 'Action', 'Primary'",
+        "Partial: first 4 chars 'Butt'"
+      ],
+      "matchRule": "Any result with name similarity > 70% to the target component name = match"
+    },
+    "strategy2_localPageScan": {
+      "method": "Scan all pages of the current file via figma.root.children",
+      "code": "for (const page of figma.root.children) { await figma.setCurrentPageAsync(page); const found = page.findAll(n => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name.toLowerCase().includes(searchTerm.toLowerCase())); if (found.length) return found; }",
+      "fallback": "Run when strategy 1 returns 0 results or confidence < 70%"
+    },
+    "strategy3_localDocsCheck": {
+      "method": "Check tokens/components/*.json files for a matching component name",
+      "fallback": "Run when strategies 1 and 2 both fail"
+    },
+    "confidenceThresholds": {
+      "high": "Exact name match → use immediately",
+      "medium": "Name similarity 70–99% → show match to user, ask to confirm",
+      "low": "Name similarity < 70% → no match, proceed to custom build"
+    },
+    "knownComponentNames": {
+      "Button":        ["Button", "Btn", "CTA", "Action Button", "Primary Button"],
+      "Input":         ["Input", "Text Field", "TextField", "Text Input", "Form Input"],
+      "Toggle":        ["Toggle", "Switch", "Toggle Button"],
+      "Checkbox":      ["Check box", "Checkbox", "Check Box"],
+      "RadioButton":   ["Radio", "Radio Button", "Radio Group"],
+      "LinkText":      ["Link", "Link Text", "Text Link", "Hyperlink"],
+      "Notification":  ["Notification", "Alert", "Banner", "Toast", "Message"],
+      "Card":          ["Card", "Panel", "Surface", "Container"],
+      "Modal":         ["Modal", "Dialog", "Overlay", "Popup"],
+      "Badge":         ["Badge", "Tag", "Chip", "Label"],
+      "Dropdown":      ["Dropdown", "Select", "Combobox", "Menu"],
+      "ListView":      ["List", "List View", "ListView", "Table", "Data Table"]
+    }
+  },
+
+  "figmaLinkMeasurementRules": {
+    "description": "When input is a Figma link, ALL values must come from figma_get_design_context — never from visual estimation.",
+    "mandatory": [
+      "paddingTop, paddingRight, paddingBottom, paddingLeft — exact px from context",
+      "itemSpacing — exact px from context",
+      "cornerRadius — exact px from context",
+      "fills[].color — exact RGB from context (convert to hex, look up in figma-variable-bindings.json)",
+      "fontName.family and fontSize — exact from context",
+      "width and height — exact from context",
+      "layoutMode — exact from context (HORIZONTAL / VERTICAL / NONE)"
+    ],
+    "rule": "Any value that can be read from figma_get_design_context MUST be used as-is. Visual estimation is only permitted for values absent from the context response.",
+    "confidenceLevel": "All Figma-link-sourced values are high confidence. Never downgrade them."
+  },
+
+  "tokenVariableNotification": {
+    "description": "Before and after Figma MCP execution, track variable state and notify user of any new tokens or variables created.",
+    "step_before": "Before Step 7 (Figma MCP execution): snapshot all existing variable collection IDs via figma.variables.getLocalVariableCollectionsAsync(). Store as preBuildSnapshot.",
+    "step_after": "After Step 11 (publish): call figma.variables.getLocalVariableCollectionsAsync() again. Diff against preBuildSnapshot.",
+    "output": "NEW TOKENS / VARIABLES ADDED\n─────────────────────────────\nCollection:  {collectionName}\nNew variables:\n  • {variableName} — {resolvedValue} ({type})\n  • ...\n\nThese have been added to your Figma file.\nUpdate tokens/figma-variable-bindings.json if these are permanent.",
+    "rule": "Always output this block even if the list is empty (output 'No new variables created')."
+  }
+}

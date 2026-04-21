@@ -2,8 +2,8 @@
 
 > **Role:** Analyze reference screenshots or Figma design context and extract style properties mapped to token names.  
 > **Receives from:** User (screenshot / Figma URL / `figma_get_design_context` output)  
-> **Outputs to:** Orchestrator Agent `(04)`  
-> **Source refs:** `tokens/resolved-tokens.json` · `pipeline/config/component-spec-schema.json`
+> **Outputs to:** Spec Agent `(01)` → Orchestrator Agent `(04)`  
+> **Source refs:** `tokens/resolved-tokens.json` · `pipeline/config/component-spec-schema.json` · `pipeline/config/property-extraction-rules.json`
 
 ---
 
@@ -56,6 +56,8 @@ Output from `figma_get_design_context({ nodeId: "..." })`. Contains:
 A URL like `https://www.figma.com/design/...?node-id=XXXX-YYYY`.  
 Extract the node ID, call `figma_get_design_context`, then process as Type B.
 
+> ⛔ **Figma link = exact values only. Never estimate.** Every spacing, color, radius, and font value MUST come from `figma_get_design_context` output. Visual estimation is forbidden when exact data is available. See `property-extraction-rules.json → figmaLinkMeasurementRules`.
+
 ---
 
 ## Output Contract — Single Screenshot (Extraction Mode)
@@ -103,7 +105,11 @@ Extract the node ID, call `figma_get_design_context`, then process as Type B.
 
 ## Output Contract — Multiple Screenshots (Multi-Input Synthesis Mode)
 
-When 2 or more screenshots are provided, output this expanded contract. The Spec Agent uses `multiInputSynthesis` directly to build the unified `COMPONENT_SET`.
+When 2 or more screenshots are provided, output this expanded contract **and then pause for human confirmation before passing to Spec Agent.** The Spec Agent uses `multiInputSynthesis` directly to build the unified `COMPONENT_SET`.
+
+> ⛔ **MANDATORY: After outputting this JSON, immediately output the PROPERTY SCHEMA CONFIRMATION block (see bottom of this section). Do NOT pass to Spec Agent until user replies `confirmed`.**
+
+**Completeness rule:** Every visual difference between ANY two screenshots MUST be accounted for in `variantAxes`, `booleanProperties`, or `textProperties`. If any difference is unexplained, add it to `unmatchedDifferences` and ask the user.
 
 ```json
 {
@@ -156,9 +162,23 @@ When 2 or more screenshots are provided, output this expanded contract. The Spec
       "booleanProperties": [
         {
           "propertyName": "Show Icon",
-          "evidence":     "Screenshot 1 has icon on left. Screenshot 3 has no icon. Makes it a toggle."
+          "defaultValue": true,
+          "evidence":     "Screenshot 1 has icon on left. Screenshot 3 has no icon. Makes it a toggle.",
+          "figmaAPI":     "cs.addComponentProperty('Show Icon', 'BOOLEAN', true)"
         }
       ],
+
+      "textProperties": [
+        {
+          "propertyName": "Label",
+          "defaultValue": "Button",
+          "layerName":    "label--button-text",
+          "evidence":     "Button text changes per use — must be exposed as TEXT property.",
+          "figmaAPI":     "cs.addComponentProperty('Label', 'TEXT', 'Button')"
+        }
+      ],
+
+      "unmatchedDifferences": [],
 
       "sharedProperties": {
         "borderRadius": { "tokenPath": "borderRadius.md",           "confidence": "high" },
@@ -192,32 +212,103 @@ When 2 or more screenshots are provided, output this expanded contract. The Spec
 }
 ```
 
+### After outputting the JSON — output this confirmation block immediately:
+
+```
+PROPERTY SCHEMA CONFIRMATION
+─────────────────────────────────────────────────────
+Component:       {ComponentName}
+Screenshots:     {n} images analysed
+
+Variant axes:
+  • {AxisName} → {value1} / {value2} / {value3}
+  • {AxisName} → {value1} / {value2}
+
+Boolean toggles:
+  • Show {ElementName}  (default: {true/false})
+  • Show {ElementName}  (default: {true/false})
+
+Text properties:
+  • {PropName}  (default: "{defaultText}")
+  • {PropName}  (default: "{defaultText}")
+
+Total variant frames:   {axis1_count} × {axis2_count} = {total}
+Build target:           1 COMPONENT_SET  ·  {total} COMPONENT children
+                        ⚠ No duplicate components. All {n} screenshots
+                          are unified into this one COMPONENT_SET.
+
+Pairwise differences covered:
+  {n_pairs} pairs checked  ·  {n_assigned} differences assigned
+  Unmatched: {0 or list}
+
+─────────────────────────────────────────────────────
+Reply "confirmed"  → pass to Spec Agent and start building
+Reply "edit"       → specify what to change before building
+```
+
+> **Do NOT proceed to Spec Agent until user replies `confirmed`.**  
+> This one confirmation prevents all property-discovery iterations.
+
 ---
 
 ## Multi-Input Synthesis Process (Mode: Multi-Input Synthesis)
 
 > Run this process when 2 or more screenshots are provided. Do NOT run Extraction mode on each image separately.
 
+> ⛔ **OUTPUT RULE: One COMPONENT_SET. Zero duplicates.** No matter how many screenshots are given, the result is always a single `COMPONENT_SET` containing every variant/state combination as individual `COMPONENT` children — never separate component sets, never one component per screenshot.
+
 ### Synthesis Step 1 — Identify the single component type across all screenshots
 
 Look at ALL images together. Confirm they show the same component type (Button, Input, Card, etc.). If different component types are present, ask the user for clarification before continuing.
 
-### Synthesis Step 2 — Map each screenshot to a variant/state combination
+### Synthesis Step 2 — Build the exhaustive pairwise differences table
+
+Compare **every pair** of screenshots against each other. For N screenshots, that is N×(N-1)/2 pairs. Write out the full table before assigning any properties — this prevents missing differences.
+
+```
+PAIRWISE DIFFERENCES TABLE
+──────────────────────────────────────────────────────
+  Pair         | Property changed        | Value A       | Value B
+  ─────────────|─────────────────────────|───────────────|─────────────
+  S1 vs S2     | fill colour             | blue #2C66DD  | white #FFF
+  S1 vs S2     | border                  | none          | 1px #C6CED9
+  S1 vs S3     | fill colour             | blue #2C66DD  | grey #DFE4EB
+  S1 vs S3     | text colour             | white #FFF    | placeholder grey
+  S2 vs S3     | fill colour             | white #FFF    | grey #DFE4EB
+  S1 vs S2     | icon                    | present       | absent
+  ─────────────|─────────────────────────|───────────────|─────────────
+```
+
+Every row in this table MUST be assigned to a `variantAxes`, `booleanProperties`, or `textProperties` entry before proceeding. Rows that cannot be assigned → `unmatchedDifferences`.
+
+### Synthesis Step 2b — Map each screenshot to a variant/state combination
 
 For each screenshot:
-1. Identify any **visual change** from the other screenshots (fill colour, border colour, opacity, stroke, label, icon presence).
-2. Map visual signals to variant axes:
+1. Use the pairwise table to determine which axis values this screenshot represents.
+2. Apply classification rules from `property-extraction-rules.json → classificationRules`:
 
-| Visual difference | Axis interpretation |
+| Visual difference | Assign to |
 |---|---|
-| Different fill colour (blue vs white) | Different `Primary` or `Variant` axis value |
-| Darker/lighter version of same hue | Different `State` (Default vs Hover vs Disabled) |
-| Element appears / disappears | Boolean property (`Show Icon`, `Show Label`, etc.) |
-| Size difference | Different `Size` axis value (sm / md / lg) |
-| Text content difference | Different `Label` text — NOT a new variant |
-| Red / green accent instead of blue | Different `Type` (danger / success / etc.) |
+| Fill colour changes completely between screenshots | VARIANT axis |
+| Darker/lighter version of same hue | State = Hover or Disabled |
+| Opacity < 50% and washed-out colours | State = Disabled |
+| Element appears in some screenshots, absent in others | BOOLEAN property |
+| Size (height/width) changes | Size axis (sm / md / lg) |
+| Text content differs, same layout | TEXT property — NOT a new variant |
+| Different icon (not just visible/hidden) | VARIANT axis |
+| Red/green/yellow accent instead of blue | Type axis (danger/success/warning) |
 
 3. Assign each screenshot: `{ "assignedVariant": "...", "assignedState": "...", "assignedProperties": { ... } }`
+
+### Synthesis Step 2c — Infer standard states not shown in screenshots
+
+Even if no screenshot shows Hover or Disabled, **always add them** to the State axis. They are mandatory in the Zoho Analytics Design System.
+
+| State not shown | How to infer |
+|---|---|
+| `Hover` | Slightly darker background + optional stroke change from Default |
+| `Disabled` | Opacity reduced, text → `semantic.light.text.placeholder`, fill → `semantic.light.background.subtle` |
+| `Focus` | Add only if component is a form input (Input, Checkbox, Radio, Toggle) |
 
 ### Synthesis Step 3 — Extract shared (constant) properties
 
@@ -255,9 +346,36 @@ Add `"Disabled"` as a standard value for `State` even if no screenshot shows it 
 - Naming: `ComponentName/{Axis1}/{Axis2}` — use the axis names discovered above.
 - Showcase grid: rows = first axis, cols = second axis.
 
-### Synthesis Step 8 — Output the full multi-input synthesis block
+### Synthesis Step 8 — Completeness check (mandatory before outputting)
 
-Output the `multiInputSynthesis` contract shown above. The Spec Agent will consume this directly.
+Before writing the final JSON, run this checklist:
+
+```
+COMPLETENESS CHECK
+──────────────────────────────────────────────────────────────
+[ ] Every row in the pairwise differences table is assigned to
+    variantAxes, booleanProperties, or textProperties.
+
+[ ] unmatchedDifferences list is empty OR each item has a
+    question for the user.
+
+[ ] State axis includes at minimum: Default, Hover, Disabled.
+
+[ ] Every visible text string that a designer might edit is
+    in textProperties.
+
+[ ] Total variants = product of all axis value counts.
+    Example: Primary(2) × State(3) = 6 variants. Confirm this.
+
+[ ] No screenshot has been left unassigned in screenshotMap.
+──────────────────────────────────────────────────────────────
+```
+
+If any box is unchecked → fix it before outputting. Do not output a partial synthesis.
+
+### Synthesis Step 9 — Output the full multi-input synthesis block
+
+Output the `multiInputSynthesis` contract shown above, followed immediately by the PROPERTY SCHEMA CONFIRMATION block. The Spec Agent will consume `multiInputSynthesis` directly — but only after user confirms.
 
 ---
 

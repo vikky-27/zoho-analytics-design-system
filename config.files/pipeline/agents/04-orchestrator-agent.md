@@ -89,10 +89,18 @@ Check the Spec Agent output for `inputMode: "multi-input-synthesis"`.
 
 **If `inputMode = "multi-input-synthesis"`:**
 - The spec contains `variantAxes`, `booleanProperties`, and `perVariantStyles`.
-- You MUST build **one single `COMPONENT_SET`** that encompasses all variants identified by the Vision Agent.
-- Do NOT create separate components per screenshot.
-- The total number of variants = product of all axis value counts (e.g. Primary 2 × State 3 = 6 variants).
-- Boolean properties are COMPONENT_SET-level boolean properties — not separate variants.
+- You MUST build **one single `COMPONENT_SET`** that encompasses ALL variants identified by the Vision Agent.
+- ⛔ **NEVER create separate components per screenshot. NEVER create duplicate component sets.**
+- Total variant frames = product of all axis value counts. Verify this before building:
+  ```
+  Axis 1: {axisName} — {n1} values
+  Axis 2: {axisName} — {n2} values
+  Expected total: {n1 × n2} COMPONENT children in 1 COMPONENT_SET
+  ```
+  If the math doesn't match your plan → stop and recalculate before proceeding.
+- Boolean properties live at COMPONENT_SET level — they are NOT separate variants.
+- TEXT properties live at COMPONENT_SET level — bind each to the matching text layer across ALL variant children.
+- The showcase frame shows the full grid: all {axis1 values} as rows × all {axis2 values} as columns, so every possibility is visible at a glance.
 
 **Reference mapping from multi-input spec to Figma COMPONENT_SET:**
 
@@ -114,22 +122,69 @@ spec.naming                      →  component.name for each variant (e.g. "But
 
 ---
 
-### STEP 3 — Check existing library components `blockOnFail: true`
+### STEP 3 — Multi-strategy library search `blockOnFail: true`
 
-Before generating any plan, verify whether this component already exists in the Design System library:
+Run ALL 3 strategies before declaring no match. A single query is not enough — component names vary across files.
+
+#### Strategy 1 — Published library (run 3+ queries)
 
 ```js
-figma_get_library_components({
-  libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0",
-  query: "{ComponentName}"
-})
+// Try multiple query terms — never just one
+const queries = [
+  "{ExactName}",           // "Checkbox"
+  "{CommonVariant}",       // "Check box"
+  "{Abbreviation}",        // "CB", "Chk"
+  "{Category}"             // "Form Control"
+];
+
+for (const q of queries) {
+  const results = await figma_get_library_components({
+    libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0",
+    query: q,
+    limit: 25
+  });
+  if (results.length > 0) break;  // stop on first match
+}
 ```
+
+Known name variants to try (from `property-extraction-rules.json → multiQueryLibrarySearch → knownComponentNames`):
+
+| Target | Try these queries |
+|---|---|
+| Button | Button, Btn, CTA, Action Button |
+| Checkbox | Checkbox, Check box, Check Box |
+| Toggle | Toggle, Switch, Toggle Button |
+| Input | Input, Text Field, Form Input |
+| Radio | Radio, Radio Button |
+| Notification | Notification, Alert, Banner |
+
+#### Strategy 2 — Local page scan (mandatory fallback)
+
+```js
+async function scanAllPages(searchTerm) {
+  for (const page of figma.root.children) {
+    await figma.setCurrentPageAsync(page);
+    const found = page.findAll(n =>
+      (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
+      n.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    if (found.length > 0) return found;
+  }
+  return [];
+}
+```
+
+#### Strategy 3 — Check `tokens/components/*.json` filenames
+
+If both strategies fail, check whether a config JSON exists for this component name. The file name = the component exists somewhere.
+
+#### Match confidence rules
 
 | Result | Action |
 |---|---|
-| Component found with matching variants | Use instantiation path — list all variant keys in the plan |
-| Component found but missing some variants | Instantiate what exists, note missing variants in the plan |
-| Component not found | Proceed to build from scratch — all values MUST use `resolved-tokens.json` paths |
+| Exact name match | Use immediately — list all variant keys in plan |
+| Name similarity > 70% | Show match to user → ask `"Found {name} — use this? (yes/no)"` |
+| Name similarity < 70% | No match — build from scratch (all values from `resolved-tokens.json`) |
 
 ---
 
@@ -238,6 +293,23 @@ Run all 5 checks **before** touching the canvas. Failures here do **NOT** consum
 | PF5 | Canvas space clear | Take screenshot. Move placement coordinates if overlap detected. |
 
 Only proceed to Step 7 when all `blockExecution: true` checks pass.
+
+#### Variable snapshot (mandatory — runs once before STEP 7)
+
+Before executing any MCP write calls, capture a baseline of all variable collections:
+
+```js
+// Store before STEP 7 begins — used for diff after publish
+const _preCollections = await figma.variables.getLocalVariableCollectionsAsync();
+const _preVarIds = new Set();
+for (const coll of _preCollections) {
+  const vars = await figma.variables.getVariablesByCollectionIdAsync(coll.id);
+  vars.forEach(v => _preVarIds.add(v.id));
+}
+const _preCollectionIds = new Set(_preCollections.map(c => c.id));
+```
+
+This snapshot is compared after publish (STEP 12) to detect any new variables created during the build.
 
 ---
 
@@ -465,7 +537,7 @@ Review spec and token mappings, then reply with corrections.
 
 ---
 
-### STEP 9 — A11y check `blockOnFail: false`
+### STEP 10 — A11y check `blockOnFail: false`
 
 Run three checks via `figma_execute`:
 
@@ -488,7 +560,7 @@ Report results. Flag failures.
 
 ---
 
-### STEP 10 — Human review and publish `blockOnFail: true`
+### STEP 11 — Human review and publish `blockOnFail: true`
 
 Output the final review summary:
 
@@ -515,7 +587,7 @@ Reply "reject"   → send back for corrections (include feedback)
 
 ---
 
-### STEP 11 — Generate component files `blockOnFail: false`
+### STEP 12 — Generate component files + token notification `blockOnFail: false`
 
 After successful publish, automatically generate two files for the new component and output them for the user to save.
 
@@ -561,6 +633,53 @@ Save these files to register the component in the system.
 ```
 
 Then update `tokens/README.md` — add the new component to the component summary table.
+
+#### Token / variable change notification (mandatory — always output, even if empty)
+
+After publishing, diff the current variable state against the pre-build snapshot captured in STEP 6:
+
+```js
+// Run AFTER figma_publish succeeds
+const _postCollections = await figma.variables.getLocalVariableCollectionsAsync();
+const newVariables = [];
+
+for (const coll of _postCollections) {
+  const vars = await figma.variables.getVariablesByCollectionIdAsync(coll.id);
+  for (const v of vars) {
+    if (!_preVarIds.has(v.id)) {
+      const modeId = Object.keys(v.valuesByMode)[0];
+      newVariables.push({
+        collection: coll.name,
+        name:       v.name,
+        value:      v.valuesByMode[modeId],
+        type:       v.resolvedType
+      });
+    }
+  }
+}
+```
+
+Then output this block **always** (even when the list is empty):
+
+```
+NEW TOKENS / VARIABLES ADDED
+─────────────────────────────────────────────────
+Collection:  {collectionName}
+New variables:
+  • {variableName} — {resolvedValue} ({type})
+  • ...
+
+These have been added to your Figma file.
+Update tokens/figma-variable-bindings.json if these are permanent.
+```
+
+If no new variables were created, output:
+
+```
+NEW TOKENS / VARIABLES ADDED
+─────────────────────────────────────────────────
+No new variables created.
+```
 
 ---
 
