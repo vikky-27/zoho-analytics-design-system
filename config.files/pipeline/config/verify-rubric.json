@@ -27,8 +27,8 @@
       "id": "C2",
       "name": "Padding Correct",
       "weight": 2,
-      "passIf": "Padding matches resolved spacing token (±4px tolerance)",
-      "failIf": "Content touches edges or padding is clearly wrong",
+      "passIf": "Padding matches resolved spacing token (±2px tolerance)",
+      "failIf": "Padding differs from spec by more than 2px on any side, or content touches edges",
       "fixActions": [
         "frame.paddingTop    = {rules.paddingTop};",
         "frame.paddingRight  = {rules.paddingRight};",
@@ -42,8 +42,8 @@
       "id": "C3",
       "name": "Gap Between Children",
       "weight": 1,
-      "passIf": "Children have consistent spacing matching the resolved gap token",
-      "failIf": "Children jammed together or inconsistent spacing",
+      "passIf": "Children have consistent spacing matching the resolved gap token (±2px tolerance)",
+      "failIf": "Gap differs from spec by more than 2px, or children are jammed together",
       "fixActions": [
         "frame.itemSpacing = {rules.itemSpacing};  // single property"
       ],
@@ -57,10 +57,12 @@
       "failIf": "Any variant missing, duplicated, or incorrectly named",
       "fixActions": [
         "// Create ONLY the missing variant frames — do not recreate existing ones",
-        "const missing = figma.createFrame();",
+        "// Always copy layout from the State=Default variant (or first variant if no Default exists)",
+        "const defaultVariant = cs.children.find(c => c.name.includes('State=Default') || c.name.includes('Default'));",
+        "const missing = defaultVariant.clone();",
         "missing.name = '{ComponentName}/{variant}/{size}/{state}';",
-        "// Copy layoutMode, padding, itemSpacing from an existing sibling frame",
-        "// Then rebind fills for the correct state"
+        "// Rebind fills ONLY for the properties that differ in this state",
+        "missing.fills = [await boundPaint(correctVariableId)];"
       ],
       "fixHint": "Add only what is missing. Copy layout from a sibling. Never touch passing variants."
     },
@@ -87,9 +89,16 @@
       "passIf": "Text is visible, legible, correct size, uses Zoho Puvi or Lato",
       "failIf": "Text invisible, clipped, wrong font, or too small",
       "fixActions": [
+        "// Load font first — always",
         "await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Regular' });",
-        "textNode.fontName = { family: 'Zoho Puvi', style: 'Regular' };",
-        "textNode.fontSize = 14;  // bodyMd — or use correct scale value from spec",
+        "await figma.loadFontAsync({ family: 'Zoho Puvi', style: 'Medium' });",
+        "// Get exact fontSize + fontWeight from spec.tokens.typography (resolved value)",
+        "// e.g. spec.tokens.typography = 'typography.scale.bodyMd'",
+        "// resolved-tokens.json: typography.scale.bodyMd → { fontSize: 14, lineHeight: 20, fontWeight: 'Regular' }",
+        "const typo = resolvedTokens[spec.tokens.typography];  // look up at runtime",
+        "textNode.fontName = { family: 'Zoho Puvi', style: typo.fontWeight || 'Regular' };",
+        "textNode.fontSize = typo.fontSize;      // exact value — never hardcode 14",
+        "textNode.lineHeight = { value: typo.lineHeight, unit: 'PIXELS' };",
         "textNode.textAutoResize = 'WIDTH_AND_HEIGHT';"
       ],
       "fixHint": "Always loadFontAsync first. Font name 'Zoho Puvi' must match exactly. Do not change fills or layout."

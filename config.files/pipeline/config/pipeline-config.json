@@ -121,7 +121,12 @@
       "reason": "No point screenshotting a component that still has hardcoded values — the screenshot won't match the spec.",
       "tool": "pipeline/scripts/token-audit.js",
       "passCriteria": "Zero FAIL issues. WARN issues (unbound font size) are logged but do not block.",
-      "onFail": "Fix all FAIL issues using the quickFix snippets in the audit report. Do NOT increment iteration counter — token audit fixes are infrastructure, not design decisions."
+      "onFail": "Fix all FAIL issues using the quickFix snippets in the audit report. Do NOT increment iteration counter — token audit fixes are infrastructure, not design decisions.",
+      "maxRetries": 2,
+      "onMaxRetriesExceeded": {
+        "action": "ESCALATE_TO_HUMAN",
+        "output": "TOKEN AUDIT ESCALATE — Component {componentName} failed token audit after 2 fix attempts.\nPersistent issues:\n{failList}\nAll Figma MCP execution stopped. Check figma-variable-bindings.json for missing variable IDs."
+      }
     },
     "G1_VisualDiff": {
       "step": 9,
@@ -133,6 +138,7 @@
     "G3_A11yCheck": {
       "step": 10,
       "runAfter": "G1 passes or warns",
+      "skipWhen": "G1 score < 12 — no point checking contrast and targets on a component with major visual failures. Fix visual issues first.",
       "checks": [
         "Contrast ratio ≥ 4.5:1 for normal text, ≥ 3:1 for large text (≥18px or 14px bold)",
         "Interactive targets: width ≥ 44px, height ≥ 28px minimum",

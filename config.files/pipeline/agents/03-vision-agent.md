@@ -96,10 +96,29 @@ Extract the node ID, call `figma_get_design_context`, then process as Type B.
       "size":     "md"
     },
     "unmatchedProperties": [],
-    "notes": "Any observations that could not be mapped to tokens"
+    "notes": "Any observations that could not be mapped to tokens",
+
+    "measurements": {
+      "_description": "Exact px values extracted from design context or estimated from screenshot. Orchestrator uses these directly at build time — no runtime token resolution needed.",
+      "padding":      { "top": 8,  "right": 12, "bottom": 8,  "left": 12 },
+      "gap":          { "px": 8 },
+      "borderRadius": { "px": 8 },
+      "height":       { "px": 32 },
+      "width":        { "px": null, "sizing": "hug" },
+      "fontSize":     { "px": 14 },
+      "lineHeight":   { "px": 20 },
+      "strokeWeight": { "px": 1 },
+      "shadow":       { "x": 0, "y": 1, "blur": 3, "spread": 0, "opacity": 0.12 },
+      "disabledOpacity": 0.4,
+      "iconSize":     { "px": 16 },
+      "source":       "figma_context | screenshot_estimate",
+      "confidence":   "high | medium | low"
+    }
   }
 }
 ```
+
+> **Measurements block is mandatory.** For Figma link inputs, every value must come from `figma_get_design_context` (source = "figma_context", confidence = "high"). For screenshots, estimate from visual proportions (source = "screenshot_estimate", confidence = "medium" or "low"). The Orchestrator uses these `px` values directly in STEP 7 — this eliminates the token-resolution gap that causes spacing mismatches.
 
 ---
 
@@ -206,7 +225,29 @@ When 2 or more screenshots are provided, output this expanded contract **and the
       },
 
       "unmatchedObservations": [],
-      "notes": "Screenshot 3 has no icon slot — suggested as boolean property Show Icon."
+      "notes": "Screenshot 3 has no icon slot — suggested as boolean property Show Icon.",
+
+      "measurements": {
+        "_description": "Shared exact px values from the reference screenshots. Used by Orchestrator in STEP 7 to set properties — no guessing.",
+        "padding":         { "top": 8, "right": 12, "bottom": 8, "left": 12 },
+        "gap":             { "px": 8 },
+        "borderRadius":    { "px": 8 },
+        "height":          { "px": 32 },
+        "fontSize":        { "px": 14 },
+        "lineHeight":      { "px": 20 },
+        "strokeWeight":    { "px": 1 },
+        "disabledOpacity": 0.4,
+        "iconSize":        { "px": 16 },
+        "source":          "screenshot_estimate",
+        "confidence":      "medium"
+      },
+
+      "groundTruth": {
+        "_description": "Reference screenshot identity. Orchestrator stores this so STEP 9 verification compares against the same image.",
+        "screenshotCount": 3,
+        "primaryReference": "screenshot-1.png (Default state)",
+        "verifyAgainst": "All screenshots — each variant is checked against its assigned reference image."
+      }
     }
   }
 }

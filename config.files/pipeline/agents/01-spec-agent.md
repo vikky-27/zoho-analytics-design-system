@@ -110,14 +110,18 @@ figma_get_library_components({ libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0", query: 
 
 For each visual property, find the best matching token in `resolved-tokens.json`:
 
-| Property | Token namespace |
-|---|---|
-| Background fills | `semantic.light.*` paths |
-| Text colors | `semantic.light.text.*` |
-| Border colors | `semantic.light.stroke.*` |
-| Corner radius | `borderRadius.*` |
-| Shadow | `shadow.*` |
-| Sizing | `sizing.*` |
+| Property | Token namespace | Notes |
+|---|---|---|
+| Background fills | `semantic.light.*` | Always include dark variant |
+| Text colors | `semantic.light.text.*` | Always include dark variant |
+| Border colors | `semantic.light.stroke.*` | — |
+| Corner radius | `borderRadius.*` | — |
+| Shadow | `shadow.*` | **Mandatory** — use `shadow.none` if no shadow |
+| Sizing | `sizing.*` | — |
+| **Stroke weight** | `border.width.*` | **Mandatory** — use `border.width.sm` (1px) if bordered |
+| **Opacity** | number 0–1 | **Mandatory for Disabled state** — always specify |
+| **Typography** | `typography.scale.*` | Capture the full scale token (e.g. `typography.scale.bodyMd`). The resolved value includes `fontSize`, `lineHeight`, `fontWeight` — Orchestrator uses exact values at build time. |
+| **Exact dimensions** | px numbers | When input is Figma link: capture `width`, `height`, `minWidth`, `minHeight` from `figma_get_design_context` as `spec.exactDimensions`. Never estimate. |
 
 - Always provide both light and dark variants where available (`backgroundDark`, `textDark`).
 - **Never use raw hex values.** If no exact match exists, use the closest semantic token and flag it.
@@ -185,6 +189,11 @@ Check every item before setting `status: VALID`:
 - [ ] `autolayout` block uses alias format `{spacing.X}` — not raw numbers
 - [ ] `showcaseLayout` block is present with `rows`, `cols`, and `frameName`
 - [ ] **`textProperties` array is present** — every user-facing text node is listed with `name`, `layerName`, `default`, and `description`
+- [ ] `tokens.shadow` is set — never omit (use `shadow.none` if no shadow)
+- [ ] `tokens.strokeWeight` is set when component has a border
+- [ ] `tokens.disabledOpacity` is set for the Disabled state (typically `0.4`)
+- [ ] `tokens.typography` references a full scale token (e.g. `typography.scale.bodyMd`)
+- [ ] If `booleanProperties` includes `Show Icon`: spec must include `iconSpec.name`, `iconSpec.sizePx`, `iconSpec.colorToken`
 - [ ] If input was multi-screenshot: `variantAxes`, `booleanProperties`, and `perVariantStyles` are present in spec
 
 If any check fails → `status: INVALID`, list all errors, stop.

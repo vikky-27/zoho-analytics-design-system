@@ -279,7 +279,8 @@ Reply "cancel"   → abort the pipeline
 ```
 
 > **Do not make any Figma MCP call until the user replies `"proceed"`.**  
-> On `"edit"`: apply changes to the plan, re-output the updated plan, wait for `"proceed"`.
+> On `"edit"`: apply changes to the plan, re-output the updated plan, wait for `"proceed"`.  
+> **Confirmation reminder:** If no reply within 2 conversation turns, re-output the plan summary (not the full plan) with: `"Awaiting your go-ahead — reply 'proceed', 'edit', or 'cancel'."`
 
 ---
 
@@ -332,7 +333,36 @@ Execute each call in plan order. Log `✓ Step N complete — {description}` bet
 | **TEXT properties mandatory** | Every user-facing text node MUST be exposed as a TEXT component property. Read `textProperties` from `auto-layout-rules.json` for the component and apply them all. See pattern below. |
 | **Text via setProperties()** | Never edit child text nodes on instances directly. |
 | **Include C10 inline** | Rename all layers per naming convention during this step — before the first verify. |
-| **Clean up on error** | If any call fails, `node.remove()` all partial artifacts before retrying. |
+| **Incremental build** | Build the `State=Default` (base) variant first. Verify it alone (quick visual check — no rubric). Only after base passes: clone it for all other variants and apply per-variant fills. |
+| **Clone, don't rebuild** | All non-default variants are `defaultVariant.clone()` — then rebind only the fills/strokes that differ for that state. Never create from scratch. |
+| **Cleanup on any MCP error** | If any figma_execute call throws, immediately run `node.remove()` on all nodes created in this step before retrying. Log removed node IDs. |
+
+#### Incremental build order (MANDATORY — follow this sequence every time)
+
+```
+Phase 1 — Base variant only
+  1. Create the Default/base COMPONENT with full layout:
+     layoutMode, padding, gap, cornerRadius, height, fills, text layers.
+  2. Quick visual sanity check: does it look right at a glance?
+     (No rubric yet — just confirm structure is correct before cloning.)
+  3. If base looks wrong → fix it now. Costs zero iterations.
+
+Phase 2 — Clone for all other variants
+  4. For each remaining variant combo:
+     const variant = baseComponent.clone();
+     variant.name = 'ComponentName/Primary=No,State=Hover';
+     // Rebind ONLY the properties that differ (fills, strokes, opacity)
+     variant.fills = [await boundPaint(variantSpecificVariableId)];
+     // Layout, padding, gap, radius — do NOT touch, they came from the base
+
+Phase 3 — Combine + shared properties
+  5. figma.combineAsVariants([baseComponent, ...clones], figma.currentPage);
+  6. Add BOOLEAN and TEXT properties at COMPONENT_SET level.
+```
+
+**Why this order matters:** Fixing a wrong base costs 0 iterations. Fixing 6 wrong clones costs 1 iteration. Always get the base right first.
+
+---
 
 #### TEXT Property binding pattern (MANDATORY for every component)
 
@@ -481,7 +511,9 @@ Token audit fixes do **NOT** count as iterations — they are infrastructure, no
 |---|---|
 | `PASS` | Proceed to Step 9. |
 | `WARN` | Log warnings. Proceed to Step 9. |
-| `FAIL` | Fix every FAIL using the quickFix below. Re-run audit. Repeat until PASS. **No iteration consumed.** |
+| `FAIL` | Fix every FAIL using the quickFix below. Re-run audit. **Max 2 audit retries** — if still failing after attempt 2, output TOKEN AUDIT ESCALATE block and stop. |
+
+> **Token audit retry limit:** If audit FAILs after 2 fix attempts, escalate to human with the exact failing node IDs and the hex values that have no variable match. Do not spend a 3rd attempt.
 
 **Quick fix for each audit failure type:**
 
@@ -496,8 +528,15 @@ Token audit fixes do **NOT** count as iterations — they are infrastructure, no
 
 ### STEP 9 — Screenshot + visual verify G1 `blockOnFail: false`
 
-Call `figma_capture_screenshot`. Pass to Vision Agent:  
-**`"Verify against spec — run verify-rubric.json checks C1–C10."`**
+Call `figma_capture_screenshot`. Pass to Vision Agent with:  
+**`"Verify against spec AND ground truth reference — run verify-rubric.json checks C1–C10."`**
+
+Include in the Vision Agent call:
+- The current screenshot (from `figma_capture_screenshot`)
+- The `measurements` block from Vision Agent's earlier output (exact px values as targets)
+- The `groundTruth` block (which reference screenshot each variant maps to)
+
+The Vision Agent uses `measurements.px` values as the pass/fail target for C2, C3, C6, C8, C9 — not just "does it look close enough."
 
 | Score | Status | Action |
 |---|---|---|
@@ -541,6 +580,8 @@ Review spec and token mappings, then reply with corrections.
 ---
 
 ### STEP 10 — A11y check `blockOnFail: false`
+
+> **Skip condition:** If STEP 9 score was < 12 (FAIL), skip this step entirely. Output `"A11y skipped — visual verify failed (score {n}/16). Fix visual issues first."` and proceed to STEP 11.
 
 Run three checks via `figma_execute`:
 
@@ -587,6 +628,15 @@ Reply "reject"   → send back for corrections (include feedback)
 
 > **Wait for explicit `"publish"` before calling any publish tool.**  
 > On `"reject"`: re-enter the pipeline at the step indicated by the feedback.
+
+**Publish retry (max 2):** If `figma_publish` fails, retry once automatically after a brief pause. If it fails a second time, output:
+```
+PUBLISH FAILED — 2 attempts made. Manual publish required.
+Open the Figma file → Assets panel → right-click component → Publish to library.
+```
+Do not block the pipeline — still run STEP 12 to generate component files.
+
+**Confirmation reminder:** If the user does not reply within 2 conversation turns, re-output the `READY FOR REVIEW` block with a one-line reminder: `"Awaiting your review — reply 'publish' or 'reject'."`
 
 ---
 
