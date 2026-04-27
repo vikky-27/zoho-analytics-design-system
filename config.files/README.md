@@ -12,7 +12,7 @@
 config.files/
 ├── pipeline/                ← AI agent pipeline (system prompts + config + scripts)
 │   ├── README.md            ← Pipeline flow, agent chain, quick-start
-│   ├── agents/              ← 4 specialized agent system prompts (ordered)
+│   ├── agents/              ← 5 specialized agent system prompts (ordered 00–04)
 │   ├── config/              ← Runtime config (pipeline rules, spec schema, rubric)
 │   └── scripts/             ← Figma console scripts (run via figma_execute)
 │
@@ -25,8 +25,14 @@ config.files/
 │   ├── foundations/         ← Token layer docs (colors, spacing, typography)
 │   └── components/          ← Component usage docs (button, input, card, etc.)
 │
+├── codebase/                ← Production repo (READ ONLY — reference for Code Agent)
+│   ├── zohoanalytics/       ← Main Zoho Analytics source (components, SCSS, JS)
+│   └── zohoanalyticsclient/ ← Client-side companion repo
+│
 └── allCollectionTokens.json ← Raw Figma collection export (reference data)
 ```
+
+> ⚠️ **`codebase/` is READ ONLY.** The Code Agent (00) reads these files to extract exact component props, variant values, and measurements. Never write or modify files inside `codebase/`.
 
 ---
 
@@ -62,16 +68,19 @@ The Orchestrator Agent outputs a full plan and waits for `"proceed"` before any 
 Brief (text / screenshot / Figma link)
         │
         ▼
-  [01] Spec Agent ──────────────── validates brief → component spec JSON
+  [00] Code Agent ──────────────── reads codebase/ (READ ONLY) → exact props/variants/measurements
+        │
+        ▼
+  [01] Spec Agent ──────────────── validates brief → component spec JSON (Code Agent = top priority)
         │
         ▼
   [02] Token Resolver Agent ─────── resolves token paths → hex/px/Figma RGB
-        │
+        │                            (uses Code Agent exact measurements directly)
         ▼
-  [03] Vision Agent (optional) ──── reference image → style observations
-        │
+  [03] Vision Agent (optional) ──── reference screenshots → colors/shadows only
+        │                            (skips structure when Code Agent ran)
         ▼
-  [04] Orchestrator Agent ───────── merges all → PLAN → proceed → MCP → audit → verify → publish
+  [04] Orchestrator Agent ───────── STEP 0 gate → merges all → PLAN → proceed → MCP → audit → verify → publish
 ```
 
-See [pipeline/README.md](pipeline/README.md) for the full 10-step execution flow.
+See [pipeline/README.md](pipeline/README.md) for the full 13-step execution flow.

@@ -294,17 +294,25 @@ Examples:
 ```
 Screenshots provided (2+)
 │
-└─ Vision Agent → Multi-Input Synthesis mode
-    │  Outputs: variantAxes, booleanProperties, perVariantStyles, sharedProperties
+└─ Code Agent (00) ← RUNS FIRST (reads codebase/)
+    │  Outputs: exact variantAxes, booleanProperties, textProperties, measurements
+    │  Source: production get attrs() — ground truth, no estimation
     │
-    └─ Spec Agent → Fast Path (consume synthesis directly)
-        │  Outputs: unified spec with all axes and styles
+    └─ Vision Agent (03) → Multi-Input Synthesis mode
+        │  Code Agent present? → only extracts colors/shadows per variant (skips structure)
+        │  No Code Agent?      → full synthesis: variantAxes, booleanProperties, perVariantStyles
+        │  Outputs: perVariantStyles, sharedProperties (colors + shadows)
         │
-        └─ Orchestrator → Build ONE COMPONENT_SET
-            │  Creates all variant combos with cartesian product of axes
-            │  Applies perVariantStyles per combo via setBoundVariableForPaint()
-            │  Adds booleanProperties at COMPONENT_SET level
-            └─ Single showcase frame: rows=Axis1, cols=Axis2
+        └─ Spec Agent (01) → Fast Path
+            │  Merges: structure from Code Agent + colors from Vision Agent
+            │  Outputs: unified spec with all axes and styles
+            │
+            └─ Orchestrator (04) → STEP 0 connectivity gate → Build ONE COMPONENT_SET
+                │  Creates all variant combos with cartesian product of axes
+                │  Measurements: from Code Agent exactMeasurements (height, padding, gap, radius)
+                │  Applies perVariantStyles per combo via setBoundVariableForPaint()
+                │  Adds booleanProperties at COMPONENT_SET level
+                └─ Single showcase frame: rows=Axis1, cols=Axis2
 ```
 
 ---
@@ -314,17 +322,25 @@ Screenshots provided (2+)
 ```
 You receive a design to implement
 │
-├─ STEP 0 (MANDATORY for ALL paths below)
-│   └─ Search Design System library FIRST — see "⛔ STOP — Search Before You Create" above
+├─ ALWAYS FIRST — Code Agent (00)
+│   └─ Run 00-code-agent.md: reads codebase/zohoanalytics/ to extract exact component props
+│       Output: variantAxes, booleanProperties, textProperties, measurements
+│       If component found → use output as ground truth for structure
+│       If not found → non-blocking, continue with other inputs
+│
+├─ ALWAYS SECOND — Search Design System library
+│   └─ See "⛔ STOP — Search Before You Create" above
 │
 ├─ Figma Link provided?
 │   └─ → Follow Section 3 (Figma Link Workflow)
 │
 ├─ Screenshot / image provided?
 │   └─ → Follow Section 4 (Screenshot Workflow)
+│       Code Agent ran? → Vision Agent extracts colors only
+│       No Code Agent?  → Vision Agent does full synthesis
 │
 └─ Description only (text)?
-    └─ → Search library → match to component → follow Section 5
+    └─ → Code Agent output + library search → match to component → follow Section 5
 ```
 
 **The mandatory pre-flight check (run before writing any creation code):**

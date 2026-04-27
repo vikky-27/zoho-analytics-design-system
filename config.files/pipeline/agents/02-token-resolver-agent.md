@@ -1,7 +1,7 @@
 # 02 — Token Resolver Agent
 
 > **Role:** Take a validated component spec and resolve every token path to its final hex/px value.  
-> **Receives from:** Spec Agent `(01)`  
+> **Receives from:** Code Agent `(00)` (exact measurements, optional) + Spec Agent `(01)`  
 > **Outputs to:** Orchestrator Agent `(04)`  
 > **Source refs:** `tokens/resolved-tokens.json`
 
@@ -90,6 +90,27 @@ All token references in the spec are dot-path strings:
 ### Step 1 — Load resolved-tokens.json
 Read the full contents of `tokens/resolved-tokens.json`. This is your **only source of truth**.
 
+### Step 1b — Check for Code Agent exact measurements (run before Step 2)
+
+If `codeAgent.status === "COMPLETE"` and `codeAgent.measurements` is present:
+
+```
+Code Agent provided exact measurements — use these values directly.
+DO NOT resolve px values from token paths for these fields:
+
+  height:       {codeAgent.measurements.height}px  ← use as-is, source: production code
+  padding:      {codeAgent.measurements.paddingH}px
+  borderRadius: {codeAgent.measurements.borderRadius}px
+  gap:          {codeAgent.measurements.gap}px
+```
+
+These values come from `get attrs()` in the production codebase — they are ground truth.  
+Only resolve token paths for **color** fields (`background`, `text`, `borderColor`, `shadow`).
+
+If `codeAgent.status !== "COMPLETE"` — proceed to Step 2 normally and resolve all fields.
+
+---
+
 ### Step 2 — Walk every token field in the spec
 Resolve each field in `spec.tokens` and `spec.autolayout`:
 - `background`, `backgroundDark`
@@ -97,6 +118,8 @@ Resolve each field in `spec.tokens` and `spec.autolayout`:
 - `borderRadius`, `border`, `borderColor`, `borderColorDark`
 - `shadow`, `minWidth`, `height`
 - `autolayout.padding`, `autolayout.paddingVertical`, `autolayout.gap`
+
+> **Note:** Skip px fields already provided by Code Agent (Step 1b) — do not overwrite them with token-resolved values.
 
 ### Step 3 — Resolve each path
 For a path like `"semantic.light.button.fillPrimary"`:

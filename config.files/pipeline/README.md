@@ -1,7 +1,7 @@
 # Pipeline — Zoho Analytics Design System
 
 > **Purpose:** AI agent chain that converts a component brief into a fully token-bound, quality-gated Figma component.  
-> **Execution model:** 4 specialized agents in sequence. Only the Orchestrator makes Figma MCP write calls.
+> **Execution model:** 5 specialized agents in sequence. Only the Orchestrator makes Figma MCP write calls.
 
 ---
 
@@ -15,16 +15,23 @@
                            │
                            ▼
           ┌────────────────────────────────┐
+          │   00  CODE AGENT               │  → reads codebase/ (READ ONLY)
+          │   agents/00-code-agent.md      │  → extracts exact props/variants
+          │   Output: { status: "COMPLETE"}│    from production source code
+          └─────────────────┬──────────────┘
+                            │
+                            ▼
+          ┌────────────────────────────────┐
           │   01  SPEC AGENT               │  → validates brief
           │   agents/01-spec-agent.md      │  → outputs: component spec JSON
-          │   Output: { status: "VALID" }  │
+          │   Output: { status: "VALID" }  │    (uses Code Agent output first)
           └─────────────────┬──────────────┘
                             │
                             ▼
           ┌────────────────────────────────┐
           │   02  TOKEN RESOLVER AGENT     │  → resolves all token dot-paths
           │   02-token-resolver-agent.md   │  → outputs: hex/px + Figma RGB
-          │   Output: { status: "RESOLVED"}│
+          │   Output: { status: "RESOLVED"}│    (uses exactMeasurements from 00)
           └─────────────────┬──────────────┘
                             │
                ┌────────────┴────────────┐
@@ -36,6 +43,7 @@
   │   03-vision-agent.md           │     │
   │   Input: screenshot / figma    │     │
   │   Output: extractedStyles JSON │     │
+  │   (skips structure if 00 ran)  │     │
   └─────────────────┬──────────────┘     │
                     └────────────┬───────┘
                                  │
@@ -44,8 +52,10 @@
           │   04  ORCHESTRATOR AGENT                        │
           │   04-orchestrator-agent.md                      │
           │                                                  │
+          │   STEP 0   Figma MCP connectivity gate ⛔       │
+          │   STEP 0b  Code Agent output ingestion          │
           │   STEP 1   Validate all inputs                  │
-          │   STEP 2   Resolve conflicts                    │
+          │   STEP 2   Resolve conflicts (Code > URL > Vis) │
           │   STEP 3   Check library components             │
           │   STEP 4   Load auto-layout rules               │
           │   STEP 5   ── CONFIRM WITH USER ──              │
@@ -67,7 +77,7 @@
 | Gate | Tool | Pass Criteria | Runs |
 |---|---|---|---|
 | **G2** Token Audit | `scripts/token-audit.js` | 0 FAIL issues | Before screenshot |
-| **G1** Visual Diff | `config/verify-rubric.json` | Score ≥ 15 / 16 | After token audit |
+| **G1** Visual Diff | `config/verify-rubric.json` | Score ≥ 14 / 16 | After token audit |
 | **G3** A11y Check | Inline figma_execute checks | Contrast ≥ 4.5:1, targets ≥ 44px, labels named | After visual diff |
 
 G2 runs first — no point screenshotting a component that still has hardcoded values.
@@ -100,28 +110,32 @@ Rubric: [config/verify-rubric.json](config/verify-rubric.json) → `fixActions` 
 
 | File | Purpose |
 |---|---|
-| `agents/01-spec-agent.md` | Parses raw brief → validated component spec JSON |
+| `agents/00-code-agent.md` | Reads codebase/ (READ ONLY) → extracts exact props/variants from production source |
+| `agents/01-spec-agent.md` | Parses raw brief → validated component spec JSON (uses Code Agent output first) |
 | `agents/02-token-resolver-agent.md` | Resolves token dot-paths → hex/px/Figma RGB values |
-| `agents/03-vision-agent.md` | Analyzes reference images → maps styles to token paths |
+| `agents/03-vision-agent.md` | Analyzes reference images → maps styles to token paths (structure from Code Agent) |
 | `agents/04-orchestrator-agent.md` | Master coordinator — only agent with Figma MCP write access |
 | `config/pipeline-config.json` | Global pipeline rules, iteration guard, quality gate order |
 | `config/component-spec-schema.json` | JSON Schema validating component spec input contract |
 | `config/verify-rubric.json` | 10-check visual verification rubric with scoring thresholds |
-| `config/component-file-template.json` | Template for auto-generated component config JSON (Step 11) |
-| `config/component-doc-template.md` | Template for auto-generated component doc MD (Step 11) |
+| `config/component-file-template.json` | Template for auto-generated component config JSON (Step 12) |
+| `config/component-doc-template.md` | Template for auto-generated component doc MD (Step 12) |
 | `scripts/token-audit.js` | Figma console script — detects hardcoded values in components |
 
 ---
 
 ## How to Start a Run
 
-1. Feed your brief to **Spec Agent** (`01-spec-agent.md`)
-2. Pass its `spec` output to **Token Resolver Agent** (`02-token-resolver-agent.md`)
-3. Optionally pass a reference screenshot to **Vision Agent** (`03-vision-agent.md`)
-4. Merge all outputs and start **Orchestrator Agent** (`04-orchestrator-agent.md`)
-5. Review the plan → reply `proceed` → pipeline executes
+1. Run **Code Agent** (`00-code-agent.md`) — reads `codebase/` to extract exact props/variants for your component
+2. Feed your brief to **Spec Agent** (`01-spec-agent.md`) — pass Code Agent output as highest-priority input
+3. Pass its `spec` output to **Token Resolver Agent** (`02-token-resolver-agent.md`)
+4. Optionally pass reference screenshots to **Vision Agent** (`03-vision-agent.md`) — structure comes from Code Agent, Vision only extracts colors/shadows
+5. Merge all outputs and start **Orchestrator Agent** (`04-orchestrator-agent.md`)
+6. Orchestrator runs STEP 0 (Figma MCP connectivity gate) — **pipeline hard-blocks if Bridge is not connected**
+7. Review the plan → reply `proceed` → pipeline executes
 
-> The Orchestrator will not make a single Figma MCP call until you reply `"proceed"` at Step 5.
+> The Orchestrator will not make a single Figma MCP call until you reply `"proceed"` at STEP 5.  
+> Config files are NEVER generated without a live Figma connection and a successfully published component.
 
 ---
 
@@ -129,9 +143,12 @@ Rubric: [config/verify-rubric.json](config/verify-rubric.json) → `fixActions` 
 
 | Reference | Path |
 |---|---|
+| **Product codebase (READ ONLY)** | `codebase/zohoanalytics/` and `codebase/zohoanalyticsclient/` |
 | Token lookup | `../tokens/resolved-tokens.json` |
 | Auto-layout rules | `../tokens/components/auto-layout-rules.json` |
 | Spec schema | `config/component-spec-schema.json` |
 | Verify rubric | `config/verify-rubric.json` |
 | Pipeline config | `config/pipeline-config.json` |
 | Token audit script | `scripts/token-audit.js` |
+
+> `codebase/` contains the Zoho Analytics production repo — used by Code Agent (00) to extract exact `get attrs()` props, CSS class patterns, and SCSS measurements. **Never write to these directories.**

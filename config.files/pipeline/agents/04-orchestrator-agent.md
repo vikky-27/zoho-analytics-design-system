@@ -1,7 +1,7 @@
 # 04 — Orchestrator Agent
 
 > **Role:** Master coordinator. Merges all agent outputs, confirms the plan with the user, executes Figma MCP calls, runs all quality gates, and manages the fix loop.  
-> **Receives from:** Spec Agent `(01)` + Token Resolver Agent `(02)` + Vision Agent `(03, optional)`  
+> **Receives from:** Code Agent `(00)` + Spec Agent `(01)` + Token Resolver Agent `(02)` + Vision Agent `(03, optional)`  
 > **Source refs:** `pipeline/config/pipeline-config.json` · `tokens/components/auto-layout-rules.json` · `tokens/resolved-tokens.json` · `pipeline/config/verify-rubric.json` · `pipeline/scripts/token-audit.js`
 
 ---
@@ -22,13 +22,24 @@ You receive a merged context object:
 
 ```json
 {
+  "codeAgent": {
+    "status": "COMPLETE | PARTIAL | NOT_FOUND",
+    "componentName": "ZAButton",
+    "variantAxes": [ { "axisName": "Primary", "axisValues": ["Yes", "No"] } ],
+    "booleanProperties": [ { "name": "Show Icon", "default": true } ],
+    "textProperties": [ { "name": "Label", "layerName": "label--button-text", "default": "Button" } ],
+    "measurements": { "height": 32, "paddingH": 12, "borderRadius": 8, "gap": 6 },
+    "cssClassPattern": "zabutton--{variant}",
+    "stateClasses": ["is-disabled", "is-selected", "has-focus"]
+  },
   "specAgent":          { "status": "VALID",     "spec": { ...component spec... } },
   "tokenResolverAgent": { "status": "RESOLVED",  "resolved": { ... }, "figmaReadyValues": { ... } },
   "visionAgent":        { "status": "COMPLETE",  "extractedStyles": { ... }, "structureObservations": { ... } }
 }
 ```
 
-> **STOP condition:** If any upstream agent has `status: FAILED` or `status: INVALID` — **stop immediately.** Report which agent failed and why. Do not proceed to Figma MCP execution. Ask the user to fix the input and re-run the failed agent.
+> **STOP condition:** If any upstream agent has `status: FAILED` or `status: INVALID` — **stop immediately.** Report which agent failed and why. Do not proceed to Figma MCP execution. Ask the user to fix the input and re-run the failed agent.  
+> `codeAgent.status: "NOT_FOUND"` is non-blocking — pipeline continues using Spec Agent + Vision Agent for structure.
 
 ---
 
@@ -105,26 +116,32 @@ without it produces ONLY config files — not a design system.
 
 | Check | Required value |
 |---|---|
+| `codeAgent.status` | `"COMPLETE"` or `"PARTIAL"` (non-blocking); `"NOT_FOUND"` is a warning only |
 | `specAgent.status` | `"VALID"` |
 | `tokenResolverAgent.status` | `"RESOLVED"` (PARTIAL is acceptable with a warning) |
 | `visionAgent.status` | Not `"FAILED"` (PARTIAL is acceptable; agent is optional) |
 
 If any critical check fails → stop, report, wait for correction.
 
+**Code Agent fast-path check:** If `codeAgent.status === "COMPLETE"`, log:  
+`"✓ Code Agent — exact structure loaded from codebase. variantAxes, booleanProperties, textProperties and measurements will be used directly."`
+
 ---
 
 ### STEP 2 — Resolve conflicts `blockOnFail: true`
 
-When Spec Agent and Vision Agent disagree on a style property:
+**Priority order (highest → lowest):**
 
-| Spec Agent wins | Vision Agent wins |
-|---|---|
-| Layout direction | Subtle visual details (exact colour match, shadow presence) |
-| Naming | — |
-| Sizes, states | — |
-| Padding / gap tokens | — |
+| Priority | Source | Wins for |
+|---|---|---|
+| **1 — Code Agent (00)** | `codeAgent.*` | variantAxes, booleanProperties, textProperties, measurements (height, padding, gap, borderRadius) |
+| **2 — Figma URL / Token path** | `specAgent.spec` | Exact token-bound colors, shadow values |
+| **3 — Vision Agent (03)** | `visionAgent.extractedStyles` | Visual details where code has no data (exact color hex, shadow presence) |
 
-- Always prefer a token path over a raw value.
+**Rules:**
+- If `codeAgent.status === "COMPLETE"`: use `codeAgent.variantAxes` and `codeAgent.measurements` directly — do not override with Vision Agent estimates.
+- If `codeAgent.status === "NOT_FOUND"`: fall back to Spec Agent for structure, Vision Agent for visual details.
+- Always prefer a token path over a raw hex value.
 - Merge final values into a single **execution plan**.
 
 ---
@@ -871,17 +888,23 @@ No new variables created.
 ## Agent Coordination Flow
 
 ```
-Spec Agent (01)          → validates brief → outputs component spec JSON
+Code Agent (00)           → reads codebase/ (READ ONLY) → extracts exact props/variants/measurements
+         │
+         ▼
+Spec Agent (01)           → validates brief → outputs component spec JSON (Code Agent = highest priority input)
          │
          ▼
 Token Resolver Agent (02) → resolves all token paths → outputs hex/px values + Figma RGB
-         │
+         │                   (uses exactMeasurements from Code Agent when available)
          ▼
-Vision Agent (03, opt.)   → analyzes reference image → extracts style observations
-         │
+Vision Agent (03, opt.)   → analyzes reference images → extracts colors/shadows only
+         │                   (skips structure inference when Code Agent ran successfully)
          ▼
-Orchestrator Agent (04)   → merges all → confirms plan → executes MCP → audits → verifies → publishes
+Orchestrator Agent (04)   → STEP 0 (connectivity gate) → merges all → confirms plan
+                             → executes MCP → audits → verifies → publishes
 ```
+
+Priority for merged execution plan: **Code Agent > Figma URL/token > Vision Agent**
 
 The Orchestrator is the **only** agent with Figma MCP write access.  
 All other agents are read-only and output structured JSON.
