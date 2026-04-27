@@ -113,6 +113,28 @@
     }
   },
 
+  "adaptiveTolerance": {
+    "description": "Adjust verify-rubric tolerances based on measurement source. Screenshot-estimated values are inherently less precise than Figma design context values.",
+    "rule": "Before running G1 (visual verify), check visionAgent.measurements.source. Apply the matching tolerance set below.",
+    "tolerances": {
+      "figma_context": {
+        "source": "figma_get_design_context — exact values",
+        "C2_padding_px": 2,
+        "C3_gap_px": 2,
+        "C9_height_px": 2,
+        "note": "Tight tolerance — Figma-sourced values are exact."
+      },
+      "screenshot_estimate": {
+        "source": "Visual estimation from PNG/JPG",
+        "C2_padding_px": 4,
+        "C3_gap_px": 4,
+        "C9_height_px": 4,
+        "note": "Wider tolerance — estimation cannot be pixel-perfect. Use ±4px for C2, C3, C9."
+      }
+    },
+    "orchestratorRule": "Pass the active tolerance set to the Vision Agent in the STEP 9 verify call so it applies the correct ±px window when scoring C2, C3, and C9."
+  },
+
   "qualityGateOrder": {
     "description": "Gates run in sequence. A FAIL blocks the next gate. WARN allows progression with issues logged.",
     "G2_TokenAudit": {

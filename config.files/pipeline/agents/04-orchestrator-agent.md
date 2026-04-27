@@ -528,6 +528,8 @@ Token audit fixes do **NOT** count as iterations — they are infrastructure, no
 
 ### STEP 9 — Screenshot + visual verify G1 `blockOnFail: false`
 
+#### For single-screenshot input:
+
 Call `figma_capture_screenshot`. Pass to Vision Agent with:  
 **`"Verify against spec AND ground truth reference — run verify-rubric.json checks C1–C10."`**
 
@@ -537,6 +539,33 @@ Include in the Vision Agent call:
 - The `groundTruth` block (which reference screenshot each variant maps to)
 
 The Vision Agent uses `measurements.px` values as the pass/fail target for C2, C3, C6, C8, C9 — not just "does it look close enough."
+
+#### For multi-screenshot input (`inputMode = "multi-input-synthesis"`):
+
+> ⛔ **Do NOT just take one screenshot of the whole COMPONENT_SET.** For multi-input builds, each variant must be checked against its own reference screenshot.
+
+**Per-variant verify process:**
+
+1. For each entry in Vision Agent's `groundTruth.screenshotMap`, identify the variant combo (e.g. `Primary=Yes, State=Default`).
+2. Select that specific variant component in Figma (by name), then call `figma_capture_screenshot` on it alone.
+3. Pass BOTH screenshots to the Vision Agent — the built variant AND the reference screenshot assigned to it — with instruction: **`"Compare built variant against its reference screenshot. Run C1–C10. Note any visual difference, color mismatch, or missing element."`**
+4. Repeat for each screenshot-sourced variant combo (skip inferred-only combos on the first pass).
+
+**Per-variant result tracking:**
+
+```
+VARIANT VERIFY RESULTS
+────────────────────────────────────────────────────
+  {combo1} (ref: S{n})  →  Score {n}/16 · {PASS/WARN/FAIL} · {failed checks}
+  {combo2} (ref: S{n})  →  Score {n}/16 · {PASS/WARN/FAIL} · {failed checks}
+  {combo3} (ref: S{n})  →  Score {n}/16 · {PASS/WARN/FAIL} · {failed checks}
+────────────────────────────────────────────────────
+Overall: PASS if ALL screenshot-sourced variants ≥ 14/16
+         WARN if ANY variant is 12–13 with no structural failures
+         FAIL if ANY variant < 12 or has a color mismatch (C5/C7)
+```
+
+Apply surgical fixes **only to the failing variant** — do not touch passing variants.
 
 | Score | Status | Action |
 |---|---|---|

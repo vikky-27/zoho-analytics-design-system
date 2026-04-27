@@ -27,8 +27,8 @@
       "id": "C2",
       "name": "Padding Correct",
       "weight": 2,
-      "passIf": "Padding matches resolved spacing token (±2px tolerance)",
-      "failIf": "Padding differs from spec by more than 2px on any side, or content touches edges",
+      "passIf": "Padding matches resolved spacing token within tolerance (±2px for figma_context source, ±4px for screenshot_estimate source)",
+      "failIf": "Padding differs from spec beyond the active tolerance on any side, or content touches edges",
       "fixActions": [
         "frame.paddingTop    = {rules.paddingTop};",
         "frame.paddingRight  = {rules.paddingRight};",
@@ -42,8 +42,8 @@
       "id": "C3",
       "name": "Gap Between Children",
       "weight": 1,
-      "passIf": "Children have consistent spacing matching the resolved gap token (±2px tolerance)",
-      "failIf": "Gap differs from spec by more than 2px, or children are jammed together",
+      "passIf": "Children have consistent spacing matching the resolved gap token within tolerance (±2px for figma_context source, ±4px for screenshot_estimate source)",
+      "failIf": "Gap differs from spec beyond the active tolerance, or children are jammed together",
       "fixActions": [
         "frame.itemSpacing = {rules.itemSpacing};  // single property"
       ],

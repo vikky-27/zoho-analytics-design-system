@@ -261,34 +261,66 @@ PROPERTY SCHEMA CONFIRMATION
 Component:       {ComponentName}
 Screenshots:     {n} images analysed
 
-Variant axes:
+── SCREENSHOT → VARIANT ASSIGNMENT ──────────────────
+  S1 ({filename})  →  {AxisName}={value}, {AxisName}={value}
+  S2 ({filename})  →  {AxisName}={value}, {AxisName}={value}
+  S3 ({filename})  →  {AxisName}={value}, {AxisName}={value}
+  ⚠ Every screenshot maps to a UNIQUE combo. No duplicates.
+
+── VARIANT AXES ─────────────────────────────────────
   • {AxisName} → {value1} / {value2} / {value3}
   • {AxisName} → {value1} / {value2}
 
-Boolean toggles:
-  • Show {ElementName}  (default: {true/false})
+── BOOLEAN TOGGLES ──────────────────────────────────
   • Show {ElementName}  (default: {true/false})
 
-Text properties:
-  • {PropName}  (default: "{defaultText}")
+── TEXT PROPERTIES ──────────────────────────────────
   • {PropName}  (default: "{defaultText}")
 
-Total variant frames:   {axis1_count} × {axis2_count} = {total}
-Build target:           1 COMPONENT_SET  ·  {total} COMPONENT children
-                        ⚠ No duplicate components. All {n} screenshots
-                          are unified into this one COMPONENT_SET.
+── COLOR MAPPINGS PER VARIANT ───────────────────────
+  {AxisName}={v1}, {AxisName}={v2}  (from screenshot S{n}):
+    background  →  {tokenPath}  (~{observedHex})  [{high/medium/low}]
+    text        →  {tokenPath}  (~{observedHex})  [{confidence}]
+    stroke      →  {tokenPath}  (~{observedHex})  [{confidence}]  or "none"
+  {AxisName}={v1}, {AxisName}={v3}  (from screenshot S{n}):
+    background  →  {tokenPath}  (~{observedHex})  [{confidence}]
+    ...
+  {inferred states not in screenshots — label clearly}:
+    background  →  {tokenPath}  (inferred from design system rules)  [inferred]
+    ...
+  (list every variant combo, including inferred states)
 
-Pairwise differences covered:
-  {n_pairs} pairs checked  ·  {n_assigned} differences assigned
-  Unmatched: {0 or list}
+── MEASUREMENTS (shared across all variants) ────────
+  padding:        top {n}px · right {n}px · bottom {n}px · left {n}px  [{confidence}]
+  gap:            {n}px  [{confidence}]
+  border-radius:  {n}px  [{confidence}]
+  height:         {n}px  [{confidence}]
+  font-size:      {n}px  [{confidence}]
+  source:         screenshot_estimate | figma_context
+
+── UNCERTAIN VALUES ─────────────────────────────────
+  (Any color or measurement with confidence "medium" or "low".
+   These will be used as-is unless you correct them here.)
+  • {property}:  observed ~{value}  →  mapped to {tokenPath}  [medium — correct if wrong]
+  • (none — all values high confidence)
+
+── BUILD SUMMARY ─────────────────────────────────────
+  Total variant frames:  {axis1_count} × {axis2_count} = {total}
+  Build target:          1 COMPONENT_SET  ·  {total} COMPONENT children
+  Pairwise diffs:        {n_pairs} pairs checked · {n_assigned} assigned
+  Unmatched:             {0 or list of unresolved differences}
 
 ─────────────────────────────────────────────────────
 Reply "confirmed"  → pass to Spec Agent and start building
-Reply "edit"       → specify what to change before building
+Reply "edit X"     → describe the correction before building
+                     e.g. "edit: S2 background is #F0F2F5 not white"
+                          "edit: gap should be 12px not 8px"
 ```
 
 > **Do NOT proceed to Spec Agent until user replies `confirmed`.**  
-> This one confirmation prevents all property-discovery iterations.
+> Review COLOR MAPPINGS and UNCERTAIN VALUES — these are the exact token/px values that will be used to build the component. If any are wrong, reply "edit" with the correction before confirming.
+>
+> **Duplicate-assignment rule (mandatory before outputting this block):** Verify that no two screenshots share the same `assignedVariant + assignedState` combination. If any two screenshots produce the same combo, a new axis MUST be created to distinguish them — never discard a screenshot silently.
 
 ---
 
@@ -358,11 +390,35 @@ Properties that are **the same across ALL screenshots** go into `sharedPropertie
 
 ### Synthesis Step 4 — Extract per-variant styles
 
-For each `variant+state` combination, record only the properties that DIFFER from the default:
-- Fill / background color → token path
-- Stroke / border color → token path
-- Text color → token path
-- Opacity → token path or number
+For each `variant+state` combination, record the **COMPLETE set of visual properties** — not just the diffs. The Orchestrator needs the full picture for each variant so it can build it correctly without having to reconstruct it from shared + delta.
+
+Include ALL of these for every combo (use the sharedProperties value for anything that doesn't change):
+- `background` → token path (REQUIRED for every combo)
+- `text` → token path (REQUIRED for every combo)
+- `stroke` → token path or `"none"` (REQUIRED — always state explicitly)
+- `opacity` → number 0–1 (REQUIRED for Disabled state; use `1` for others)
+- `borderRadius` → token path (copy from sharedProperties if unchanged)
+- `padding` → token path (copy from sharedProperties if unchanged)
+- `gap` → token path (copy from sharedProperties if unchanged)
+
+> ⛔ **Never omit a property because it's "the same as default."** Always write the full combo key with all properties. The Orchestrator must not guess what the default is.
+
+Example of a correct (complete) `perVariantStyles` entry:
+```json
+"Primary=Yes,State=Default": {
+  "background":   "color.accent.blue",
+  "text":         "semantic.light.text.onAccent",
+  "stroke":       "none",
+  "opacity":      1,
+  "borderRadius": "borderRadius.md",
+  "padding":      "spacing.padding.S",
+  "gap":          "spacing.gap.M"
+}
+```
+
+Also label inferred states clearly so the Orchestrator knows which combos came from screenshots vs. design system inference:
+- `"_source": "screenshot-S1"` for combos directly observed in a screenshot
+- `"_source": "inferred"` for states derived from design system rules (not shown in any screenshot)
 
 ### Synthesis Step 5 — Detect boolean properties
 
@@ -409,6 +465,14 @@ COMPLETENESS CHECK
     Example: Primary(2) × State(3) = 6 variants. Confirm this.
 
 [ ] No screenshot has been left unassigned in screenshotMap.
+
+[ ] No two screenshots share the same assignedVariant + assignedState
+    combination. If any two screenshots produce the same combo key,
+    a new axis MUST be created before proceeding.
+
+[ ] perVariantStyles has EVERY combo key (product of all axes).
+    Each entry has: background, text, stroke, opacity, borderRadius,
+    padding, gap, and _source. No combo is missing any of these.
 ──────────────────────────────────────────────────────────────
 ```
 
