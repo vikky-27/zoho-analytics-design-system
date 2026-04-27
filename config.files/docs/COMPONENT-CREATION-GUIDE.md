@@ -27,21 +27,46 @@
 
 ## ⛔ STOP — Search Before You Create
 
-> **This is the most-violated rule.** Before writing a single line of component creation code, you MUST search the Design System library. If the component exists there, import and instantiate it. Building from scratch is only allowed when both searches below return no match.
+> ⛔ **HARD RULE: Building from scratch is FORBIDDEN if the component already exists in the design system.**  
+> **Always check `docs/COMPONENT-REGISTRY.md` FIRST.** If the component is `✅ Done`, you MUST find and reuse it — never duplicate it.  
+> A single failed search query does NOT mean the component doesn't exist. Run ALL search methods below before concluding "not found."
 
-### Search Method 1 — Published Library (preferred)
+### Step 0 — Check the registry before any Figma call (MANDATORY)
 
-Use the Figma MCP tool to search the Design System file by name:
+Open `docs/COMPONENT-REGISTRY.md` and look up this component name.
+
+| Status | What to do |
+|---|---|
+| `✅ Done` | Component exists. Run Search Methods 1 and 2 below to locate it. If both fail, **do not build** — ask the user to confirm the component's Figma location. |
+| `🔄 Partial` | Component exists in Figma. Find it (Methods 1/2) and build only the missing config/doc. Do not rebuild the Figma component. |
+| `⏳ Pending` or not listed | Component hasn't been built yet. Proceed through all search methods. If all return nothing → custom build is permitted. |
+
+### Search Method 1 — Published Library (run ALL queries — do NOT stop on first result)
 
 ```js
-// Run this FIRST — before any figma.create*() calls
-figma_get_library_components({
-  libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0",   // Design-System--Zoho-Analytics
-  query: "<ComponentName>",                       // e.g. "Button", "Checkbox", "Toggle"
-  limit: 25
-})
-// → Inspect results. Look for COMPONENT_SET entries (parent) and COMPONENT entries (variants).
-// → Pick a COMPONENT variant key (never the COMPONENT_SET key).
+// Run EVERY query — collect ALL results before picking
+const queries = [
+  "<ExactName>",     // "Checkbox"
+  "ZA<ExactName>",   // "ZACheckbox" — Zoho Analytics prefix
+  "<Spaced>",        // "Check box", "Check Box"
+  "<Abbrev>",        // "CB", "Chk"
+  "<Category>"       // "Form Control"
+];
+
+let allResults = [];
+for (const q of queries) {
+  const r = await figma_get_library_components({
+    libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0",
+    query: q,
+    limit: 25
+  });
+  allResults = allResults.concat(r);
+  // ⛔ DO NOT break early — run every query even when results are found
+}
+
+// Deduplicate by key
+const seen = new Set();
+const unique = allResults.filter(r => !seen.has(r.key) && seen.add(r.key));
 ```
 
 **If a result is found → import and use it:**
@@ -60,29 +85,31 @@ instance.setProperties({
 });
 ```
 
-### Search Method 2 — Local page scan (fallback)
-
-If the library search fails or returns no results, scan the local Figma file pages:
+### Search Method 2 — Local page scan (scan EVERY page — do NOT stop after first page)
 
 ```js
-// Scan all pages for a component set matching the name
-async function findComponentSet(name) {
+// Scan ALL pages for every name variant
+async function scanAllPages(searchTerms) {
+  const allFound = [];
   for (const page of figma.root.children) {
     await figma.setCurrentPageAsync(page);
-    const found = page.findOne(
-      n => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
-           n.name.toLowerCase().includes(name.toLowerCase())
-    );
-    if (found) return found;
+    for (const term of searchTerms) {
+      const found = page.findAll(n =>
+        (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
+        n.name.toLowerCase().includes(term.toLowerCase())
+      );
+      allFound.push(...found);
+    }
+    // ⛔ DO NOT return early — scan every page for every term
   }
-  return null;
+  return allFound;
 }
 
-const cs = await findComponentSet('Check box');
-if (cs) {
-  // Pick the right variant from the component set
+const results = await scanAllPages(["Checkbox", "ZACheckbox", "Check box"]);
+if (results.length > 0) {
+  const cs = results.find(n => n.type === 'COMPONENT_SET') ?? results[0];
   const variant = cs.type === 'COMPONENT_SET'
-    ? cs.children.find(c => c.name.includes('Check=Yes') && c.name.includes('Enable=Yes'))
+    ? cs.children.find(c => c.name.includes('Check=Yes'))
     : cs;
   const instance = variant.createInstance();
   // position + setProperties...

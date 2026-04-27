@@ -185,72 +185,153 @@ spec.naming                      →  component.name for each variant (e.g. "But
 
 ---
 
-### STEP 3 — Multi-strategy library search `blockOnFail: true`
+### STEP 3 — Existing component search `blockOnFail: true` ⛔ NEVER SKIP
 
-Run ALL 3 strategies before declaring no match. A single query is not enough — component names vary across files.
+> ⛔ **HARD RULE: Custom build is FORBIDDEN until all 4 strategies are exhausted AND the registry confirms the component does not exist.**  
+> If `docs/COMPONENT-REGISTRY.md` shows `✅ Done` for this component — **STOP. Do not build. Find and reuse it.**  
+> A component that exists in the design system MUST be reused. Creating a duplicate is a pipeline error.
 
-#### Strategy 1 — Published library (run 3+ queries)
+---
+
+#### Strategy 0 — Check `docs/COMPONENT-REGISTRY.md` FIRST (mandatory — runs before any Figma call)
+
+Read `docs/COMPONENT-REGISTRY.md` and find the entry for this component.
+
+| Registry status | Action |
+|---|---|
+| `✅ Done` | ⛔ **Hard block on custom build.** Component exists — find it via Strategy 1/2 below. If search fails after all retries, output the `DUPLICATE BLOCKED` error (see below). Do NOT build from scratch. |
+| `🔄 Partial` | Component was built but config/doc is missing. Find it in Figma (Strategy 1/2), build only the missing config/doc piece. Do NOT rebuild the Figma component. |
+| `⏳ Pending` | Component has not been built yet. Proceed through Strategy 1/2/3. If all return no match → custom build is permitted. |
+| Not listed | Treat as `⏳ Pending`. Proceed through Strategy 1/2/3. |
+
+**If registry says `✅ Done` and all searches fail — output this block and stop:**
+
+```
+⛔ DUPLICATE BLOCKED — {ComponentName} already exists in the design system
+──────────────────────────────────────────────────────────────────────────
+docs/COMPONENT-REGISTRY.md shows this component as "✅ Done" but the
+search could not locate it in the Figma file. Do NOT build a duplicate.
+
+Possible causes:
+  1. The component is on a different page — check every page manually.
+  2. The component name in Figma differs from the registry entry.
+  3. The library needs to be re-synced (Assets panel → refresh).
+
+Actions:
+  A. Check the Figma file manually, find the component set, then reply
+     with its nodeId to continue from STEP 3b.
+  B. If the component was deleted, update the registry to ⏳ Pending
+     and reply "rebuild" to restart from STEP 3.
+
+Pipeline is paused until the user resolves this.
+──────────────────────────────────────────────────────────────────────────
+```
+
+---
+
+#### Strategy 1 — Published library (run ALL queries — do NOT stop on first hit)
 
 ```js
-// Try multiple query terms — never just one
+// Run EVERY query term — collect ALL results before deciding
 const queries = [
-  "{ExactName}",           // "Checkbox"
-  "{CommonVariant}",       // "Check box"
-  "{Abbreviation}",        // "CB", "Chk"
-  "{Category}"             // "Form Control"
+  "{ExactName}",          // "Checkbox"
+  "{ZAPrefix}",           // "ZACheckbox", "ZAButton"
+  "{CommonVariant}",      // "Check box", "Check Box"
+  "{Abbreviation}",       // "CB", "Chk", "Btn"
+  "{Category}"            // "Form Control", "Navigation"
 ];
 
+let allResults = [];
 for (const q of queries) {
   const results = await figma_get_library_components({
     libraryFileKey: "m2iOWX3I9aDI5kgyw4wCo0",
     query: q,
     limit: 25
   });
-  if (results.length > 0) break;  // stop on first match
+  allResults = allResults.concat(results);
+  // DO NOT break early — run every query even if results found
 }
+// Deduplicate by key, then pick best match
+const seen = new Set();
+const unique = allResults.filter(r => !seen.has(r.key) && seen.add(r.key));
 ```
 
-Known name variants to try (from `property-extraction-rules.json → multiQueryLibrarySearch → knownComponentNames`):
+Known name variants to always try:
 
 | Target | Try these queries |
 |---|---|
-| Button | Button, Btn, CTA, Action Button |
-| Checkbox | Checkbox, Check box, Check Box |
-| Toggle | Toggle, Switch, Toggle Button |
-| Input | Input, Text Field, Form Input |
-| Radio | Radio, Radio Button |
-| Notification | Notification, Alert, Banner |
+| Button | Button, ZAButton, Btn, CTA, Action Button |
+| Checkbox | Checkbox, ZACheckbox, Check box, Check Box |
+| Toggle | Toggle, ZAToggle, Switch, Toggle Button |
+| Input | Input, ZAInput, Text Field, Form Input |
+| Radio | Radio, ZARadio, Radio Button |
+| Notification | Notification, ZANotification, Alert, Banner, Toast |
+| Tab | Tab, ZATab, ZATabPanel, ViewTab, Tab Panel |
+| Search | Search, ZASearch, Search Bar, Search Input |
+| Select | Select, ZASelect, Dropdown, Combobox |
+| Accordion | Accordion, ZAAccordion, Collapsible |
+| Slider | Slider, ZASlider, Range |
+| Popover | Popover, ZAPopover, Tooltip, Flyout |
 
-#### Strategy 2 — Local page scan (mandatory fallback)
+---
+
+#### Strategy 2 — Local page scan (scan EVERY page — do NOT stop after first page)
 
 ```js
 async function scanAllPages(searchTerm) {
+  const allFound = [];
   for (const page of figma.root.children) {
     await figma.setCurrentPageAsync(page);
     const found = page.findAll(n =>
       (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
       n.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (found.length > 0) return found;
+    allFound.push(...found);
+    // DO NOT return early — scan every page
   }
-  return [];
+  return allFound;
+}
+
+// Run for multiple name variants
+const scanTerms = ["{ExactName}", "{ZAPrefix}", "{Abbreviation}"];
+let localResults = [];
+for (const term of scanTerms) {
+  localResults = localResults.concat(await scanAllPages(term));
 }
 ```
 
-#### Strategy 3 — Check `docs/COMPONENT-REGISTRY.md`
+---
 
-If both strategies fail, read `docs/COMPONENT-REGISTRY.md`:
-- If status is `✅ Done` → the component was built previously. Re-run Strategy 1/2 with the aliases listed in the registry's Quick Reference table.
-- If status is `🔄 Partial` → config or doc is missing. Build the missing piece only.
-- If status is `⏳ Pending` → component has not been built yet. Proceed to custom build. After building, update the registry entry to `✅ Done` and fill in `figmaNodeId` and `variantKeys`.
+#### Strategy 3 — Fuzzy name scan across all pages
 
-#### Match confidence rules
+If Strategy 1 and 2 returned nothing, run a broader scan with partial name fragments:
+
+```js
+// Break the component name into fragments and search for each
+const nameFragments = "{ComponentName}".split(/(?=[A-Z])|[\s-_]/).filter(f => f.length > 2);
+// e.g. "TabPanel" → ["Tab", "Panel"]
+// e.g. "CheckboxGroup" → ["Checkbox", "Group"]
+
+for (const fragment of nameFragments) {
+  const hits = await scanAllPages(fragment);
+  // Inspect each hit — does it look like the target component?
+}
+```
+
+---
+
+#### Match rules — applied after ALL strategies complete
 
 | Result | Action |
 |---|---|
-| Exact name match | Use immediately — list all variant keys in plan |
-| Name similarity > 70% | Show match to user → ask `"Found {name} — use this? (yes/no)"` |
-| Name similarity < 70% | No match — build from scratch (all values from `resolved-tokens.json`) |
+| Exact name match (any strategy) | ✅ Use immediately — list all variant keys in plan |
+| ZA-prefixed match (`ZA{Name}`) | ✅ Use immediately — this is the Zoho Analytics component |
+| Name similarity > 70% | Show match to user → `"Found {name} — use this? (yes/no)"` before proceeding |
+| Name similarity 40–70% | Show match to user → `"Possible match: {name}. Inspect and confirm (yes/no)"` |
+| All strategies return nothing AND registry = ⏳ Pending | ✅ Permitted to build from scratch |
+| All strategies return nothing AND registry = ✅ Done | ⛔ Output DUPLICATE BLOCKED error — stop |
+
+> **Never go straight from "search returned nothing" to "build from scratch" without first confirming registry status.**
 
 ---
 
