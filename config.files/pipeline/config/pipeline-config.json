@@ -5,6 +5,15 @@
     "change": "Redesigned iteration loop for 2–3 attempt convergence. Added pre-flight step, surgical fix mode, same-check escalation, and targeted fixActions."
   },
 
+  "figmaMCPGate": {
+    "description": "Hard rule: the pipeline exists to build a Figma design system. It cannot run in config-only mode. Config files are a byproduct of a successful Figma build — never the primary output.",
+    "rule": "STEP 0 (Figma MCP connectivity probe) MUST pass before any other step executes. If the Figma Desktop Bridge is not connected, the entire pipeline is blocked.",
+    "connectivityProbe": "figma_get_metadata({ fileKey: 'm2iOWX3I9aDI5kgyw4wCo0' }) — must return a non-null file name",
+    "onProbeFailure": "Output PIPELINE BLOCKED message with setup instructions. Stop immediately. Do not run any other step.",
+    "configFileRule": "Config files (tokens/components/*.json, docs/components/*.md) are ONLY generated in STEP 12 after ALL three conditions are true: (1) STEP 0 Figma connected, (2) STEP 7 component built with a real componentSetId, (3) STEP 11 publish confirmed. Generating config files without a live Figma component is forbidden.",
+    "noConfigOnlyMode": "There is no config-only mode, dry-run mode, or offline mode in this pipeline. Any execution without a Figma MCP connection is invalid and must be rejected with the PIPELINE BLOCKED message."
+  },
+
   "pipeline": {
     "version": "2.0",
     "mode": "figma-only",
@@ -12,6 +21,7 @@
     "confirmationKeyword": "proceed",
 
     "steps": [
+      { "step": 0,  "name": "Figma MCP connectivity gate", "tool": "figma_get_metadata",         "blockOnFail": true  },
       { "step": 1,  "name": "Validate brief",           "tool": "component-spec-schema.json",  "blockOnFail": true  },
       { "step": 2,  "name": "Resolve tokens",            "tool": "resolved-tokens.json",        "blockOnFail": true  },
       { "step": 3,  "name": "Check library components",  "tool": "figma_get_library_components", "blockOnFail": false },
@@ -240,6 +250,6 @@
 
   "agentSystemPrompt": {
     "description": "Inject this context when initialising any agent. Replace {{TOKEN_JSON}} with resolved-tokens.json contents.",
-    "prompt": "You are a Figma component agent for Zoho Analytics Design System.\n\nCRITICAL RULES:\n1. Colors MUST be Figma variable bindings — never raw hex or {r,g,b}. Use boundPaint(variableId) from figma-variable-bindings.json.\n2. Run 5 pre-flight checks (PF1–PF5) before any Figma MCP write call. Snapshot variable IDs at end of pre-flight.\n3. On verification failure, apply SURGICAL fixes only — re-run only the MCP operations for failed checks. Do not rebuild the full component.\n4. If the same check fails twice in a row, escalate that check to human. Do not spend a 3rd attempt on it.\n5. Maximum 3 total iterations. Use them wisely — pre-flight failures do not count.\n6. Output plan → wait for 'proceed' → execute → audit → verify → fix (surgical) → verify again.\n7. For multi-screenshot input: Vision Agent outputs PROPERTY SCHEMA CONFIRMATION → user replies 'confirmed' → THEN spec/orchestrator proceed. Do not build before confirmed.\n8. After publish: diff variable state against pre-build snapshot. Always output NEW TOKENS / VARIABLES ADDED block.\n\nTOKEN DATA:\n{{TOKEN_JSON}}"
+    "prompt": "You are a Figma component agent for Zoho Analytics Design System.\n\nCRITICAL RULES:\n0. STEP 0 FIRST — ALWAYS. Call figma_get_metadata before anything else. If it fails, output PIPELINE BLOCKED and stop. Do not validate, plan, or generate any file.\n1. Colors MUST be Figma variable bindings — never raw hex or {r,g,b}. Use boundPaint(variableId) from figma-variable-bindings.json.\n2. Run 5 pre-flight checks (PF1–PF5) before any Figma MCP write call. Snapshot variable IDs at end of pre-flight.\n3. On verification failure, apply SURGICAL fixes only — re-run only the MCP operations for failed checks. Do not rebuild the full component.\n4. If the same check fails twice in a row, escalate that check to human. Do not spend a 3rd attempt on it.\n5. Maximum 3 total iterations. Use them wisely — pre-flight failures do not count.\n6. Output plan → wait for 'proceed' → execute → audit → verify → fix (surgical) → verify again.\n7. For multi-screenshot input: Vision Agent outputs PROPERTY SCHEMA CONFIRMATION → user replies 'confirmed' → THEN spec/orchestrator proceed. Do not build before confirmed.\n8. After publish: diff variable state against pre-build snapshot. Always output NEW TOKENS / VARIABLES ADDED block.\n9. STEP 12 (config files) is BLOCKED unless: STEP 0 passed AND STEP 7 produced a real componentSetId AND STEP 11 publish succeeded. Config files without a live Figma component are invalid — never generate them.\n\nTOKEN DATA:\n{{TOKEN_JSON}}"
   }
 }

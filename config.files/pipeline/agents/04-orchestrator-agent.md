@@ -49,9 +49,55 @@ You have **3 iterations maximum** (Steps 7→8→9 = one iteration).
 
 ---
 
-## Pipeline — 12 Steps
+## Pipeline — 13 Steps (STEP 0 through STEP 12)
 
 Each step marked `blockOnFail: true` stops the entire pipeline on failure.
+
+---
+
+### STEP 0 — Figma MCP connectivity gate `blockOnFail: true` ⛔ MANDATORY FIRST STEP
+
+> ⛔ **THIS IS THE ABSOLUTE FIRST ACTION. No other step runs until STEP 0 passes.**  
+> Do NOT validate inputs, do NOT resolve tokens, do NOT generate a plan until Figma MCP is confirmed live.  
+> Config files are NEVER generated if this step fails — there is nothing to record.
+
+Run this connectivity probe via `figma_get_metadata`:
+
+```js
+// Connectivity probe — call this before ANYTHING else
+const meta = await figma_get_metadata({ fileKey: "m2iOWX3I9aDI5kgyw4wCo0" });
+// A non-null response with a file name confirms the Bridge is connected and the file is accessible.
+```
+
+| Result | Action |
+|---|---|
+| Returns file name + metadata | ✅ Bridge is connected. Log `"STEP 0 PASS — Figma Desktop Bridge connected. File: {name}"`. Proceed to STEP 1. |
+| Throws / times out / returns null | ❌ **HARD STOP. Output the error block below. Do not proceed to ANY other step.** |
+
+**Hard stop output (copy exactly):**
+
+```
+⛔ PIPELINE BLOCKED — Figma Desktop Bridge not connected
+──────────────────────────────────────────────────────────────
+This pipeline REQUIRES a live Figma MCP connection to build
+components. It cannot run in config-only mode.
+
+No Figma component has been built. No config files will be
+generated — config files are only created AFTER a component
+is successfully built and published in Figma.
+
+To fix this on a new machine:
+  1. Open Figma Desktop (not the browser version).
+  2. In Figma → Preferences → Enable "Developer Mode".
+  3. Install and enable the Figma Desktop Bridge plugin.
+  4. Re-run this pipeline after the Bridge shows a green status.
+
+Do NOT run the pipeline without the Bridge connected. Running
+without it produces ONLY config files — not a design system.
+──────────────────────────────────────────────────────────────
+```
+
+> **Rule: The only acceptable output of this pipeline is a published Figma component set.** Config files are a byproduct of a successful Figma build — they are never the primary output and are never created in isolation.
 
 ---
 
@@ -659,17 +705,58 @@ Reply "reject"   → send back for corrections (include feedback)
 > On `"reject"`: re-enter the pipeline at the step indicated by the feedback.
 
 **Publish retry (max 2):** If `figma_publish` fails, retry once automatically after a brief pause. If it fails a second time, output:
+
 ```
-PUBLISH FAILED — 2 attempts made. Manual publish required.
-Open the Figma file → Assets panel → right-click component → Publish to library.
+⛔ PUBLISH FAILED — 2 attempts made
+──────────────────────────────────────────────────────────────
+The Figma component was BUILT but could not be published to the
+library. Config files will NOT be generated until publish succeeds
+— they must reference a live published component, not an unpublished one.
+
+To resolve:
+  Option A — Manual publish (recommended):
+    Open the Figma file → Assets panel → right-click the component
+    → "Publish to library". Then reply "published" to continue.
+
+  Option B — Retry:
+    Reply "retry publish" to attempt figma_publish one more time.
+
+STEP 12 is BLOCKED until publish is confirmed.
+──────────────────────────────────────────────────────────────
 ```
-Do not block the pipeline — still run STEP 12 to generate component files.
+
+> ⛔ **Do NOT run STEP 12 after a publish failure.** Config files reference the published component's library key and variant keys — generating them before publish makes them invalid. Wait for the user to confirm manual publish or retry before proceeding.
 
 **Confirmation reminder:** If the user does not reply within 2 conversation turns, re-output the `READY FOR REVIEW` block with a one-line reminder: `"Awaiting your review — reply 'publish' or 'reject'."`
 
 ---
 
 ### STEP 12 — Generate component files + token notification `blockOnFail: false`
+
+> ⛔ **HARD PRE-CONDITIONS — all three must be true before generating any file.**  
+> If ANY condition is false, output the block error below and stop. Do not generate partial files.
+
+| Pre-condition | How to verify |
+|---|---|
+| STEP 0 passed | `figmaConnected === true` (connectivity probe returned valid metadata) |
+| STEP 7 completed | At least one `figma_execute` write call returned success and a real `componentSetId` exists |
+| STEP 11 completed | `figma_publish` (or confirmed manual publish) returned success |
+
+If any pre-condition is false:
+
+```
+⛔ STEP 12 BLOCKED — Component files NOT generated
+──────────────────────────────────────────────────────────────
+Config files are only created when a component has been fully
+built AND published in Figma. One or more pre-conditions failed:
+
+  STEP 0 (Figma connected):  {PASS / FAIL}
+  STEP 7 (Component built):  {PASS / FAIL — componentSetId: {id or "none"}}
+  STEP 11 (Published):       {PASS / FAIL}
+
+Fix the failing step, then re-run STEP 12 only.
+──────────────────────────────────────────────────────────────
+```
 
 After successful publish, automatically generate two files for the new component and output them for the user to save.
 
