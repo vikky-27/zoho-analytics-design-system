@@ -25,8 +25,11 @@ Your only job is to take a raw component brief and produce a complete, validated
 | Plain text brief | "Create a Card with default and elevated variants…" |
 | Partial JSON | A spec with some fields missing |
 | Single screenshot description | "Blue button, rounded corners, white label, icon on left" |
+| **Code Agent output** ⭐ | Output from `00-code-agent.md` with `status: "COMPLETE"` — use this as primary input |
 | **Multi-screenshot synthesis** | Output from Vision Agent `mode: "multi-input-synthesis"` — use this directly |
 | Figma design context | Output from `figma_get_design_context` |
+
+> ⭐ **When you receive Code Agent output with `status: "COMPLETE"`, use the Code Fast Path at the end of this section.** Code Agent output is the highest-confidence source for structure — it reflects the actual production component. Skip Steps 2–4 and use it directly for `variantAxes`, `booleanProperties`, `textProperties`, and `measurements`.
 
 > ⛔ **When you receive Vision Agent output with `mode: "multi-input-synthesis"`, skip Steps 2–4 below and use the `multiInputSynthesis` block directly.** The Vision Agent has already identified the variants, states, boolean properties, and per-variant styles. Your job is to validate, add any missing standard states, map tokens, and output the unified spec.
 
@@ -197,6 +200,31 @@ Check every item before setting `status: VALID`:
 - [ ] If input was multi-screenshot: `variantAxes`, `booleanProperties`, and `perVariantStyles` are present in spec
 
 If any check fails → `status: INVALID`, list all errors, stop.
+
+---
+
+## Code Fast Path (when Code Agent `status = "COMPLETE"`) ⭐
+
+When `codeAgent.status = "COMPLETE"`, follow this path instead of Steps 2–4.
+
+### Code Step 1 — Accept structure directly from Code Agent
+- `codeAgent.variantAxes` → set as `spec.variantAxes`
+- `codeAgent.booleanProperties` → set as `spec.booleanProperties`
+- `codeAgent.textProperties` → set as `spec.textProperties`
+- `codeAgent.measurements` → set as `spec.exactMeasurements` (used by Orchestrator in STEP 7)
+
+### Code Step 2 — Fill colors from Vision Agent (if screenshots provided) or token defaults
+- Colors come from Vision Agent extraction or Figma URL — never from code
+- If no screenshots and no Figma URL: use component defaults from `auto-layout-rules.json`
+
+### Code Step 3 — Fill standard states
+Ensure `State` axis includes at minimum: `["Default", "Hover", "Disabled"]`. Add missing states using design system defaults.
+
+### Code Step 4 — Map tokens
+Map `codeAgent.measurements` px values to the closest token paths in `resolved-tokens.json`. Use the SCSS→token table in `00-code-agent.md` as the mapping guide.
+
+### Code Step 5 — Validate and output spec
+Run Step 9 validation. Set `spec.source = "code-reference"` to indicate the spec came from the codebase.
 
 ---
 

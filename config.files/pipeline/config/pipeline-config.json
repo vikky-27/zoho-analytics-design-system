@@ -22,6 +22,7 @@
 
     "steps": [
       { "step": 0,  "name": "Figma MCP connectivity gate", "tool": "figma_get_metadata",         "blockOnFail": true  },
+      { "step": "0b", "name": "Code Agent — read codebase", "tool": "00-code-agent.md",         "blockOnFail": false, "note": "Reads codebase/ for exact props/variants/states. PARTIAL or NOT_FOUND is acceptable — pipeline continues with Vision Agent fallback." },
       { "step": 1,  "name": "Validate brief",           "tool": "component-spec-schema.json",  "blockOnFail": true  },
       { "step": 2,  "name": "Resolve tokens",            "tool": "resolved-tokens.json",        "blockOnFail": true  },
       { "step": 3,  "name": "Check library components",  "tool": "figma_get_library_components", "blockOnFail": false },

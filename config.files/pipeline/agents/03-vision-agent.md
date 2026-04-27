@@ -38,12 +38,26 @@ The mode is determined by the instruction you receive:
 
 ## Input Types
 
+### Type D — Code Agent output (highest priority for structure) ⭐ NEW
+Output from `00-code-agent.md`. Contains exact props, variant axes, boolean properties, text properties, and px measurements read directly from the Zoho Analytics codebase (`codebase/`).
+
+**When Type D is present:**
+- Use `codeAgent.variantAxes` directly — do NOT re-derive from screenshots
+- Use `codeAgent.booleanProperties` directly — do NOT infer from screenshots
+- Use `codeAgent.textProperties` directly — do NOT guess from screenshots
+- Use `codeAgent.measurements` as the exact px targets for C2, C3, C9 — do NOT estimate
+- Still run your normal extraction for **colors and shadows** — Code Agent does not provide these
+- Confidence for all code-sourced fields = `"high"` — no estimation needed
+
+> ⛔ **When Type D is present, skip the pairwise differences table and variant inference process.** The structure is already known from code. Only extract visual properties (fills, strokes, shadows) from screenshots.
+
 ### Type A — Single screenshot or image
-A single PNG/JPG of a component or screen. Use **Extraction** mode.
+A single PNG/JPG of a component or screen. Use **Extraction** mode.  
+If Type D is also present, only extract colors and shadows from this screenshot — structure comes from Code Agent.
 
 ### Type A-MULTI — Multiple screenshots of the same component
 Two or more PNG/JPG images showing the same component in different states, variants, or configurations. Use **Multi-Input Synthesis** mode.  
-Do NOT run Extraction mode separately on each image — run synthesis across all images together.
+If Type D is also present, use screenshots only to confirm per-variant colors — the variant axis structure is already defined by Code Agent.
 
 ### Type B — Figma design context
 Output from `figma_get_design_context({ nodeId: "..." })`. Contains:
@@ -57,6 +71,8 @@ A URL like `https://www.figma.com/design/...?node-id=XXXX-YYYY`.
 Extract the node ID, call `figma_get_design_context`, then process as Type B.
 
 > ⛔ **Figma link = exact values only. Never estimate.** Every spacing, color, radius, and font value MUST come from `figma_get_design_context` output. Visual estimation is forbidden when exact data is available. See `property-extraction-rules.json → figmaLinkMeasurementRules`.
+
+**Input priority order: Type D (code) > Type B/C (Figma URL) > Type A (screenshot)**
 
 ---
 
