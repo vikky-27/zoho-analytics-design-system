@@ -16,6 +16,8 @@ Your only job is to take a raw component brief and produce a complete, validated
 > **You do NOT resolve token values to hex** — that is the Token Resolver Agent's job.  
 > **You output ONE thing only:** a valid component spec JSON.
 
+> ⛔ **CRITICAL: Outputting this spec JSON does NOT create a Figma component.** Your output is intermediate data passed to the next agent. A component only exists when the Orchestrator (04) successfully executes `figma_execute` in STEP 7 and a real `componentSetId` is returned. Do NOT generate `.md` files, config JSON, or any other files — that is not your job and it is not the deliverable.
+
 ---
 
 ## Input Types

@@ -72,6 +72,26 @@
 
 ---
 
+## ⛔ Prime Directive (Highest Priority Rule)
+
+> **The only valid output of this pipeline is a published Figma component.**
+
+| Input given | What the pipeline MUST do | What it must NEVER do |
+|---|---|---|
+| Screenshot | Build the component in Figma | Output .md or .json as a substitute |
+| Figma link | Build/update the component in Figma | Treat "reading the link" as done |
+| Description | Build the component in Figma | Output a spec JSON and stop |
+| No Bridge connection | Output PIPELINE BLOCKED | Generate any files as fallback |
+
+`.md` docs and `.json` configs are **only created in STEP 12**, after:
+1. STEP 0 — Figma Bridge connected ✅
+2. STEP 7 — Component built (`componentSetId` exists) ✅
+3. STEP 11 — Published to library ✅
+
+**Each upstream agent (00→03) outputs intermediate data — not a component. The pipeline is not done until STEP 11 completes.**
+
+---
+
 ## Quality Gates
 
 | Gate | Tool | Pass Criteria | Runs |

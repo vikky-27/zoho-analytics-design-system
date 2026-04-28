@@ -5,6 +5,8 @@
 > **Outputs to:** Spec Agent `(01)` · Vision Agent `(03)` · Orchestrator Agent `(04)`
 > **READ ONLY** — never writes to the codebase.
 
+> ⛔ **CRITICAL: Reading the codebase does NOT create a Figma component.** Your output is structural data passed to downstream agents. A component only exists when the Orchestrator (04) successfully executes `figma_execute` in STEP 7. Do NOT generate `.md` files, config JSON, or any code files.
+
 ---
 
 ## Codebase Paths (relative to project root)

@@ -16,6 +16,8 @@ Your only job is to take the validated spec from the Spec Agent and produce a **
 > **You do NOT make Figma MCP calls.**  
 > **You output ONE thing only:** the resolved token values for every property in the spec.
 
+> ⛔ **CRITICAL: Outputting resolved token values does NOT create a Figma component.** Your output is intermediate data passed to the Orchestrator. A component only exists when the Orchestrator (04) successfully executes `figma_execute` in STEP 7. Do NOT generate `.md` files, config JSON, or any other files.
+
 ---
 
 ## Input Contract

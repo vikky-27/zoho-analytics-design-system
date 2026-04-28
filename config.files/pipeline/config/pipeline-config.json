@@ -1,8 +1,40 @@
 {
   "_meta": {
     "description": "Global pipeline configuration. Controls iteration limits, confirmation requirements, agent behavior, and escalation rules for the Figma component generation pipeline.",
-    "version": "2.0",
-    "change": "Redesigned iteration loop for 2–3 attempt convergence. Added pre-flight step, surgical fix mode, same-check escalation, and targeted fixActions."
+    "version": "2.1",
+    "change": "Added PRIME DIRECTIVE: pipeline output is a Figma component, never files. Added fast-track mode for known components. Hardened component search rules."
+  },
+
+  "primeDirective": {
+    "rule": "THE ONLY VALID OUTPUT OF THIS PIPELINE IS A PUBLISHED FIGMA COMPONENT.",
+    "prohibited": [
+      "Generating .md files without a built Figma component",
+      "Generating .json config files without a built Figma component",
+      "Generating code files as a substitute for building in Figma",
+      "Treating Spec Agent JSON output as 'the component is done'",
+      "Treating Token Resolver output as 'the component is done'",
+      "Treating Vision Agent output as 'the component is done'",
+      "Skipping STEP 7 (figma_execute) under any circumstance",
+      "Running STEP 12 (file generation) before componentSetId exists"
+    ],
+    "agentOutputNote": "Spec JSON, token JSON, and extracted styles are INTERMEDIATE DATA passed between agents — they are NOT components. A component exists ONLY when figma_execute in STEP 7 has successfully created a COMPONENT_SET node with a real componentSetId in the Figma file.",
+    "whenUserGivesScreenshot": "ALWAYS build in Figma first. If Figma Bridge is not connected, output PIPELINE BLOCKED. Never generate files as a fallback.",
+    "whenUserGivesFigmaLink": "ALWAYS build/update in Figma first. Reading a Figma link does not mean building is done.",
+    "fileGenerationRule": "Files (.md, .json) are ONLY created in STEP 12 after: (1) STEP 0 passed, (2) STEP 7 returned a real componentSetId, (3) STEP 11 publish confirmed."
+  },
+
+  "fastTrack": {
+    "description": "Speed optimisations for known components. A known component = registry status ✅ Done OR code agent found it.",
+    "registryKnown": {
+      "step3": "Skip broad multi-query search. Go directly to targeted library search with ExactName and ZA-prefix only. Max 2 queries total.",
+      "step5": "Use FAST CONFIRM format (compact plan, no full JSON). Single-turn: output plan → wait for 'proceed'. Do not expand unless user asks.",
+      "step6": "Run PF1 + PF3 in parallel (fonts + variable IDs). Log combined result. Do not run sequentially."
+    },
+    "unknownComponent": {
+      "step3": "Run all 4 strategies (Strategy 0–3) as documented.",
+      "step5": "Full plan output with all sections."
+    },
+    "targetTimePerComponent": "Under 10 minutes from 'proceed' to published component for known components."
   },
 
   "figmaMCPGate": {
