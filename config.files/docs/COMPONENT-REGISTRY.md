@@ -20,11 +20,11 @@
 |---|---|---|---|
 | Form Controls | 6 | 0 | 3 |
 | Feedback & Status | 3 | 2 | 4 |
-| Navigation | 1 | 1 | 4 |
+| Navigation | 2 | 1 | 3 |
 | Data Display | 1 | 2 | 3 |
-| Overlay | 0 | 1 | 3 |
-| Layout | 1 | 1 | 3 |
-| **Total** | **12** | **7** | **20** |
+| Overlay | 1 | 1 | 2 |
+| Layout | 2 | 1 | 2 |
+| **Total** | **15** | **7** | **17** |
 
 ---
 
@@ -113,12 +113,11 @@
 | Field | Value |
 |---|---|
 | Priority | High |
-| Aliases to try | Dropdown, Select, Combobox, Menu |
+| Aliases to try | Select, Dropdown, Combobox, Select Input |
 
-**Variant axes:** `State` (Default / Open / Selected / Disabled / Error)  
-**Boolean:** Show Search · Show Clear · Show Multi-select  
-**Text:** Placeholder · Selected Value · Label  
-**Notes:** Includes trigger (closed state) + overlay (open state). Build as two linked components.
+**Variant axes:** `State` (Default / Open / Focused / Error / Disabled)  
+**Boolean:** Show Label · Show Helper Text · Show Clear Button  
+**Text:** Label · Placeholder · Selected Value · Helper Text  
 
 ---
 
@@ -126,10 +125,10 @@
 | Field | Value |
 |---|---|
 | Priority | High |
-| Aliases to try | Search, Search Input, Search Bar, Search Field |
+| Aliases to try | Search, Search Input, Search Field, Search Bar |
 
-**Variant axes:** `State` (Default / Active / Filled / Disabled)  
-**Boolean:** Show Clear Button · Show Filter Icon  
+**Variant axes:** `State` (Default / Focus / Active / Disabled)  
+**Boolean:** Show Clear Button  
 **Text:** Placeholder · Value  
 
 ---
@@ -138,11 +137,11 @@
 | Field | Value |
 |---|---|
 | Priority | Medium |
-| Aliases to try | Textarea, Text Area, Multiline Input |
+| Aliases to try | Textarea, Text Area, Multi-line Input |
 
 **Variant axes:** `State` (Default / Focus / Error / Disabled / Filled)  
 **Boolean:** Show Label · Show Helper Text · Show Character Count  
-**Text:** Label · Placeholder · Helper Text · Error Message  
+**Text:** Label · Placeholder · Helper Text  
 
 ---
 
@@ -155,9 +154,9 @@
 | Doc | `docs/components/notification.md` |
 | Priority | High |
 
-**Variant axes:** `Type` (Info / Success / Warning / Error) · `State` (Default / Dismissed)  
-**Boolean:** Show Icon · Show Close · Show Action  
-**Text:** Title · Description · Action Label  
+**Variant axes:** `Type` (Info / Success / Warning / Error) · `State` (Default / Dismissible)  
+**Boolean:** Show Icon · Show Title · Show Close  
+**Text:** Title · Message  
 
 ---
 
@@ -165,12 +164,12 @@
 | Field | Value |
 |---|---|
 | Config | `tokens/components/empty-state-config.json` ✅ |
-| Doc | `docs/components/empty-state.md` ⏳ Missing |
+| Doc | ⏳ Missing |
 | Priority | Medium |
 
-**Variant axes:** `Type` (No Data / No Results / Error / No Access)  
-**Boolean:** Show Illustration · Show Action Button · Show Secondary Action  
-**Text:** Title · Description · Action Label  
+**Variant axes:** `Type` (No Data / No Results / Error / Access Denied / Not Found)  
+**Boolean:** Show Illustration · Show Action Button  
+**Text:** Title · Message · Action Label  
 
 ---
 
@@ -181,9 +180,8 @@
 | Aliases to try | Badge, Tag, Chip, Label, Status Badge |
 
 **Variant axes:** `Type` (Default / Success / Warning / Error / Info / Neutral) · `Size` (sm / md)  
-**Boolean:** Show Icon · Show Close / Remove  
+**Boolean:** Show Icon · Show Close  
 **Text:** Label  
-**Notes:** Two sub-variants — removable (chip) and static (badge).
 
 ---
 
@@ -191,7 +189,7 @@
 | Field | Value |
 |---|---|
 | Priority | Medium |
-| Aliases to try | Loader, Spinner, Loading, Progress Spinner |
+| Aliases to try | Loader, Spinner, Loading, Progress Indicator |
 
 **Variant axes:** `Size` (sm / md / lg) · `Type` (Spinner / Dots / Bar)  
 **Boolean:** Show Label  
@@ -203,7 +201,7 @@
 | Field | Value |
 |---|---|
 | Priority | Medium |
-| Aliases to try | Progress, Progress Bar, Loading Bar |
+| Aliases to try | Progress Bar, Progress Indicator, Loading Bar |
 
 **Variant axes:** `State` (Default / Success / Error) · `Size` (sm / md)  
 **Boolean:** Show Label · Show Percentage  
@@ -211,25 +209,24 @@
 
 ---
 
-### 2.6 Skeleton / Loading Placeholder ⏳ Pending
+### 2.6 Skeleton ⏳ Pending
 | Field | Value |
 |---|---|
 | Priority | Medium |
-| Aliases to try | Skeleton, Shimmer, Placeholder, Loading Skeleton |
+| Aliases to try | Skeleton, Skeleton Loader, Placeholder |
 
-**Variant axes:** `Type` (Text / Avatar / Card / Table Row / Chart)  
-**Boolean:** Show Animation  
-**Notes:** No text properties — skeleton is purely structural.
+**Variant axes:** `Type` (Text / Avatar / Card / Table Row / List Item)  
+**Boolean:** Animated  
 
 ---
 
-### 2.7 Tooltip 🔄 Partial (doc referenced, not built)
+### 2.7 Tooltip 🔄 Partial (referenced, not built)
 | Field | Value |
 |---|---|
 | Config | ⏳ Missing |
 | Doc | ⏳ Missing |
 | Priority | High |
-| Aliases to try | Tooltip, Info Tooltip, Hint |
+| Aliases to try | Tooltip, Info Tooltip, Help Tooltip |
 
 **Variant axes:** `Position` (Top / Bottom / Left / Right) · `Type` (Default / Rich)  
 **Boolean:** Show Arrow  
@@ -244,10 +241,12 @@
 |---|---|
 | Config | `tokens/components/sidepane-menu-config.json` |
 | Doc | `docs/components/sidepane-menu.md` |
+| Figma page | `Side Nav bar` |
+| figmaNodeId | `4670:466` |
 | Priority | High |
 
-**Variant axes:** `State` (Collapsed / Expanded)  
-**Boolean:** Show Icons · Show Sub-items  
+**Variant axes:** `State` (Default / Hover / Selected)  
+**Notes:** Icon-rail navigation (64px wide). Contains specific NavItem instances per module.  
 
 ---
 
@@ -256,24 +255,35 @@
 |---|---|
 | Config | `tokens/components/sidepane-menu-item-config.json` ✅ |
 | Doc | `docs/components/sidepane-menu-item.md` ✅ |
+| Figma page | `🟠 - Components` |
+| figmaNodeId (Item) | `5013:10972` |
+| figmaNodeId (Menu) | `5013:11021` |
 | Priority | High |
 
 **Variant axes:** `State` (Default / Hover / Active / Disabled) · `Level` (Parent / Child)  
-**Boolean:** Show Icon · Show Badge · Show Expand Arrow  
-**Text:** Label · Badge Count  
+**Boolean:** ShowIcon · ShowBadge · ShowExpandArrow  
+**Text:** Label (`Label#...`) · BadgeCount (`BadgeCount#...`)  
 
 ---
 
-### 3.3 Tabs ⏳ Pending
+### 3.3 Tabs ✅ Done
 | Field | Value |
 |---|---|
+| Config | `tokens/components/tabs-config.json` |
+| Doc | `docs/components/tabs.md` |
+| Figma page | `🟠 - Components` |
+| figmaNodeId (Tab / Item) | `5023:12761` |
+| figmaNodeId (Tab / Item — Segmented) | `5038:1528` |
+| figmaNodeId (Tab / Bar) | `5023:12809` |
 | Priority | High |
-| Aliases to try | Tabs, Tab Bar, Tab Group, Navigation Tabs |
 
-**Variant axes:** `State` (Default / Active / Hover / Disabled) · `Style` (Line / Filled / Pill)  
-**Boolean:** Show Icon · Show Count Badge  
-**Text:** Label · Count  
-**Notes:** Build Tab Bar (container) + Tab Item (individual) as separate but linked components.
+**Variant axes (Tab / Item):** `Style` (Line / Filled) · `State` (Default / Hover / Active / **Focused** / Disabled)  
+**Variant axes (Tab / Item — Segmented):** `Position` (Start / Middle / End) · `State` (Default / Hover / Active)  
+**Variant axes (Tab / Bar):** `Style` (Line / Filled) · `Overflow` (No / **Yes**)  
+**Boolean (Tab / Item):** ShowIcon · ShowCount  
+**Text:** Label · Count (Tab / Item) · Label (Segmented)  
+**Codebase:** `ZATab.js` → Segmented style · `ZATabComponent.js` → Line/Filled + Focused state · `TabGroup.js` → Overflow arrows  
+**CSS tokens:** `--tab-switch-border` · `--tab-switch-hover` · `--tab-switch-active` · `--za-accent-color` (focus outline) · `.MTS-Arrow` (overflow)  
 
 ---
 
@@ -286,19 +296,25 @@
 **Variant axes:** `State` (Default / Truncated)  
 **Boolean:** Show Home Icon  
 **Text:** Item Label  
-**Notes:** Build Breadcrumb Item + Breadcrumb Container.
+**Notes:** Build Breadcrumb Item + Breadcrumb Container.  
 
 ---
 
-### 3.5 Pagination ⏳ Pending
+### 3.5 Pagination ✅ Done
 | Field | Value |
 |---|---|
+| Config | `tokens/components/pagination-config.json` |
+| Doc | `docs/components/pagination.md` |
+| Figma page | `🟠 - Components` |
+| figmaNodeId (Item) | `4993:1452` |
+| figmaNodeId (Nav)  | `4993:1465` |
+| figmaNodeId (Bar)  | `4998:1446` |
 | Priority | Medium |
-| Aliases to try | Pagination, Page Control, Page Navigation |
 
-**Variant axes:** `State` (Default / Active / Disabled) for page button  
-**Boolean:** Show First/Last · Show Page Size Selector  
-**Text:** Page Number · Total Label  
+**Component sets:** `Pagination / Item` · `Pagination / Nav` · `Pagination / Bar`  
+**Variant axes:** `State` (Default / Active / Disabled) · `IsNext` (false / true) on Nav  
+**Boolean:** ShowFirstLast · ShowPageSize (on Bar)  
+**Text:** PageNumber (`PageNumber#4993:3`) · Showing label (`label--pagination-showing`)  
 
 ---
 
@@ -362,8 +378,8 @@
 | Priority | Medium |
 | Aliases to try | Avatar, User Avatar, Profile Picture, Profile Icon |
 
-**Variant axes:** `Type` (Image / Initials / Icon) · `Size` (xs / sm / md / lg)  
-**Boolean:** Show Status Dot · Show Badge  
+**Variant axes:** `Type` (Initials / Image / Icon) · `Size` (xs / sm / md / lg)  
+**Boolean:** Show Status Indicator  
 **Text:** Initials  
 
 ---
@@ -372,25 +388,21 @@
 | Field | Value |
 |---|---|
 | Priority | High |
-| Aliases to try | Table Row, Data Row, Grid Row |
+| Aliases to try | Table Row, Data Row, Grid Row, Table Cell |
 
-**Variant axes:** `State` (Default / Hover / Selected / Expanded)  
+**Variant axes:** `State` (Default / Hover / Selected / Disabled)  
 **Boolean:** Show Checkbox · Show Actions · Show Expand  
 **Text:** Cell Value  
-**Notes:** Build Row + Header Row + Cell as separate components.
 
 ---
 
-### 4.6 Chart Placeholder / Chart Frame ⏳ Pending
+### 4.6 Chart Placeholder ⏳ Pending
 | Field | Value |
 |---|---|
 | Priority | Low |
-| Aliases to try | Chart, Chart Container, Chart Frame |
+| Aliases to try | Chart Placeholder, Empty Chart, Chart Container |
 
-**Variant axes:** `Type` (Bar / Line / Pie / Donut / Area) · `State` (Loading / Empty / Filled)  
-**Boolean:** Show Legend · Show Title · Show Toolbar  
-**Text:** Title · Subtitle · No-data Message  
-**Notes:** Placeholder frame only — actual chart rendering is code-side.
+**Variant axes:** `Type` (Bar / Line / Pie / Donut / Table / KPI) · `State` (Loading / Empty / Error)  
 
 ---
 
@@ -422,15 +434,20 @@
 
 ---
 
-### 5.3 Drawer / Side Panel ⏳ Pending
+### 5.3 Sidepane / Panel ✅ Done
 | Field | Value |
 |---|---|
-| Priority | Medium |
-| Aliases to try | Drawer, Side Panel, Slide Panel, Sheet |
+| Config | `tokens/components/sidepane-panel-config.json` |
+| Doc | `docs/components/sidepane-panel.md` |
+| Figma page | `🟠 - Components` |
+| figmaNodeId | `5015:11997` |
+| Priority | High |
 
-**Variant axes:** `Position` (Left / Right) · `Size` (sm / md / lg)  
-**Boolean:** Show Header · Show Footer · Show Overlay  
-**Text:** Title  
+**Variant axes:** `Layer` (Layer1 / Layer2) · `ShowFooter` (Yes / No)  
+**Boolean:** ShowHelpIcon  
+**Text:** Title · CancelLabel · SaveLabel  
+**Codebase:** `ZASidePane.js` — right-edge slide-in overlay with primary + secondary layer support  
+**CSS class:** `newUiDialog sidepane za-sidepanel-dialog`  
 
 ---
 
@@ -441,6 +458,8 @@
 |---|---|
 | Config | `tokens/components/expand-collapse-panel-config.json` |
 | Doc | `docs/components/expand-collapse-panel.md` |
+| Figma page | `🟠 - Components` |
+| figmaNodeId | `4763:12843` |
 | Priority | Medium |
 
 **Variant axes:** `State` (Collapsed / Expanded)  
@@ -455,11 +474,9 @@
 | Config | ⏳ Missing |
 | Doc | ⏳ Missing |
 | Priority | Low |
-| Aliases to try | Divider, Separator, Rule, HR |
+| Aliases to try | Divider, Separator, Rule, Horizontal Rule |
 
-**Variant axes:** `Direction` (Horizontal / Vertical) · `Style` (Solid / Dashed · `Weight` (sm / md)  
-**Boolean:** Show Label  
-**Text:** Label  
+**Variant axes:** `Direction` (Horizontal / Vertical) · `Style` (Solid / Dashed)  
 
 ---
 
@@ -467,92 +484,48 @@
 | Field | Value |
 |---|---|
 | Priority | Medium |
-| Aliases to try | Section Header, Group Header, Page Section, Panel Header |
+| Aliases to try | Section Header, Page Header, Content Header |
 
-**Variant axes:** `Level` (Page / Section / Sub-section) · `Style` (Default / Bordered)  
-**Boolean:** Show Action · Show Count · Show Divider Below  
-**Text:** Title · Action Label · Count  
+**Variant axes:** `Level` (H1 / H2 / H3) · `Style` (Default / With Divider)  
+**Boolean:** Show Actions · Show Back Button  
+**Text:** Title · Subtitle  
 
 ---
 
-### 6.4 Accordion ⏳ Pending
+### 6.4 Accordion ✅ Done
 | Field | Value |
 |---|---|
+| Config | `tokens/components/accordion-config.json` |
+| Doc | `docs/components/accordion.md` |
+| Figma page | `🟠 - Components` |
+| figmaNodeId | `4986:1488` |
 | Priority | Low |
-| Aliases to try | Accordion, Collapsible, Expandable Section |
 
 **Variant axes:** `State` (Collapsed / Expanded / Disabled) · `Style` (Default / Bordered)  
-**Boolean:** Show Icon  
-**Text:** Title · Content Summary  
-**Notes:** Expand/Collapse Panel is similar — check if reusable before building separately.
+**Boolean:** ShowIcon (chevron visibility)  
+**Text:** Title (`label--accordion-title`) · Content (`label--accordion-content`)  
+**Notes:** Distinct from Expand/Collapse Panel — general-purpose free-form content slot; not limited to label-field rows.  
 
 ---
 
-## Build Priority Order
+## Quick Reference — Built Components (Figma Node IDs)
 
-Components in this order give maximum coverage across the UI fastest.
-
-```
-Round 1 — High priority, blockers for most screens
-  1. Select / Dropdown       (form control needed everywhere)
-  2. Tabs                    (navigation used on every analytics page)
-  3. Data Grid Row           (core analytics data display)
-  4. Modal / Dialog          (complete config + build)
-  5. Badge / Tag             (used inside lists, tables, notifications)
-  6. Tooltip                 (needed for all data labels)
-
-Round 2 — Medium priority, completes core system
-  7. Stat Card               (complete config + build)
-  8. Avatar                  (used in nav and lists)
-  9. Search Input            (prominent in analytics pages)
- 10. Popover                 (data point detail panels)
- 11. Section Header          (page structure)
- 12. Breadcrumb              (navigation context)
-
-Round 3 — Fills gaps
- 13. Textarea
- 14. Pagination
- 15. Loader / Spinner
- 16. Progress Bar
- 17. Skeleton
- 18. Drawer / Side Panel
- 19. Divider
- 20. Accordion
- 21. Chart Placeholder
- 22. Top Navigation / Header
-```
-
----
-
-## Quick Reference — Component Aliases
-
-Use these when searching the Figma library (`figma_get_library_components`). Try ALL aliases before declaring not found.
-
-| Component | Aliases |
-|---|---|
-| Button | Button, Btn, CTA, Action Button, Primary Button |
-| Input | Input, Text Field, TextField, Text Input, Form Input |
-| Toggle | Toggle, Switch, Toggle Button |
-| Checkbox | Checkbox, Check box, Check Box |
-| Radio Button | Radio, Radio Button, Radio Group |
-| Link Text | Link, Link Text, Text Link, Hyperlink |
-| Notification | Notification, Alert, Banner, Toast, Message |
-| Empty State | Empty State, No Data, Zero State |
-| Badge | Badge, Tag, Chip, Label, Status Tag |
-| Dropdown | Dropdown, Select, Combobox, Menu |
-| List View | List, List View, ListView, Table, Data Table |
-| Tabs | Tabs, Tab Bar, Tab Group, Navigation Tabs |
-| Modal | Modal, Dialog, Overlay, Popup |
-| Tooltip | Tooltip, Info Tooltip, Hint |
-| Card | Card, Panel, Surface, Container |
-| Stat Card | StatCard, Stat Card, KPI Card, Metric Card |
-| Avatar | Avatar, User Avatar, Profile Picture |
-| Pagination | Pagination, Page Control, Page Navigation |
-| Skeleton | Skeleton, Shimmer, Placeholder |
-| Loader | Loader, Spinner, Loading, Progress Spinner |
-| Drawer | Drawer, Side Panel, Slide Panel, Sheet |
-| Accordion | Accordion, Collapsible, Expandable |
-| Divider | Divider, Separator, Rule |
-| Section Header | Section Header, Group Header, Panel Header |
-| Breadcrumb | Breadcrumb, Breadcrumbs, Navigation Path |
-| Search Input | Search, Search Input, Search Bar |
+| Component | figmaNodeId | Figma Page |
+|---|---|---|
+| Button | *(see doc)* | Components |
+| Input / Text Field | *(see doc)* | `01 - Input` |
+| Toggle | *(see doc)* | Components |
+| Checkbox | *(see doc)* | Components |
+| Radio Button | *(see doc)* | Components |
+| Link Text | *(see doc)* | Components |
+| Notification / Alert | *(see doc)* | Components |
+| Sidepane Menu | `4670:466` | `Side Nav bar` |
+| Sidepane / Item | `5013:10972` | `🟠 - Components` |
+| Sidepane / Menu | `5013:11021` | `🟠 - Components` |
+| Sidepane / Panel | `5015:11997` | `🟠 - Components` |
+| Pagination / Item | `4993:1452` | `🟠 - Components` |
+| Pagination / Nav | `4993:1465` | `🟠 - Components` |
+| Pagination / Bar | `4998:1446` | `🟠 - Components` |
+| List View | *(see doc)* | Components |
+| Expand / Collapse Panel | `4763:12843` | `🟠 - Components` |
+| Accordion | `4986:1488` | `🟠 - Components` |

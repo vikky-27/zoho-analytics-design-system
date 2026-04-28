@@ -1,0 +1,188 @@
+{
+  "_meta": {
+    "component": "Accordion",
+    "figmaNodeId": null,
+    "figmaPage": "🟠 - Components",
+    "figmaFile": "m2iOWX3I9aDI5kgyw4wCo0",
+    "description": "General-purpose collapsible content section with a clickable header and expandable body area. Supports Default and Bordered styles, three interaction states, and an optional chevron icon.",
+    "variantAxes": ["State", "Style"],
+    "booleanProperties": ["ShowIcon"]
+  },
+
+  "variants": {
+    "stateValues": ["Collapsed", "Expanded", "Disabled"],
+    "styleValues": ["Default", "Bordered"]
+  },
+
+  "booleanProperties": {
+    "ShowIcon": {
+      "type": "BOOLEAN",
+      "default": true,
+      "controls": "ChevronIcon visibility inside AccordionHeader"
+    }
+  },
+
+  "variantMatrix": [
+    { "State": "Collapsed", "Style": "Default",  "height": 48,   "width": 480, "contentVisible": false },
+    { "State": "Expanded",  "Style": "Default",  "height": "AUTO","width": 480, "contentVisible": true  },
+    { "State": "Disabled",  "Style": "Default",  "height": 48,   "width": 480, "contentVisible": false },
+    { "State": "Collapsed", "Style": "Bordered", "height": 48,   "width": 480, "contentVisible": false },
+    { "State": "Expanded",  "Style": "Bordered", "height": "AUTO","width": 480, "contentVisible": true  },
+    { "State": "Disabled",  "Style": "Bordered", "height": 48,   "width": 480, "contentVisible": false }
+  ],
+
+  "layout": {
+    "container": {
+      "direction":             "VERTICAL",
+      "primaryAxisSizingMode": "HUG",
+      "counterAxisSizingMode": "FILL",
+      "cornerRadius":          8,
+      "strokeWeight":          1,
+      "naturalWidth":          480,
+      "canResizeWidth":        true,
+      "_note": "Bordered style → 1px stroke on all sides. Default style → only bottom divider visible between items."
+    },
+    "header": {
+      "height":               48,
+      "direction":            "HORIZONTAL",
+      "paddingHorizontal":    16,
+      "paddingVertical":      0,
+      "itemSpacing":          8,
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "counterAxisAlignItems": "CENTER",
+      "primaryAxisSizingMode": "FILL",
+      "counterAxisSizingMode": "FIXED"
+    },
+    "headerLeft": {
+      "direction":            "HORIZONTAL",
+      "itemSpacing":          8,
+      "primaryAxisSizingMode": "FILL",
+      "counterAxisSizingMode": "HUG",
+      "counterAxisAlignItems": "CENTER"
+    },
+    "chevronIcon": {
+      "size":            16,
+      "collapsed":       "chevron-right path M6 4L10 8L6 12 (rotated 0°)",
+      "expanded":        "chevron-down path M4 6L8 10L12 6 (rotated 90°)",
+      "strokeWidth":     1.5,
+      "linkedProperty":  "ShowIcon",
+      "hiddenWhenFalse": true
+    },
+    "titleText": {
+      "layerName":   "label--accordion-title",
+      "fontFamily":  "Zoho Puvi",
+      "fontStyle":   "Medium",
+      "fontSize":    14,
+      "sizing":      "FILL horizontal"
+    },
+    "summaryText": {
+      "layerName":       "label--accordion-summary",
+      "fontFamily":      "Zoho Puvi",
+      "fontStyle":       "Regular",
+      "fontSize":        12,
+      "sizing":          "HUG",
+      "hiddenByDefault": true,
+      "_note": "Optional subtitle / preview text shown in header only when collapsed"
+    },
+    "divider": {
+      "height":      1,
+      "direction":   "HORIZONTAL",
+      "sizing":      "FILL horizontal",
+      "_note": "Visible between header and content when State=Expanded"
+    },
+    "content": {
+      "direction":             "VERTICAL",
+      "paddingTop":            16,
+      "paddingRight":          16,
+      "paddingBottom":         16,
+      "paddingLeft":           16,
+      "itemSpacing":           12,
+      "primaryAxisSizingMode": "HUG",
+      "counterAxisSizingMode": "FILL",
+      "visibleWhen":           "State=Expanded"
+    }
+  },
+
+  "tokens": {
+    "headerBg": {
+      "Default":  { "path": "semantic.light.background.subtle",  "hex": "#F5F7F9", "variableId": "VariableID:575:275" },
+      "Bordered": { "path": "semantic.light.background.default", "hex": "#FFFFFF", "variableId": "VariableID:575:273" }
+    },
+    "contentBg": {
+      "path": "semantic.light.background.default", "hex": "#FFFFFF", "variableId": "VariableID:575:273"
+    },
+    "titleColor": {
+      "Default":  { "path": "semantic.light.text.primary",  "hex": "#0C0E11", "variableId": "VariableID:575:276" },
+      "Disabled": { "path": "semantic.light.text.disabled", "hex": "#93A2B6", "variableId": "VariableID:575:278" }
+    },
+    "summaryColor": {
+      "Default":  { "path": "semantic.light.text.description", "hex": "#3D4653", "variableId": "VariableID:575:277" },
+      "Disabled": { "path": "semantic.light.text.disabled",    "hex": "#93A2B6", "variableId": "VariableID:575:278" }
+    },
+    "chevronColor": {
+      "Default":  { "path": "semantic.light.text.description", "hex": "#3D4653", "variableId": "VariableID:575:277" },
+      "Disabled": { "path": "semantic.light.text.disabled",    "hex": "#93A2B6", "variableId": "VariableID:575:278" }
+    },
+    "borderColor": {
+      "Bordered": { "path": "semantic.light.stroke.stroke2", "hex": "#C6CED9", "variableId": "VariableID:579:42" }
+    },
+    "dividerColor": {
+      "path": "semantic.light.stroke.stroke1", "hex": "#DFE4EB", "variableId": "VariableID:579:41"
+    },
+    "cornerRadius": {
+      "path": "borderRadius.md", "px": 8
+    },
+    "headerHeight": {
+      "path": "sizing.accordion.headerHeight", "px": 48
+    },
+    "contentPadding": {
+      "path": "spacing.padding.M", "px": 16
+    },
+    "contentGap": {
+      "path": "spacing.gap.M", "px": 12
+    },
+    "headerPaddingH": {
+      "path": "spacing.padding.M", "px": 16
+    },
+    "iconGap": {
+      "path": "spacing.gap.M", "px": 8
+    }
+  },
+
+  "textProperties": [
+    {
+      "name":        "Title",
+      "layerName":   "label--accordion-title",
+      "default":     "Section Title",
+      "description": "Accordion header label — always visible"
+    },
+    {
+      "name":        "Summary",
+      "layerName":   "label--accordion-summary",
+      "default":     "Content summary…",
+      "description": "Optional short preview shown in header; hidden by default"
+    }
+  ],
+
+  "instantiationPattern": {
+    "description": "Search the library first. If found, use importComponentByKeyAsync with a variant key. If not found in library, scan local pages by COMPONENT_SET name 'Accordion'. Fall back to custom build only if both searches return nothing.",
+    "searchAliases": ["Accordion", "Collapsible", "Expandable", "Expandable Section", "Collapse Panel"],
+    "localPageScan": {
+      "pageName": "🟠 - Components",
+      "searchName": "Accordion"
+    },
+    "setPropertiesExample": {
+      "code": "instance.setProperties({ 'State': 'Expanded', 'Style': 'Default', 'ShowIcon': true });"
+    },
+    "sizingAfterAppend": "instance.layoutSizingHorizontal = 'FILL';"
+  },
+
+  "hardRules": [
+    "Never hardcode hex values — use setBoundVariableForPaint() with the variableId from this file.",
+    "Never resize height — set primaryAxisSizingMode = 'HUG' and let content drive height.",
+    "Set layoutSizingHorizontal = 'FILL' only AFTER appending to a parent auto-layout frame.",
+    "AccordionContent visibility is driven by the State variant — never force-show it on a Collapsed variant.",
+    "ShowIcon is a BOOLEAN component property — toggle via setProperties(), never via layer.visible directly.",
+    "Run token-audit.js before marking the component done when building from scratch."
+  ]
+}

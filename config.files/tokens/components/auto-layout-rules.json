@@ -357,5 +357,67 @@
       { "name": "Segment 2", "layerName": "label--seg2", "default": "Tab 2", "description": "Label for segment/tab 2" },
       { "name": "Segment 3", "layerName": "label--seg3", "default": "Tab 3", "description": "Label for segment/tab 3" }
     ]
+  },
+
+  "Accordion": {
+    "container": {
+      "direction":               "VERTICAL",
+      "paddingTop":              0,
+      "paddingRight":            0,
+      "paddingBottom":           0,
+      "paddingLeft":             0,
+      "itemSpacing":             0,
+      "primaryAxisSizingMode":   "HUG",
+      "counterAxisSizingMode":   "FILL",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "MIN",
+      "cornerRadius":            8,
+      "naturalHeight":           48,
+      "naturalWidth":            480,
+      "canResizeWidth":          true,
+      "strokeWeight":            1,
+      "_note": "naturalHeight is for Collapsed state; Expanded height is HUG (driven by content)"
+    },
+    "header": {
+      "direction":               "HORIZONTAL",
+      "paddingTop":              0,
+      "paddingRight":            16,
+      "paddingBottom":           0,
+      "paddingLeft":             16,
+      "itemSpacing":             8,
+      "primaryAxisSizingMode":   "FILL",
+      "counterAxisSizingMode":   "FIXED",
+      "primaryAxisAlignItems":   "SPACE_BETWEEN",
+      "counterAxisAlignItems":   "CENTER",
+      "naturalHeight":           48
+    },
+    "content": {
+      "direction":               "VERTICAL",
+      "paddingTop":              16,
+      "paddingRight":            16,
+      "paddingBottom":           16,
+      "paddingLeft":             16,
+      "itemSpacing":             12,
+      "primaryAxisSizingMode":   "HUG",
+      "counterAxisSizingMode":   "FILL",
+      "primaryAxisAlignItems":   "MIN",
+      "counterAxisAlignItems":   "MIN"
+    },
+    "fills": {
+      "headerDefault":  { "light": "semantic.light.background.subtle",  "dark": "semantic.dark.background.subtle"  },
+      "headerBordered": { "light": "semantic.light.background.default", "dark": "semantic.dark.background.default" },
+      "content":        { "light": "semantic.light.background.default", "dark": "semantic.dark.background.default" }
+    },
+    "stroke": {
+      "bordered": { "light": "semantic.light.stroke.stroke2", "dark": "semantic.dark.stroke.stroke2" },
+      "divider":  { "light": "semantic.light.stroke.stroke1", "dark": "semantic.dark.stroke.stroke1" }
+    },
+    "textStyle": "typography.scale.bodyMd",
+    "iconSize":  "sizing.icon.md",
+    "maxIterations": 3,
+    "textProperties": [
+      { "name": "Title",   "layerName": "label--accordion-title",   "default": "Section Title",    "description": "Accordion header label — always visible" },
+      { "name": "Summary", "layerName": "label--accordion-summary",  "default": "Content summary…", "description": "Optional short preview shown in the header; hidden by default" }
+    ]
   }
 }
