@@ -206,7 +206,68 @@ Ready to proceed? YES / NO (NO if any UNCERTAIN unresolved)
 
 ## Output Contract — Multiple Screenshots (Multi-Input Synthesis Mode)
 
-When 2 or more screenshots are provided, output this expanded contract **and then pause for human confirmation before passing to Spec Agent.** The Spec Agent uses `multiInputSynthesis` directly to build the unified `COMPONENT_SET`.
+> ⛔ **ABSOLUTE RULE: 2 or more screenshots of the same component = EXACTLY ONE `COMPONENT_SET`.**  
+> Never create separate components per screenshot. Never build N components for N screenshots.  
+> All screenshots show variants or states of the same thing — your job is to find what changes and what stays the same.
+
+---
+
+### MANDATORY Step 0 — Screenshot Comparison Table (run BEFORE anything else)
+
+When 2+ screenshots are provided, output this table **before** the JSON contract.  
+This is the most important step — it drives all variant decisions.
+
+**Process:**
+1. For each visual property, check its value in every screenshot
+2. Mark as `SAME` or `DIFFERS`
+3. For each DIFFERS: decide if it's a variant axis, boolean, or text property
+
+```
+SCREENSHOT COMPARISON — {ComponentName}
+══════════════════════════════════════════════════════════════════════════════
+                │ S1 (label)      │ S2 (label)      │ S3 (label)     │ Decision
+────────────────────────────────────────────────────────────────────────────────
+Background      │ #2C66DD (blue)  │ #1E51B8 (dark)  │ #FFFFFF (white)│ DIFFERS → variant axis
+Text color      │ #FFFFFF         │ #FFFFFF         │ #0C0E11        │ DIFFERS → variant axis
+Border          │ none            │ none            │ 1px #C6CED9    │ DIFFERS → variant axis
+Border radius   │ 8px             │ 8px             │ 8px            │ SAME    → shared property
+Padding H       │ 12px            │ 12px            │ 12px           │ SAME    → shared property
+Height          │ 32px            │ 32px            │ 32px           │ SAME    → shared property
+Font size       │ 14px            │ 14px            │ 14px           │ SAME    → shared property
+Has icon        │ YES             │ YES             │ NO             │ DIFFERS → boolean property
+Shadow          │ none            │ none            │ none           │ SAME    → shared property
+──────────────────────────────────────────────────────────────────────────────
+VARIANT AXIS CONCLUSION:
+  Axis 1 "Primary": YES (S1, S2) vs NO (S3)   ← background/text/border all change together
+  Axis 2 "State":   Default (S1) vs Hover (S2) ← background shifts from #2C66DD to #1E51B8
+  Boolean "Show Icon": S1+S2=true, S3=false    ← icon present only in some screenshots
+
+SHARED (applies to ALL variants):
+  borderRadius=8px, paddingH=12px, height=32px, fontSize=14px
+
+TOTAL BUILD:
+  → 1 COMPONENT_SET
+  → 2 axes × values = Primary(Yes/No) × State(Default/Hover/Disabled) = 6 variants
+  → 1 boolean: Show Icon
+  → NOT 3 separate components
+══════════════════════════════════════════════════════════════════════════════
+```
+
+**Decision rules for the table:**
+
+| When a property | → Classify as |
+|---|---|
+| Has the SAME value across ALL screenshots | `shared property` — applies to every variant |
+| Changes between screenshots | `variant axis` if it's a style (color, border, opacity) |
+| Appears/disappears between screenshots | `boolean property` |
+| Text content changes between screenshots | `text property` |
+| Only 1 screenshot has it, structure differs | `variant axis` — different layout = different variant |
+
+> ⛔ **After this table, if any DIFFERS property is not classified → add to `unmatchedDifferences` and ask user before proceeding.**
+
+---
+
+When 2 or more screenshots are provided, output the comparison table above, then output this expanded contract **and then pause for human confirmation before passing to Spec Agent.** The Spec Agent uses `multiInputSynthesis` directly to build the unified `COMPONENT_SET`.
 
 > ⛔ **MANDATORY: After outputting this JSON, immediately output the PROPERTY SCHEMA CONFIRMATION block (see bottom of this section). Do NOT pass to Spec Agent until user replies `confirmed`.**
 

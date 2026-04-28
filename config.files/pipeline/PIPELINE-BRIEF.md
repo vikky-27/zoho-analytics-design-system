@@ -24,8 +24,12 @@
 | **Notes / requirements** | *(optional — any special states, sizes, or constraints)* |
 
 **Screenshots:** Attach PNG/JPG screenshots to this chat alongside this file.  
-Each screenshot should show one variant or state of the component.  
-Multiple screenshots = multiple variants → will be combined into one COMPONENT_SET.
+Each screenshot should show one variant or state of the component.
+
+> **Multiple screenshots = ONE component with multiple variants — never separate components.**  
+> 2 screenshots → 1 COMPONENT_SET with 2 variants (or more if states are inferred)  
+> 3 screenshots → 1 COMPONENT_SET with 3+ variants  
+> The agent will compare all screenshots, find what changes (→ variant axis) and what stays the same (→ shared property), then build exactly one unified component.
 
 ---
 
@@ -73,7 +77,12 @@ Output: `codeAgent` JSON block. Continue even if NOT_FOUND.
 Run each agent in order, passing outputs forward:
 
 1. **Vision Agent** → `config.files/pipeline/agents/03-vision-agent.md`  
-   - Code Agent found the component? → extract **colors and shadows only** from screenshots (skip structure inference)
+   - **2+ screenshots?** → MUST output a side-by-side SCREENSHOT COMPARISON TABLE first:
+     - Compare every property across all screenshots
+     - SAME value → shared property (applied to all variants)
+     - DIFFERS → variant axis, boolean, or text property
+     - Output: `1 COMPONENT_SET with {N} variant combos` — never N separate components
+   - Code Agent found the component? → extract **colors and shadows only** from screenshots
    - Code Agent NOT_FOUND? → full multi-input synthesis from screenshots
    - **Screenshot fidelity rule** (see below)
 

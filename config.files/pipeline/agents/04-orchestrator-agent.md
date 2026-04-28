@@ -191,24 +191,51 @@ If any critical check fails → stop, report, wait for correction.
 
 Check the Spec Agent output for `inputMode: "multi-input-synthesis"`.
 
-**If `inputMode = "multi-input-synthesis"`:**
-- The spec contains `variantAxes`, `booleanProperties`, and `perVariantStyles`.
-- You MUST build **one single `COMPONENT_SET`** that encompasses ALL variants identified by the Vision Agent.
-- ⛔ **NEVER create separate components per screenshot. NEVER create duplicate component sets.**
-- Total variant frames = product of all axis value counts. Verify this before building:
-  ```
-  Axis 1: {axisName} — {n1} values
-  Axis 2: {axisName} — {n2} values
-  Expected total: {n1 × n2} COMPONENT children in 1 COMPONENT_SET
-  ```
-  If the math doesn't match your plan → stop and recalculate before proceeding.
-- Boolean properties live at COMPONENT_SET level — they are NOT separate variants.
-- TEXT properties live at COMPONENT_SET level — bind each to the matching text layer across ALL variant children.
-- The showcase frame shows the full grid: all {axis1 values} as rows × all {axis2 values} as columns, so every possibility is visible at a glance.
+**If `inputMode = "multi-input-synthesis"` OR if Vision Agent outputted a comparison table:**
 
-**Reference mapping from multi-input spec to Figma COMPONENT_SET:**
+> ⛔ **HARD RULE: N screenshots → ALWAYS 1 COMPONENT_SET. Never N components.**  
+> Screenshots show variants/states of the same component. Each screenshot is ONE variant — not a separate component.
+
+**Mandatory count verification — output this before building:**
 
 ```
+MULTI-SCREENSHOT COUNT VERIFICATION
+════════════════════════════════════════════════════════
+Input screenshots:  {N} screenshots provided
+Variant axes:
+  Axis "{name1}":  {values} — {count1} values
+  Axis "{name2}":  {values} — {count2} values
+
+Expected variants:  {count1 × count2} = {total} COMPONENT children
+Inferred variants:  {any states inferred beyond screenshots, e.g. Disabled}
+Booleans (NOT variants): {booleanPropertyNames}
+
+BUILD PLAN:
+  ✅ 1 COMPONENT_SET named "{ComponentName}"
+  ✅ {total} COMPONENT children inside it
+  ✅ {n} boolean properties at set level
+  ❌ NOT {N} separate components
+  ❌ NOT {N} separate COMPONENT_SETs
+════════════════════════════════════════════════════════
+```
+
+If the count doesn't match your plan → **stop and recalculate**. Do not build until numbers match.
+
+**Rules:**
+- Screenshots show ONLY the variants that have screenshots — infer remaining states (e.g. Disabled) from design system standards or Code Agent data
+- Boolean properties live at COMPONENT_SET level — they are NOT separate variants
+- TEXT properties live at COMPONENT_SET level — bind each text layer across ALL variant children
+- Showcase frame = full grid: all {axis1 values} as rows × all {axis2 values} as columns
+
+**Property mapping:**
+
+```
+Vision Agent comparison table:
+  SAME properties       →  sharedProperties (applied to all variants)
+  DIFFERS — style       →  variantAxes (each unique combo = 1 COMPONENT)
+  DIFFERS — present/absent → booleanProperties (added at COMPONENT_SET level)
+  DIFFERS — text content → textProperties (added at COMPONENT_SET level)
+
 spec.variantAxes[*].axisName     →  COMPONENT_SET variant property axis name
 spec.variantAxes[*].axisValues   →  axis values (each combo becomes one COMPONENT variant)
 spec.booleanProperties[*]        →  figma.addComponentProperty(name, "BOOLEAN", defaultValue)
@@ -217,12 +244,13 @@ spec.naming                      →  component.name for each variant (e.g. "But
 ```
 
 **Build order for multi-input:**
-1. Create the `COMPONENT_SET` container
-2. Generate all variant combinations: for each combo of axis values, create one `COMPONENT`
-3. Name each component using `spec.naming` pattern
-4. Apply `perVariantStyles` colors — bound to Figma library variables via `setBoundVariableForPaint()`
-5. Apply `sharedProperties` (radius, padding, gap, height) to all variants
+1. Output the COUNT VERIFICATION block above — confirm numbers
+2. Create the base (`State=Default` or first axis value) COMPONENT with full layout
+3. Clone it for every remaining variant combo — apply only the differing fills/strokes per clone
+4. `figma.combineAsVariants([...all components])` → 1 COMPONENT_SET
+5. Apply `sharedProperties` (radius, padding, gap, height) — these are IDENTICAL on every variant
 6. Add `booleanProperties` at the component set level
+7. Bind `textProperties` across all variant children
 
 ---
 
