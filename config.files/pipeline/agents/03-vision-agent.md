@@ -140,6 +140,70 @@ Extract the node ID, call `figma_get_design_context`, then process as Type B.
 
 ---
 
+## ⛔ Visual Accuracy Protocol — MANDATORY Before Handing Off
+
+> This protocol prevents the #1 cause of screenshot mismatches. Do NOT skip it.  
+> Run this after extracting all properties. Output the FIDELITY CHECK block before passing to Spec Agent.
+
+### Step V1 — Color accuracy check (per extracted color)
+
+For every color property (background, text, stroke, shadow):
+
+1. Extract the raw hex from the screenshot (or from `figma_get_design_context`)
+2. Find the nearest token in `resolved-tokens.json` by comparing RGB values
+3. Compute the total RGB delta: `ΔTotal = |ΔR| + |ΔG| + |ΔB|` (each channel 0–255)
+
+| ΔTotal | Confidence | Action |
+|---|---|---|
+| 0–5 | `high` | Use this token — exact match |
+| 6–15 | `medium` | Use this token — flag in FIDELITY CHECK |
+| 16–30 | `low` | Mark as UNCERTAIN — do not guess |
+| > 30 | — | Do not map. Output raw hex in `unmatchedProperties`. Ask user. |
+
+> ⛔ **Never map a color with ΔTotal > 30 to a token.** A wrong token produces a built component that doesn't match the screenshot.
+
+### Step V2 — Measurement confidence check
+
+| Source | Confidence | Tolerance in STEP 9 |
+|---|---|---|
+| `figma_get_design_context` | `high` | ±2px |
+| Code Agent (`codeAgent.measurements`) | `high` | ±2px |
+| Screenshot with clear boundaries | `medium` | ±4px |
+| Screenshot with unclear/small boundaries | `low` | Must resolve before building |
+
+For any measurement with confidence = `low`:
+- Use Code Agent value if available → upgrade to `high`
+- Otherwise → flag in FIDELITY CHECK and ask user for exact value before proceeding
+
+### Step V3 — Output the FIDELITY CHECK block (mandatory)
+
+Output this block immediately after the JSON output contract, before signaling completion:
+
+```
+FIDELITY CHECK — {ComponentName}
+══════════════════════════════════════════════════════════════════
+Property        | Observed      | Token path                  | Conf   | ΔMatch
+────────────────────────────────────────────────────────────────────────────────
+background      | #2C66DD       | color.accent.blue           | HIGH   | exact (Δ0)
+text            | #FFFFFF       | semantic.light.text.onAccent| HIGH   | exact (Δ0)
+stroke          | #C6CED9       | semantic.light.stroke.3     | HIGH   | Δ3
+borderRadius    | ~8px          | borderRadius.md             | MEDIUM | ±1px
+padding         | ~12px         | spacing.padding.S           | MEDIUM | ±2px
+gap             | ~6px          | spacing.gap.XS              | LOW    | estimated
+shadow          | subtle        | shadow.sm                   | MEDIUM | visual match
+══════════════════════════════════════════════════════════════════
+UNCERTAIN (must resolve before Spec Agent proceeds):
+  • gap: LOW confidence — screenshot too small to measure precisely.
+    ➜ Using Code Agent value (6px) if available.
+    ➜ If not available, ask user: "What is the gap between icon and label in px?"
+══════════════════════════════════════════════════════════════════
+Ready to proceed? YES / NO (NO if any UNCERTAIN unresolved)
+```
+
+> ⛔ **Do NOT pass to Spec Agent if any UNCERTAIN value is unresolved.** An unresolved value becomes a wrong token, which fails STEP 9 verify, which wastes iterations.
+
+---
+
 ## Output Contract — Multiple Screenshots (Multi-Input Synthesis Mode)
 
 When 2 or more screenshots are provided, output this expanded contract **and then pause for human confirmation before passing to Spec Agent.** The Spec Agent uses `multiInputSynthesis` directly to build the unified `COMPONENT_SET`.

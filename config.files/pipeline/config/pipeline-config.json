@@ -37,6 +37,26 @@
     "targetTimePerComponent": "Under 10 minutes from 'proceed' to published component for known components."
   },
 
+  "iconPlaceholderRule": {
+    "rule": "NEVER import, search for, or embed actual icon SVGs or image assets. Always use placeholder frames.",
+    "iconPattern": "figma.createFrame() with name='icon--{purpose}', resize(16,16), fills=[], dashPattern=[2,2] stroke",
+    "imagePlaceholderPattern": "figma.createFrame() with name='image--placeholder', neutral fill color",
+    "naming": "All icon slots MUST be named 'icon--{purpose}' (e.g. 'icon--chevron', 'icon--left', 'icon--close'). Never 'icon', 'Icon', 'SVG', or unnamed.",
+    "reason": "Importing icons wastes build time, causes SVG parse errors, and is not needed for component structure verification."
+  },
+
+  "screenshotFidelityRule": {
+    "rule": "Vision Agent must output a FIDELITY CHECK block before passing to Spec Agent. No UNCERTAIN values may be unresolved.",
+    "colorThreshold": "ΔTotal (sum of |ΔR|+|ΔG|+|ΔB|) must be ≤15 for a confident token match. Above 30: do not map — output raw hex and ask user.",
+    "measurementSources": {
+      "figma_context": { "confidence": "high", "tolerance": "±2px" },
+      "codeAgent": { "confidence": "high", "tolerance": "±2px" },
+      "screenshot_clear": { "confidence": "medium", "tolerance": "±4px" },
+      "screenshot_small_or_unclear": { "confidence": "low", "action": "resolve before building — use Code Agent value or ask user" }
+    },
+    "verifyMode": "Compare each property individually (color, spacing, radius, shadow). A pass is not 'looks similar' — it is each property within tolerance."
+  },
+
   "figmaMCPGate": {
     "description": "Hard rule: the pipeline exists to build a Figma design system. It cannot run in config-only mode. Config files are a byproduct of a successful Figma build — never the primary output.",
     "rule": "STEP 0 (Figma MCP connectivity probe) MUST pass before any other step executes. If the Figma Desktop Bridge is not connected, the entire pipeline is blocked.",

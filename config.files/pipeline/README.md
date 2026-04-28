@@ -146,6 +146,16 @@ Rubric: [config/verify-rubric.json](config/verify-rubric.json) → `fixActions` 
 
 ## How to Start a Run
 
+### ⚡ Quick start (for team members)
+
+1. Open `PIPELINE-BRIEF.md` (this folder)
+2. Fill in the component name
+3. Drag the file into your Claude chat
+4. Attach screenshots to the same message
+5. Type `"build"` → agent runs the full pipeline
+
+### Manual start (advanced)
+
 1. Run **Code Agent** (`00-code-agent.md`) — reads `codebase/` to extract exact props/variants for your component
 2. Feed your brief to **Spec Agent** (`01-spec-agent.md`) — pass Code Agent output as highest-priority input
 3. Pass its `spec` output to **Token Resolver Agent** (`02-token-resolver-agent.md`)
